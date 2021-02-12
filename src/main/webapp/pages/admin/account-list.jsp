@@ -29,7 +29,7 @@
 
             <div class="col-md-6 col-md-offset-2">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="按XXXXX查询"/>
+                    <input type="text" class="form-control" placeholder="按学号或用户名查询"/>
                     <span class="input-group-btn">
                     <button class="btn btn-blue" type="button" style="padding-left: 50px;padding-right: 50px;">查询</button>
                 </span>
@@ -47,22 +47,26 @@
             <thead>
             <tr>
                 <th>序号</th>
-                <th>名称</th>
-                <th>年龄</th>
-                <th>性别</th>
-                <th>住址</th>
-                <th>QQ</th>
+                <th>学号</th>
+                <th>用户名</th>
+                <th>权限</th>
+                <th>操作</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>小易</td>
-                <td>21</td>
-                <td>男</td>
-                <td>china</td>
-                <td>123456</td>
-            </tr>
+            <c:forEach items="${accountList}" var="account" varStatus="s">
+                <tr>
+                    <td>${s.count}</td>
+                    <td>${account.studentId}</td>
+                    <td>${account.username}</td>
+                    <td>${account.authorityStr}</td>
+                    <td>
+                        <button class="btn-sm btn-warning" href="#">修改</button>
+                        <button class="btn-sm btn-danger" href="#">删除</button>
+                    </td>
+                </tr>
+            </c:forEach>
+
             </tbody>
         </table>
     </div>

@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class AccountController {
         //调用业务层service方法
         List<Account> accountList = accountService.findAll();
         model.addAttribute("accountList", accountList);
-        return "/admin/accountList";
+        return "/admin/account-list";
     }
 
     @RequestMapping("/save.do")
