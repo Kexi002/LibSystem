@@ -6,6 +6,7 @@ public class BookDetail {
     private String ISBN; //20
     private String intro; //500
     private String image; //50
+    private String location;
 
     public String getId() {
         return id;
@@ -47,6 +48,14 @@ public class BookDetail {
         this.image = image;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     @Override
     public String toString() {
         return "BookDetail{" +
@@ -55,6 +64,7 @@ public class BookDetail {
                 ", ISBN='" + ISBN + '\'' +
                 ", intro='" + intro + '\'' +
                 ", image='" + image + '\'' +
+                ", location='" + location + '\'' +
                 '}';
     }
 }

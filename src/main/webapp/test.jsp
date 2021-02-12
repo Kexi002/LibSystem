@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="resource.jsp"%>
+<%@include file="css/resource.jsp"%>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>

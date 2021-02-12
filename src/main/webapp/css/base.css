@@ -1,5 +1,5 @@
 .no-yj{
-    border-radius:0px !important;
+    border-radius:0 !important;
 }
 .label-nav{
     position: absolute;
@@ -27,8 +27,8 @@
     list-style: none;
 
     background-color: #F9F9F9;
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
     min-height:900px;
 
 
@@ -40,7 +40,7 @@
 }
 
 .nav-list > ul > li:first-child {
-    border-top: 0px;
+    border-top: 0;
 }
 
 .nav-list > ul > li:last-child {
@@ -48,7 +48,7 @@
 }
 
 .nav-list > ul > li > a {
-    padding: 10px 30px 10px 0px;
+    padding: 10px 30px 10px 0;
     display: block;
     color: #777777 !important;
     border-left: 3px solid #F9F9F9;
@@ -95,7 +95,7 @@
 .nav-left-dropdown-menu {
     position: relative;
     list-style: none;
-    padding-left: 0px;
+    padding-left: 0;
 }
 
 .nav-left-dropdown-menu > li {
@@ -105,7 +105,7 @@
 .nav-left-dropdown-menu > li > a {
     color: #777777 !important;
     display: block;
-    padding: 10px 30px 10px 0px;
+    padding: 10px 30px 10px 0;
     text-align:center;
 }
 
@@ -140,7 +140,7 @@ a:focus,a:hover{
 }
 .no-hover:hover{
     background:none;
-    color:none;
+    color:transparent;
 }
 .nav-username{
     margin-left:8px
@@ -154,7 +154,7 @@ a:focus,a:hover{
 
 .main-right{
     margin-top:-20px;
-    padding:20px 0px;
+    padding:20px 0;
 }
 .pagination>.active>a,.pagination>.active>a:hover,.pagination>.active>a:focus{
     outline:none;
@@ -164,7 +164,7 @@ a:focus,a:hover{
     background-color:#EEE !important;
 }
 .pagination>.active{
-    background-color:none !important;
+    background-color:transparent !important;
 }
 table{
     color:#666666;
@@ -186,7 +186,7 @@ table{
     background-color:#F7F7F7;
 }
 .user-li-head{
-    background-color: #F9F9F9; margin-top: 0px; border-bottom: 1px solid #EEEEEE; padding-top: 10px
+    background-color: #F9F9F9; margin-top: 0; border-bottom: 1px solid #EEEEEE; padding-top: 10px
 }
 .navbar-brand{
     padding-left :30px;
@@ -218,8 +218,50 @@ table{
     color: #efefef;
 }
 
+thead > tr > th {
 
-.style-one {
+    position:sticky;
+
+    top:0; /* 第一列最上 */
+}
+
+th{
+    z-index:2;
+    background-color:#F8F8F8;
+    height: 33px;
+}
+
+.table-inner-border > thead > tr > th,
+.table-inner-border > tbody > tr > th,
+.table-inner-border > tfoot > tr > th,
+.table-inner-border > thead > tr > td,
+.table-inner-border > tbody > tr > td,
+.table-inner-border > tfoot > tr > td {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+}
+.table-inner-border > thead > tr > th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #ddd;
+}
+
+.table-inner-border > thead > tr > th:first-child,
+.table-inner-border > tbody > tr > td:first-child{
+    border-left: 0;
+}
+/*.table > caption + thead > tr:first-child > th,
+.table > colgroup + thead > tr:first-child > th,
+.table > thead:first-child > tr:first-child > th,
+.table > caption + thead > tr:first-child > td,
+.table > colgroup + thead > tr:first-child > td,
+.table > thead:first-child > tr:first-child > td {
+    border-top: 0;
+    border-left: 0;
+}*/
+/*.style-one {
     width: 80%;
     margin: 0 auto;
     border: 0;
@@ -227,7 +269,7 @@ table{
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
-/*透明渐变水平线*/
+!*透明渐变水平线*!
 .style-two {
     width: 80%;
     margin: 0 auto;
@@ -235,7 +277,7 @@ table{
     height: 1px;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
-/*渐变*/
+!*渐变*!
 .style-three {
     width: 80%;
     margin: 0 auto;
@@ -243,7 +285,7 @@ table{
     height: 1px;
     background: #333;
     background-image: linear-gradient(to right, #ccc, #333, #ccc);
-}
+}*/
 /*.btn-blue:visited{
     background-color: #08A5E0;
     color: #efefef;
