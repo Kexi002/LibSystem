@@ -46,5 +46,10 @@ public class TestOther {
         System.out.println((System.currentTimeMillis() - timestamp0.getTime())/(1000*24*3600));
     }
 
+    @Test
+    public void testMath(){
+        System.out.println((-1)/7);
+    }
+
 
 }

@@ -15,13 +15,13 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         String role = null;
-        //项目根地址
+        //项目根地址 /lib_system
         String path = httpServletRequest.getContextPath();
-        System.out.println(path);
+        //System.out.println(path);
 
-        //主机+端口号+项目根路径
+        //主机+端口号+项目根路径 http://localhost:8080/lib_system/
         String basePath = httpServletRequest.getScheme()+"://"+httpServletRequest.getServerName()+":"+httpServletRequest.getServerPort()+path+"/";
-        System.out.println(basePath);
+        //System.out.println(basePath);
 
         UserDetails principal =(UserDetails) authentication.getPrincipal();
         //权限是我手动赋予的，每一个认证成功的用户只有一个权限

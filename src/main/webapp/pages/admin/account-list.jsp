@@ -29,9 +29,10 @@
 
             <div class="col-md-6 col-md-offset-2">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="按学号或用户名查询"/>
+                    <input type="text" class="form-control" id="condition" placeholder="按学号或用户名查询"/>
                     <span class="input-group-btn">
-                    <button class="btn btn-blue" type="button" style="padding-left: 50px;padding-right: 50px;">查询</button>
+                    <button type="button" class="btn btn-blue" id="findByCondition" onclick="findByCondition()"
+                            style="padding-left: 50px;padding-right: 50px;">查询</button>
                 </span>
                 </div>
             </div>
@@ -42,7 +43,7 @@
 
 <div class="col-md-10 col-md-offset-2" style="margin-top: 120px;">
     <div class="col-md-11"
-         style="margin-left: 20px;border-top: 2px solid #08A5E0; height: 440px;overflow-y: auto">
+         style="margin-left: 20px;border-top: 2px solid #08A5E0; border-bottom: 2px solid #08A5E0;height: 405px;overflow-y: auto;">
         <table class="table table-hover table-inner-border" style="table-layout: fixed;width: 100%;">
             <thead>
             <tr>
@@ -54,9 +55,9 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${accountList}" var="account" varStatus="s">
+            <c:forEach items="${pageInfo.list}" var="account" varStatus="s">
                 <tr>
-                    <td>${s.count}</td>
+                    <td>${s.count + pageInfo.pageSize * (pageInfo.pageNum - 1)}</td>
                     <td>${account.studentId}</td>
                     <td>${account.username}</td>
                     <td>${account.authorityStr}</td>
@@ -70,31 +71,88 @@
             </tbody>
         </table>
     </div>
+
+    <div style="float: left; margin-top: 10px; margin-left: -20px">
+        <div class="form-group form-inline"  style="margin-left: 50px;">
+            共<b>${pageInfo.pages}</b>页，共<b>${pageInfo.total}</b>条数据。每页
+            <select class="form-control" id="changePageSize" onchange="changePageSize()">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>10</option>
+                <option>20</option>
+            </select>
+            条
+        </div>
+    </div>
 </div>
 
-<nav class="navbar-fixed-bottom" style="margin-left: 650px">
+
+
+<nav class="navbar-fixed-bottom" style="text-align:center;margin-bottom: 15px" >
     <ul class="pagination">
         <li>
-            <a href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
+            <a href="${pageContext.request.contextPath}/account/find.do?page=1&size=${pageInfo.pageSize}&condition=${condition}">首页</a>
         </li>
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
+        <li><a href="${pageContext.request.contextPath}/account/find.do?page=${pageInfo.pageNum-1}&size=${pageInfo.pageSize}&condition=${condition}"  aria-label="Previous">&laquo;</a></li>
+        <c:forEach begin="1" end="${pageInfo.pages}" var="pageNum">
+            <li id="page_${pageNum}"><a href="${pageContext.request.contextPath}/account/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageNum}</a></li>
+        </c:forEach>
+        <li><a href="${pageContext.request.contextPath}/account/find.do?page=${pageInfo.pageNum+1}&size=${pageInfo.pageSize}&condition=${condition}" aria-label="Next">&raquo;</a></li>
         <li>
-            <a href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
+            <a href="${pageContext.request.contextPath}/account/find.do?page=${pageInfo.pages}&size=${pageInfo.pageSize}&condition=${condition}">尾页</a>
         </li>
     </ul>
 </nav>
 
 <script type="text/javascript">
+
+    /*设置页数相关*/
+    $(function (){
+        //设置当前页的class为active
+        $("#page_${pageInfo.pageNum}").addClass("active");
+        //设置当前页的显示条数
+        if ("${pageInfo.pageSize}" > 7 && "${pageInfo.pageSize}" < 10){
+            $("#changePageSize").val(10);
+        } else if("${pageInfo.pageSize}" > 10 && "${pageInfo.pageSize}" < 20){
+            $("#changePageSize").val(20);
+        } else{
+            $("#changePageSize").val("${pageInfo.pageSize}");
+        }
+    });
+
+    function changePageSize() {
+        //获取下拉框的值
+        var pageSize = $("#changePageSize").val();
+        //向服务器发送请求，改变每页显示条数
+        location.href = "${pageContext.request.contextPath}/account/find.do?page=1&size="
+            + pageSize + "&condition=${condition}";
+    }
+
+    /*搜索框*/
+    $(function (){
+       $("#condition").val("${condition}");
+    });
+
+    function findByCondition(){
+        if($("#condition").val() == ""){
+            location.href = "${pageContext.request.contextPath}/account/find.do?page=1&size=${pageInfo.pageSize}"
+        } else{
+            var condition = $("#condition").val();
+            location.href = "${pageContext.request.contextPath}/account/find.do?page=1&size="+
+                ${pageInfo.pageSize} +"&condition="
+                + condition;
+        }
+    }
+
+
+
+    /*toastr配置*/
     $(function() {
-        //设置显示配置
         toastr.options = {
             "closeButton" : true,//是否显示关闭按钮
             "debug" : false,//是否使用debug模式

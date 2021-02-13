@@ -33,6 +33,20 @@
         <property name="dataSource" ref="dataSource"/>
         <!--配置延迟加载-->
         <property name="configLocation" value="classpath:mybatis-setting.xml"/>
+        <!--配置插件-->
+        <property name="plugins">
+            <array>
+                <!--配置pagehelper插件-->
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <props>
+                            <prop key="helperDialect">mysql</prop>
+                            <prop key="reasonable">true</prop>
+                        </props>
+                    </property>
+                </bean>
+            </array>
+        </property>
     </bean>
     <!--配置Dao接口所在的包-->
     <bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">

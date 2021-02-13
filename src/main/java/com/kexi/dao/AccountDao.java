@@ -25,13 +25,13 @@ public interface AccountDao {
     Account findByUsername(String username);
 
     @Select("select * from account where username like concat('%',#{username},'%')")
-    Account findByUsernameLike(String username);
+    List<Account> findByUsernameLike(String username);
 
     @Select("select * from account where studentId = #{studentId}")
     Account findByStudentId(String studentId);
 
     @Select("select * from account where studentId like concat('%',#{studentId},'%')")
-    Account findByStudentIdLike(String studentId);
+    List<Account> findByStudentIdLike(String studentId);
 
     @Update("update account set studentId = #{studentId}, username = #{username}, password = #{password} where id = #{id}")
     void update(Account account);

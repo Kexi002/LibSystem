@@ -34,7 +34,7 @@
                     <a href="#">用户管理</a>
                     <ul class="nav-left-dropdown-menu">
                         <li><a href="#">查询和修改</a></li>
-                        <li><a href="${pageContext.request.contextPath}/account/findAll.do">账号管理</a></li>
+                        <li><a href="${pageContext.request.contextPath}/account/find.do">账号管理</a></li>
                         <li><a href="#">选项3</a></li>
                     </ul>
                 </li>

@@ -1,15 +1,20 @@
 package com.kexi.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import com.kexi.domain.Account;
 import com.kexi.domain.UserInfo;
 import com.kexi.service.AccountService;
+import com.kexi.util.defaultValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -19,11 +24,25 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping("/findAll.do")
-    public String findAll(Model model){
-        //调用业务层service方法
-        List<Account> accountList = accountService.findAll();
-        model.addAttribute("accountList", accountList);
+    @RequestMapping("/find.do")
+    public String find(Model model, @RequestParam(name = "page", required = true, defaultValue = defaultValue.defaultPage) int page,
+                                  @RequestParam(name = "size", required = true, defaultValue = defaultValue.defaultSize) int size,
+                                  @RequestParam(name = "condition", required = false) String condition){
+        //condition在没有&的时候为null，但是在&{condition}且condition没有值的时候为空字符串
+        List<Account> accountList = new ArrayList<>();
+        if (condition == null || "".equals(condition)){
+            //没有条件，查询全部
+            accountList = accountService.findAll(page, size);
+        } else {
+            accountList = accountService.findByCondition(page, size, condition);
+
+            Page<Account> accountPage = (Page<Account>)accountList;
+            System.out.println(accountPage);
+
+            model.addAttribute("condition",condition);
+        }
+        PageInfo pageInfo = new PageInfo(accountList);
+        model.addAttribute("pageInfo", pageInfo);
         return "/admin/account-list";
     }
 

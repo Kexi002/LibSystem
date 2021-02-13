@@ -14,7 +14,9 @@ public interface AccountService extends UserDetailsService {
 
     void register(UserInfo userInfo);
 
-    List<Account> findAll();
+    List<Account> findAll(int page, int size);
+
+    List<Account> findByCondition(int page, int size, String condition);
 
     Account findByUsername(String username);
 
