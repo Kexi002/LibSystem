@@ -1,9 +1,12 @@
 package com.kexi.test;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.List;
+
 import org.junit.Test;
 
 public class TestOther {
@@ -49,6 +52,18 @@ public class TestOther {
     @Test
     public void testMath(){
         System.out.println((-1)/7);
+    }
+
+    @Test
+    public void testSublist(){
+        List<Integer> list = new ArrayList<>();
+        for (int i = 1; i <= 10; i++) {
+            list.add(i);
+        }
+        System.out.println(list);
+        list = list.subList(0, 7);
+        System.out.println(list);
+
     }
 
 
