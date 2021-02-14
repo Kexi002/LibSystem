@@ -21,15 +21,19 @@
         <div class="col-md-10 col-md-offset-2">
             <div class="col-md-12">
                 <ol class="breadcrumb">
-                    <li><a href="#">一级目录</a></li>
-                    <li><a href="#">二级目录</a></li>
-                    <li class="active">当前页面</li>
+                    <c:if test="${empty condition}">
+                        <li class="active">查询全部</li>
+                    </c:if>
+                    <c:if test="${!empty condition}">
+                        <li><a href="${pageContext.request.contextPath}/account/find.do?page=1&size=${pageInfo.pageSize}">查询全部</a></li>
+                        <li class="active">按条件查询</li>
+                    </c:if>
                 </ol>
             </div>
 
             <div class="col-md-6 col-md-offset-2">
                 <div class="input-group">
-                    <input type="text" class="form-control" id="condition" placeholder="按学号或用户名查询"/>
+                    <input type="text" class="form-control" id="condition"/>
                     <span class="input-group-btn">
                     <button type="button" class="btn btn-blue" id="findByCondition" onclick="findByCondition()"
                             style="padding-left: 50px;padding-right: 50px;">查询</button>
@@ -135,7 +139,11 @@
 
     /*搜索框*/
     $(function (){
-       $("#condition").val("${condition}");
+        if (${!empty condition}){
+            $("#condition").val("${condition}");
+        } else {
+            $("#condition").attr("placeholder","按学号或用户名查询")
+        }
     });
 
     function findByCondition(){
@@ -148,8 +156,6 @@
                 + condition;
         }
     }
-
-
 
     /*toastr配置*/
     $(function() {
@@ -167,6 +173,10 @@
             "showMethod" : "fadeIn",//显示时的动画方式
             "hideMethod" : "fadeOut" //消失时的动画方式
         };
+
+        if (${empty pageInfo.list}){
+            toastr.error("没有找到对应的查询结果");
+        }
     });
 
     /*下拉框动画*/

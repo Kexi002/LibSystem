@@ -10,11 +10,10 @@ public class PageInfoUtil {
 
     public static <T> PageInfo<T> list2PageInfo(int pageNum, int pageSize, List<T> list){
         PageInfo<T> pageInfo = new PageInfo<>(list);
+
         //total是未分页数据的总长度
         int total = list.size();
         pageInfo.setTotal(total);
-        pageInfo.setPageNum(pageNum);
-        pageInfo.setPageSize(pageSize);
 
         //总页数 = ((总条数 - 1) 整除/ 每页条目数) + 1
         //(0 - 1) / 7 + 1 = 1
@@ -22,6 +21,15 @@ public class PageInfoUtil {
         //(8 - 1) / 7 + 1 = 2
         int pages = (total - 1) / pageSize + 1;
         pageInfo.setPages(pages);
+
+        //根据总页数判断pageNum是否合法，不合法就纠正
+        if (pageNum < 1){
+            pageNum = 1;
+        } else if(pageNum > pages){
+            pageNum = pages;
+        }
+        pageInfo.setPageNum(pageNum);
+        pageInfo.setPageSize(pageSize);
 
         //开始行数 = (当前页数 - 1) * 每页条目数, 开始的索引跟开始的行数是一样的
         int startIndex = (pageNum - 1) * pageSize;

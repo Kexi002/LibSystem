@@ -64,12 +64,22 @@ public class AccountServiceImpl implements AccountService {
         String[] cs = condition.split("\\s+");
         for (String c : cs) {
             List<Account> tempList = accountDao.findByUsernameLike(c);
-            //第一次的时候集合是空的，不能取交集，直接赋值
-            if(accountList == null){
-                accountList = tempList;
-            }else {
-                //注意：retainAll的比较，对于对象数组要重写equals和hashCode方法
-                accountList.retainAll(tempList);
+            //注意：Dao返回来的不是一个null值而是一个空数组
+            if(!tempList.isEmpty()){
+                //第一次的时候集合是空的，不能取交集，直接赋值
+                if(accountList == null){
+                    accountList = tempList;
+                }else {
+                    //注意：retainAll的比较，对于对象数组要重写equals和hashCode方法
+                    accountList.retainAll(tempList);
+                }
+            } else {
+                tempList = accountDao.findByStudentIdLike(c);
+                if(accountList == null){
+                    accountList = tempList;
+                }else {
+                    accountList.retainAll(tempList);
+                }
             }
         }
         return accountList;
