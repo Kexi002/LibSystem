@@ -1,5 +1,7 @@
 package com.kexi.domain;
 
+import java.util.Objects;
+
 public class Account { //管理员只有Account，没有对应的User对象
     private String id;
     private String studentId; //15
@@ -73,5 +75,23 @@ public class Account { //管理员只有Account，没有对应的User对象
                 ", authority=" + authority +
                 ", authorityStr='" + authorityStr + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Account account = (Account) o;
+        return id.equals(account.id) &&
+                studentId.equals(account.studentId) &&
+                username.equals(account.username) &&
+                password.equals(account.password) &&
+                authority.equals(account.authority) &&
+                Objects.equals(authorityStr, account.authorityStr);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, studentId, username, password, authority, authorityStr);
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class PageInfoUtil {
 
-    public static <T> PageInfo<T> list2PageInfo(List<T> list, int pageNum, int pageSize){
+    public static <T> PageInfo<T> list2PageInfo(int pageNum, int pageSize, List<T> list){
         PageInfo<T> pageInfo = new PageInfo<>(list);
         //total是未分页数据的总长度
         int total = list.size();

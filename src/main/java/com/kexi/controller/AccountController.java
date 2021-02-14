@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.kexi.domain.Account;
 import com.kexi.domain.UserInfo;
 import com.kexi.service.AccountService;
+import com.kexi.util.PageInfoUtil;
 import com.kexi.util.defaultValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,19 +30,17 @@ public class AccountController {
                                   @RequestParam(name = "size", required = true, defaultValue = defaultValue.defaultSize) int size,
                                   @RequestParam(name = "condition", required = false) String condition){
         //condition在没有&的时候为null，但是在&{condition}且condition没有值的时候为空字符串
-        List<Account> accountList = new ArrayList<>();
+        List<Account> accountList;
+        PageInfo pageInfo;
         if (condition == null || "".equals(condition)){
             //没有条件，查询全部
             accountList = accountService.findAll(page, size);
+            pageInfo = new PageInfo(accountList);
         } else {
             accountList = accountService.findByCondition(page, size, condition);
-
-            Page<Account> accountPage = (Page<Account>)accountList;
-            System.out.println(accountPage);
-
-            model.addAttribute("condition",condition);
+            pageInfo = PageInfoUtil.list2PageInfo(page, size, accountList);
+            model.addAttribute("condition", condition);
         }
-        PageInfo pageInfo = new PageInfo(accountList);
         model.addAttribute("pageInfo", pageInfo);
         return "/admin/account-list";
     }
