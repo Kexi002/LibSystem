@@ -99,17 +99,61 @@
 
 <nav class="navbar-fixed-bottom" style="text-align:center;margin-bottom: 15px" >
     <ul class="pagination">
-        <li>
-            <a href="${pageContext.request.contextPath}/account/find.do?page=1&size=${pageInfo.pageSize}&condition=${condition}">首页</a>
-        </li>
+        <%--<li><a href="${pageContext.request.contextPath}/account/find.do?page=1&size=${pageInfo.pageSize}&condition=${condition}">首页</a></li>--%>
         <li><a href="${pageContext.request.contextPath}/account/find.do?page=${pageInfo.pageNum-1}&size=${pageInfo.pageSize}&condition=${condition}"  aria-label="Previous">&laquo;</a></li>
-        <c:forEach begin="1" end="${pageInfo.pages}" var="pageNum">
-            <li id="page_${pageNum}"><a href="${pageContext.request.contextPath}/account/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageNum}</a></li>
-        </c:forEach>
+        <%--如果长度小于7，直接完整显示--%>
+        <c:if test="${pageInfo.pages <= 7}">
+            <c:forEach begin="1" end="${pageInfo.pages}" var="pageNum">
+                <li id="page_${pageNum}"><a href="${pageContext.request.contextPath}/account/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageNum}</a></li>
+            </c:forEach>
+        </c:if>
+        <%--如果长度大于7，则分三种情况：靠近首页、靠近尾页和在中间--%>
+        <c:if test="${pageInfo.pages > 7}">
+            <%--更靠近首页，且当前页离首页只有3格（4）--%>
+            <c:if test="${((pageInfo.pageNum - 1) < 4) && ((pageInfo.pageNum - 1) <= (pageInfo.pages - pageInfo.pageNum))}">
+                <%--如果离首页不到3格，则按照当前页为4显示--%>
+                <c:if test="${pageInfo.pageNum < 4}">
+                    <c:forEach begin="1" end="6" var="pageNum">
+                        <li id="page_${pageNum}"><a href="${pageContext.request.contextPath}/account/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageNum}</a></li>
+                    </c:forEach>
+                </c:if>
+                <%--当前页为4或以上--%>
+                <c:if test="${pageInfo.pageNum >= 4}">
+                    <c:forEach begin="1" end="${pageInfo.pageNum + 2}" var="pageNum">
+                        <li id="page_${pageNum}"><a href="${pageContext.request.contextPath}/account/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageNum}</a></li>
+                    </c:forEach>
+                </c:if>
+                <li><a href="#">...</a></li>
+                <li id="page_${pageInfo.pages}"><a href="${pageContext.request.contextPath}/account/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageInfo.pages}</a></li>
+            </c:if>
+            <%--更靠近尾页，且当前页离尾页只有不到3格--%>
+            <c:if test="${((pageInfo.pages - pageInfo.pageNum) < 4) && ((pageInfo.pageNum - 1) > (pageInfo.pages - pageInfo.pageNum))}">
+                <li id="page_1"><a href="${pageContext.request.contextPath}/account/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">1</a></li>
+                <li><a href="#">...</a></li>
+                <c:if test="${pageInfo.pageNum > (pageInfo.pages - 3)}">
+                    <c:forEach begin="${pageInfo.pages - 5}" end="${pageInfo.pages}" var="pageNum">
+                        <li id="page_${pageNum}"><a href="${pageContext.request.contextPath}/account/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageNum}</a></li>
+                    </c:forEach>
+                </c:if>
+                <c:if test="${pageInfo.pageNum <= (pageInfo.pages - 3)}">
+                    <c:forEach begin="${pageInfo.pageNum - 2}" end="${pageInfo.pages}" var="pageNum">
+                        <li id="page_${pageNum}"><a href="${pageContext.request.contextPath}/account/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageNum}</a></li>
+                    </c:forEach>
+                </c:if>
+            </c:if>
+            <%--当前页在中间位置--%>
+            <c:if test="${(pageInfo.pageNum - 1 >= 4) && ((pageInfo.pages - pageInfo.pageNum) >= 4)}">
+                <li id="page_1"><a href="${pageContext.request.contextPath}/account/find.do?page=1&size=${pageInfo.pageSize}&condition=${condition}">1</a></li>
+                <li><a href="#">...</a></li>
+                <c:forEach begin="${pageInfo.pageNum - 2}" end="${pageInfo.pageNum + 2}" var="pageNum">
+                    <li id="page_${pageNum}"><a href="${pageContext.request.contextPath}/account/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageNum}</a></li>
+                </c:forEach>
+                <li><a href="#">...</a></li>
+                <li id="page_${pageInfo.pages}"><a href="${pageContext.request.contextPath}/account/find.do?page=${pageInfo.pages}&size=${pageInfo.pageSize}&condition=${condition}">${pageInfo.pages}</a></li>
+            </c:if>
+        </c:if>
         <li><a href="${pageContext.request.contextPath}/account/find.do?page=${pageInfo.pageNum+1}&size=${pageInfo.pageSize}&condition=${condition}" aria-label="Next">&raquo;</a></li>
-        <li>
-            <a href="${pageContext.request.contextPath}/account/find.do?page=${pageInfo.pages}&size=${pageInfo.pageSize}&condition=${condition}">尾页</a>
-        </li>
+        <%--<li><a href="${pageContext.request.contextPath}/account/find.do?page=${pageInfo.pages}&size=${pageInfo.pageSize}&condition=${condition}">尾页</a></li>--%>
     </ul>
 </nav>
 

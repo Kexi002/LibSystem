@@ -1,9 +1,7 @@
 package com.kexi.util;
 
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PageInfoUtil {
