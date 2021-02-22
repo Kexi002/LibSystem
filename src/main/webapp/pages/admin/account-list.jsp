@@ -66,12 +66,11 @@
                     <td>${account.username}</td>
                     <td>${account.authorityStr}</td>
                     <td>
-                        <button class="btn-sm btn-warning" href="#">修改</button>
-                        <button class="btn-sm btn-danger" href="#">删除</button>
+                        <button class="btn-sm btn-warning" onclick="window.location.href = '${pageContext.request.contextPath}/account/detail.do?id=${account.id}'">修改</button>
+                        <button class="btn-sm btn-danger btn_delete" onclick="confirmDelete(${account.id})">删除</button>
                     </td>
                 </tr>
             </c:forEach>
-
             </tbody>
         </table>
     </div>
@@ -157,6 +156,31 @@
     </ul>
 </nav>
 
+<%--隐藏的警告框--%>
+<div class="modal fade" id="model_delete">
+    <div class="modal-dialog" style="margin-top: 250px">
+        <div class="modal-content message_align">
+            <div class="modal-header" style="height: 50px">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" >提示</h4>
+            </div>
+            <div class="modal-body" style="height: 100px">
+                <p style="font-size: 16px">您确认要删除该条信息吗？</p>
+                <div style="float: right">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="padding-left: 20px; padding-right: 20px"
+                    >取消</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_delete_confirm" style="margin-left: 5px;padding-left: 20px; padding-right: 20px"
+                    >确认</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript">
 
     /*设置页数相关*/
@@ -201,6 +225,24 @@
         }
     }
 
+    /*删除警告*/
+    function confirmDelete(id){
+        $("#btn_delete_confirm").click(function (){
+            $.ajax({
+                type:"post",
+                url:"${pageContext.request.contextPath}/account/delete.do",
+                contentType:"application/json;charset=UTF-8",
+                data:'{"id":"'+ id +'"}',
+                data_type:"json",
+                success:function () {
+                    toastr.success("删除成功");
+                    location.href = "${pageContext.request.contextPath}/account/find.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}";
+                }
+            })
+        })
+        $("#model_delete").modal();
+    }
+
     /*toastr配置*/
     $(function() {
         toastr.options = {
@@ -224,7 +266,7 @@
     });
 
     /*下拉框动画*/
-    $(document).ready(function () {
+    $(function () {
         $(".dropdownMenu").dropdown();
         $(".nav-left-dropdown>a").click(function () {
 

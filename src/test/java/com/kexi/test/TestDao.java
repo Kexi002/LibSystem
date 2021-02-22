@@ -96,6 +96,11 @@ public class TestDao {
         }
     }
 
+    @Test
+    public void testDelete(){
+        accountDao.delete("11");
+    }
+
 
 
 /*    @Test

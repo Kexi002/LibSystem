@@ -21,8 +21,9 @@ public class PageInfoUtil {
         pageInfo.setPages(pages);
 
         //根据总页数判断pageNum是否合法，不合法就纠正
-        if (pageNum < 1){
+        if (pageNum <= 1){
             pageNum = 1;
+            //在只有一页的时候，pages有可能为0（没有结果）
         } else if(pageNum > pages){
             pageNum = pages;
         }

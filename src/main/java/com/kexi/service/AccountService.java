@@ -18,11 +18,15 @@ public interface AccountService extends UserDetailsService {
 
     List<Account> findByCondition(int page, int size, String condition);
 
+    Account findById(String id);
+
     Account findByUsername(String username);
 
     Account findByStudentId(String studentId);
 
     boolean update(Account account);
+
+    void delete(String id);
 
     void updatePassword(Account account);
 }

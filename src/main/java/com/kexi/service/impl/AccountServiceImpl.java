@@ -63,26 +63,54 @@ public class AccountServiceImpl implements AccountService {
         List<Account> accountList = null;
         String[] cs = condition.split("\\s+");
         for (String c : cs) {
-            List<Account> tempList = accountDao.findByUsernameLike(c);
-            //注意：Dao返回来的不是一个null值而是一个空数组
-            if(!tempList.isEmpty()){
-                //第一次的时候集合是空的，不能取交集，直接赋值
-                if(accountList == null){
-                    accountList = tempList;
-                }else {
-                    //注意：retainAll的比较，对于对象数组要重写equals和hashCode方法
-                    accountList.retainAll(tempList);
+            //两种情况：关键字是纯数字（可能匹配学号+用户名），或者非纯数字（只能匹配用户名）
+            if (!c.matches("^\\d+$")){
+                List<Account> tempList = accountDao.findByUsernameLike(c);
+                //注意：Dao返回来的不是一个null值而是一个空数组
+                if(!tempList.isEmpty()){
+                    //第一次的时候集合是空的，不能取交集，直接赋值
+                    if(accountList == null){
+                        accountList = tempList;
+                    }else {
+                        //注意：retainAll的比较，对于对象数组要重写equals和hashCode方法
+                        accountList.retainAll(tempList);
+                    }
                 }
-            } else {
-                tempList = accountDao.findByStudentIdLike(c);
-                if(accountList == null){
-                    accountList = tempList;
-                }else {
-                    accountList.retainAll(tempList);
+            }else{
+                //如果是纯数字，则两个字段都要查询，结果取并集，并把并集结果再跟原有列表retainAll
+                //两个插叙结果取并集
+                List<Account> tempList1 = accountDao.findByStudentIdLike(c);
+                List<Account> tempList2 = accountDao.findByUsernameLike(c);
+                tempList2.removeAll(tempList1);
+                tempList1.addAll(tempList2);
+                if (!tempList1.isEmpty()){
+                    if (accountList == null){
+                        accountList = tempList1;
+                    }else {
+                        accountList.retainAll(tempList1);
+                    }
                 }
             }
+
+
+           /* //如果是纯数字，则有可能是学号
+            {
+                tempList = accountDao.findByStudentIdLike(c);
+                if (!tempList.isEmpty()){
+                    if(accountList == null){
+                        accountList = tempList;
+                    }else {
+                        accountList.retainAll(tempList);
+                    }
+                }
+            }*/
         }
         return accountList;
+    }
+
+    @Override
+    public Account findById(String id) {
+        return accountDao.findById(id);
     }
 
     @Override
@@ -119,10 +147,14 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public void delete(String id) {
+        accountDao.delete(id);
+    }
+
+    @Override
     public void updatePassword(Account account) {
         accountDao.updatePassword(account);
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String username){

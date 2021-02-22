@@ -76,4 +76,20 @@ public class AccountController {
         return false;
     }
 
+    @RequestMapping("/detail.do")
+    public String update(Model model, @RequestParam(name = "id") String id){
+        Account account = accountService.findById(id);
+        model.addAttribute("account", account);
+        return "/admin/account-detail";
+    }
+
+    @RequestMapping("/delete.do")
+    public @ResponseBody void deleteById(@RequestBody Account account){
+        System.out.println("正在删除......");
+
+        //删除Account的时候对应的User也会被删除
+        //必须先写删除User的逻辑！！！
+        accountService.delete(account.getId());
+    }
+
 }
