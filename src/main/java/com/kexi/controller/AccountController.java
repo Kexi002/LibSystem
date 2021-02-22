@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,6 +91,16 @@ public class AccountController {
         //删除Account的时候对应的User也会被删除
         //必须先写删除User的逻辑！！！
         accountService.delete(account.getId());
+    }
+
+    @RequestMapping("/update.do")
+    public @ResponseBody void update(@RequestBody Account account){
+        accountService.update(account);
+    }
+
+    @RequestMapping("/updatePassword.do")
+    public @ResponseBody void updatePassword(@RequestBody Account account){
+        accountService.updatePassword(account);
     }
 
 }

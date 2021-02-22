@@ -33,7 +33,7 @@ public interface AccountDao {
     @Select("select * from account where studentId like concat('%',#{studentId},'%')")
     List<Account> findByStudentIdLike(String studentId);
 
-    @Update("update account set studentId = #{studentId}, username = #{username}, password = #{password} where id = #{id}")
+    @Update("update account set studentId = #{studentId}, username = #{username} where id = #{id}")
     void update(Account account);
 
     @Update("update account set password = #{password} where id = #{id}")

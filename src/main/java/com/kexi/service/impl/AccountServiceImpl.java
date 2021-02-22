@@ -153,6 +153,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void updatePassword(Account account) {
+        System.out.println(account.getPassword());
+        account.setPassword(bCryptPasswordEncoder.encode(account.getPassword()));
+        System.out.println(account.getPassword());
         accountDao.updatePassword(account);
     }
 
