@@ -94,8 +94,9 @@ public class AccountController {
     }
 
     @RequestMapping("/update.do")
-    public @ResponseBody void update(@RequestBody Account account){
+    public @ResponseBody void update(Model model, @RequestBody Account account){
         accountService.update(account);
+        model.addAttribute("account", account);
     }
 
     @RequestMapping("/updatePassword.do")

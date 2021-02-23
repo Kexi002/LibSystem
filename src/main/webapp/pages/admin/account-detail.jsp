@@ -232,10 +232,12 @@
                             '", "password":"${account.password}"}',
                         data_type:"json",
                         success:function () {
-                            toastr.success("账户修改成功");
-                            setTimeout(function () {
-                                location.href = "${pageContext.request.contextPath}/account/detail.do?id=${account.id}";
-                            }, 1500)
+                            toastr.success("账户修改成功","", {"onHidden":function () {
+                                    location.reload();
+                                }});
+/*                            setTimeout(function () {
+                                location.reload();
+                            }, 1500)*/
                         }
                     })
                 }
