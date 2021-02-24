@@ -5,12 +5,14 @@ import com.kexi.domain.Borrow;
 import com.kexi.service.BorrowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.List;
 
-@Service
+@Service("borrowService")
+@Transactional
 public class BorrowServiceImpl implements BorrowService {
     @Autowired
     private BorrowDao borrowDao;

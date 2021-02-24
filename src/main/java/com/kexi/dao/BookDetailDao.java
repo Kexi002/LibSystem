@@ -4,6 +4,7 @@ import com.kexi.domain.BookDetail;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,4 +26,6 @@ public interface BookDetailDao {
     @Select("select * from bookDetail where id = #{id}")
     BookDetail findById(String id);
 
+    @Update("update bookDetail set image = #{image} where id = #{id}")
+    void updateImage(BookDetail bookDetail);
 }
