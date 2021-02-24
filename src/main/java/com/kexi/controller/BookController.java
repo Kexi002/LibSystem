@@ -1,4 +1,5 @@
 package com.kexi.controller;
+import com.kexi.domain.Account;
 import com.kexi.domain.BookDetail;
 import com.kexi.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,13 @@ public class BookController {
 
     @Autowired
     private BookService bookService;
+
+    @RequestMapping("/detail.do")
+    public String update(Model model, @RequestParam(name = "id") String id){
+        BookDetail bookDetail = bookService.findDetailById(id);
+        model.addAttribute("bookDetail", bookDetail);
+        return "/admin/img-upload-test";
+    }
 
     @RequestMapping("/uploadImg.do")
     public @ResponseBody void uploadImg(HttpServletRequest request,  Model model, @RequestParam(name = "upload") MultipartFile upload, @RequestParam(name = "id") String id) throws Exception {
