@@ -15,10 +15,10 @@
                 <li>
                     <a href="#">首页</a>
                 </li>
-                <li class="nav-left-dropdown">
+                <li class="nav-left-dropdown" id="book_menu">
                     <a href="#">图书管理</a>
                     <ul class="nav-left-dropdown-menu">
-                        <li><a href="#">查询和修改</a></li>
+                        <li><a id="book_menu_find" href="${pageContext.request.contextPath}/book/find.do">查询和修改</a></li>
                         <li><a href="#">新书入库</a></li>
                     </ul>
                 </li>
@@ -30,11 +30,11 @@
                         <li><a href="#">选项3</a></li>
                     </ul>
                 </li>
-                <li class="nav-left-dropdown">
+                <li class="nav-left-dropdown" id="user_menu">
                     <a href="#">用户管理</a>
                     <ul class="nav-left-dropdown-menu">
                         <li><a href="#">查询和修改</a></li>
-                        <li><a href="${pageContext.request.contextPath}/account/find.do">账号管理</a></li>
+                        <li><a id="user_menu_account" href="${pageContext.request.contextPath}/account/find.do">账号管理</a></li>
                         <li><a href="#">选项3</a></li>
                     </ul>
                 </li>

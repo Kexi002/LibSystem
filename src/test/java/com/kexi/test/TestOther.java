@@ -44,8 +44,6 @@ public class TestOther {
         System.out.println(timestamp0);
         System.out.println(timestamp1);
 
-
-
         System.out.println((System.currentTimeMillis() - timestamp0.getTime())/(1000*24*3600));
     }
 

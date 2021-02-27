@@ -1,9 +1,8 @@
 package com.kexi.test;
 
-import com.kexi.domain.Account;
-import com.kexi.domain.UserDetail;
-import com.kexi.domain.UserInfo;
+import com.kexi.domain.*;
 import com.kexi.service.AccountService;
+import com.kexi.service.BookService;
 import com.kexi.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.awt.print.Book;
 import java.math.BigInteger;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -23,6 +23,8 @@ public class TestService {
     private AccountService accountService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private BookService bookService;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -53,7 +55,30 @@ public class TestService {
 
             accountService.register(userInfo);
         }
+    }
 
+    @Test
+    public void addTestBook(){
+        int start = 1;
+        int end = 20;
+        for (int i = start; i <= end; i++) {
+
+            BookDetail bookDetail = new BookDetail();
+            bookDetail.setPublicationDate("2021-2-27");
+            bookDetail.setISBN("ISBN 0-000-00000-0");
+            //198字
+            bookDetail.setIntro("这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本");
+            bookDetail.setLocation("中心图书馆 某层 某书架");
+
+            BookInfo bookInfo = new BookInfo();
+            bookInfo.setBookDetail(bookDetail);
+            bookInfo.setAuthor("测试作者"+i);
+            bookInfo.setBookName("测试图书"+i);
+            bookInfo.setCategory("T工业技术");
+            bookInfo.setPublisher("测试出版社"+i);
+
+            bookService.save(bookInfo);
+        }
     }
 
     @Test

@@ -73,7 +73,7 @@
     border-right: 1px solid #E7E7E7;
 }
 
-.nav-left-bottrom-border {
+.nav-left-bottom-border {
     border-bottom: 1px solid #E7E7E7;
 }
 
@@ -134,10 +134,10 @@ span{
 a{
     color:#08A5E0 !important;
 }
-a:focus,a:hover{
+/*a:focus,a:hover{
     color:#0a8cd2 !important;
     outline:none !important;
-}
+}*/
 .no-hover:hover{
     background:none;
     color:transparent;

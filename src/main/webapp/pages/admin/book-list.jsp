@@ -10,8 +10,6 @@
     <link href="${pageContext.request.contextPath}/css/toastr.min.css" rel="stylesheet" type="text/css" />
     <script src="${pageContext.request.contextPath}/js/toastr.min.js"></script>
 </head>
-
-<body>
 <div class="container-fluid">
     <jsp:include page="side-navbar.jsp"/> <%--侧边栏文件--%>
 
@@ -25,7 +23,7 @@
                         <li class="active">查询全部</li>
                     </c:if>
                     <c:if test="${!empty condition}">
-                        <li><a href="${pageContext.request.contextPath}/account/find.do?page=1&size=${pageInfo.pageSize}">查询全部</a></li>
+                        <li><a href="${pageContext.request.contextPath}/book/find.do?page=1&size=${pageInfo.pageSize}">查询全部</a></li>
                         <li class="active">按条件查询</li>
                     </c:if>
                 </ol>
@@ -52,22 +50,24 @@
             <thead>
             <tr>
                 <th>序号</th>
-                <th>学号</th>
-                <th>用户名</th>
-                <th>权限</th>
+                <th>书名</th>
+                <th>分类</th>
+                <th>作者</th>
+                <th>出版社</th>
                 <th>操作</th>
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${pageInfo.list}" var="account" varStatus="s">
+            <c:forEach items="${pageInfo.list}" var="bookInfo" varStatus="s">
                 <tr>
                     <td>${s.count + pageInfo.pageSize * (pageInfo.pageNum - 1)}</td>
-                    <td>${account.studentId}</td>
-                    <td>${account.username}</td>
-                    <td>${account.authorityStr}</td>
+                    <td>${bookInfo.bookName}</td>
+                    <td>${bookInfo.category}</td>
+                    <td>${bookInfo.author}</td>
+                    <td>${bookInfo.publisher}</td>
                     <td>
-                        <button class="btn-sm btn-warning" onclick="window.location.href = '${pageContext.request.contextPath}/account/detail.do?id=${account.id}'">修改</button>
-                        <button class="btn-sm btn-danger btn_delete" onclick="confirmDelete(${account.id})">删除</button>
+                        <button class="btn-sm btn-warning" onclick="window.location.href = '${pageContext.request.contextPath}/book/detail.do?id=${bookInfo.id}'">修改</button>
+                        <button class="btn-sm btn-danger btn_delete" onclick="confirmDelete(${bookInfo.id})">删除</button>
                     </td>
                 </tr>
             </c:forEach>
@@ -98,12 +98,11 @@
 
 <nav class="navbar-fixed-bottom" style="text-align:center;margin-bottom: 15px" >
     <ul class="pagination">
-        <%--<li><a href="${pageContext.request.contextPath}/account/find.do?page=1&size=${pageInfo.pageSize}&condition=${condition}">首页</a></li>--%>
-        <li><a href="${pageContext.request.contextPath}/account/find.do?page=${pageInfo.pageNum-1}&size=${pageInfo.pageSize}&condition=${condition}"  aria-label="Previous">&laquo;</a></li>
+        <li><a href="${pageContext.request.contextPath}/book/find.do?page=${pageInfo.pageNum-1}&size=${pageInfo.pageSize}&condition=${condition}"  aria-label="Previous">&laquo;</a></li>
         <%--如果长度小于7，直接完整显示--%>
         <c:if test="${pageInfo.pages <= 7}">
             <c:forEach begin="1" end="${pageInfo.pages}" var="pageNum">
-                <li id="page_${pageNum}"><a href="${pageContext.request.contextPath}/account/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageNum}</a></li>
+                <li id="page_${pageNum}"><a href="${pageContext.request.contextPath}/book/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageNum}</a></li>
             </c:forEach>
         </c:if>
         <%--如果长度大于7，则分三种情况：靠近首页、靠近尾页和在中间--%>
@@ -113,73 +112,47 @@
                 <%--如果离首页不到3格，则按照当前页为4显示--%>
                 <c:if test="${pageInfo.pageNum < 4}">
                     <c:forEach begin="1" end="6" var="pageNum">
-                        <li id="page_${pageNum}"><a href="${pageContext.request.contextPath}/account/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageNum}</a></li>
+                        <li id="page_${pageNum}"><a href="${pageContext.request.contextPath}/book/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageNum}</a></li>
                     </c:forEach>
                 </c:if>
                 <%--当前页为4或以上--%>
                 <c:if test="${pageInfo.pageNum >= 4}">
                     <c:forEach begin="1" end="${pageInfo.pageNum + 2}" var="pageNum">
-                        <li id="page_${pageNum}"><a href="${pageContext.request.contextPath}/account/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageNum}</a></li>
+                        <li id="page_${pageNum}"><a href="${pageContext.request.contextPath}/book/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageNum}</a></li>
                     </c:forEach>
                 </c:if>
                 <li><a href="#">...</a></li>
-                <li id="page_${pageInfo.pages}"><a href="${pageContext.request.contextPath}/account/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageInfo.pages}</a></li>
+                <li id="page_${pageInfo.pages}"><a href="${pageContext.request.contextPath}/book/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageInfo.pages}</a></li>
             </c:if>
             <%--更靠近尾页，且当前页离尾页只有不到3格--%>
             <c:if test="${((pageInfo.pages - pageInfo.pageNum) < 4) && ((pageInfo.pageNum - 1) > (pageInfo.pages - pageInfo.pageNum))}">
-                <li id="page_1"><a href="${pageContext.request.contextPath}/account/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">1</a></li>
+                <li id="page_1"><a href="${pageContext.request.contextPath}/book/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">1</a></li>
                 <li><a href="#">...</a></li>
                 <c:if test="${pageInfo.pageNum > (pageInfo.pages - 3)}">
                     <c:forEach begin="${pageInfo.pages - 5}" end="${pageInfo.pages}" var="pageNum">
-                        <li id="page_${pageNum}"><a href="${pageContext.request.contextPath}/account/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageNum}</a></li>
+                        <li id="page_${pageNum}"><a href="${pageContext.request.contextPath}/book/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageNum}</a></li>
                     </c:forEach>
                 </c:if>
                 <c:if test="${pageInfo.pageNum <= (pageInfo.pages - 3)}">
                     <c:forEach begin="${pageInfo.pageNum - 2}" end="${pageInfo.pages}" var="pageNum">
-                        <li id="page_${pageNum}"><a href="${pageContext.request.contextPath}/account/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageNum}</a></li>
+                        <li id="page_${pageNum}"><a href="${pageContext.request.contextPath}/book/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageNum}</a></li>
                     </c:forEach>
                 </c:if>
             </c:if>
             <%--当前页在中间位置--%>
             <c:if test="${(pageInfo.pageNum - 1 >= 4) && ((pageInfo.pages - pageInfo.pageNum) >= 4)}">
-                <li id="page_1"><a href="${pageContext.request.contextPath}/account/find.do?page=1&size=${pageInfo.pageSize}&condition=${condition}">1</a></li>
+                <li id="page_1"><a href="${pageContext.request.contextPath}/book/find.do?page=1&size=${pageInfo.pageSize}&condition=${condition}">1</a></li>
                 <li><a href="#">...</a></li>
                 <c:forEach begin="${pageInfo.pageNum - 2}" end="${pageInfo.pageNum + 2}" var="pageNum">
-                    <li id="page_${pageNum}"><a href="${pageContext.request.contextPath}/account/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageNum}</a></li>
+                    <li id="page_${pageNum}"><a href="${pageContext.request.contextPath}/book/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageNum}</a></li>
                 </c:forEach>
                 <li><a href="#">...</a></li>
-                <li id="page_${pageInfo.pages}"><a href="${pageContext.request.contextPath}/account/find.do?page=${pageInfo.pages}&size=${pageInfo.pageSize}&condition=${condition}">${pageInfo.pages}</a></li>
+                <li id="page_${pageInfo.pages}"><a href="${pageContext.request.contextPath}/book/find.do?page=${pageInfo.pages}&size=${pageInfo.pageSize}&condition=${condition}">${pageInfo.pages}</a></li>
             </c:if>
         </c:if>
-        <li><a href="${pageContext.request.contextPath}/account/find.do?page=${pageInfo.pageNum+1}&size=${pageInfo.pageSize}&condition=${condition}" aria-label="Next">&raquo;</a></li>
-        <%--<li><a href="${pageContext.request.contextPath}/account/find.do?page=${pageInfo.pages}&size=${pageInfo.pageSize}&condition=${condition}">尾页</a></li>--%>
+        <li><a href="${pageContext.request.contextPath}/book/find.do?page=${pageInfo.pageNum+1}&size=${pageInfo.pageSize}&condition=${condition}" aria-label="Next">&raquo;</a></li>
     </ul>
 </nav>
-
-<%--隐藏的警告框--%>
-<div class="modal fade" id="model_delete">
-    <div class="modal-dialog" style="margin-top: 250px">
-        <div class="modal-content message_align">
-            <div class="modal-header" style="height: 50px">
-                <button type="button" class="close" data-dismiss="modal"
-                        aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-                <h4 class="modal-title" >提示</h4>
-            </div>
-            <div class="modal-body" style="height: 100px">
-                <p style="font-size: 16px">您确认要删除该条信息吗？</p>
-                <div style="float: right">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" style="padding-left: 20px; padding-right: 20px"
-                    >取消</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_delete_confirm" style="margin-left: 5px;padding-left: 20px; padding-right: 20px"
-                    >确认</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
 
 <script type="text/javascript">
 
@@ -201,7 +174,7 @@
         //获取下拉框的值
         var pageSize = $("#changePageSize").val();
         //向服务器发送请求，改变每页显示条数
-        location.href = "${pageContext.request.contextPath}/account/find.do?page=1&size="
+        location.href = "${pageContext.request.contextPath}/book/find.do?page=1&size="
             + pageSize + "&condition=${condition}";
     }
 
@@ -216,10 +189,10 @@
 
     function findByCondition(){
         if($("#condition").val() == ""){
-            location.href = "${pageContext.request.contextPath}/account/find.do?page=1&size=${pageInfo.pageSize}"
+            location.href = "${pageContext.request.contextPath}/book/find.do?page=1&size=${pageInfo.pageSize}"
         } else{
             var condition = $("#condition").val();
-            location.href = "${pageContext.request.contextPath}/account/find.do?page=1&size="+
+            location.href = "${pageContext.request.contextPath}/book/find.do?page=1&size="+
                 ${pageInfo.pageSize} +"&condition="
                 + condition;
         }
@@ -230,13 +203,13 @@
         $("#btn_delete_confirm").click(function (){
             $.ajax({
                 type:"post",
-                url:"${pageContext.request.contextPath}/account/delete.do",
+                url:"${pageContext.request.contextPath}/book/delete.do",
                 contentType:"application/json;charset=UTF-8",
                 data:'{"id":"'+ id +'"}',
                 data_type:"json",
                 success:function () {
                     toastr.success("删除成功");
-                    location.href = "${pageContext.request.contextPath}/account/find.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}";
+                    location.href = "${pageContext.request.contextPath}/book/find.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}";
                 }
             })
         })
@@ -267,22 +240,23 @@
 
     /*下拉框动画*/
     $(function () {
-        $("#user_menu > a").addClass("nav-left-dropdown-a");
-        $("#user_menu > a").addClass("nav-left-bottom-border");
-        $("#user_menu > a").next("ul").addClass("nav-left-dropdown-ul").slideDown(0);
-        $("#user_menu > a").attr("d", "2");
-        $("#user_menu > a").attr("style", "color:#08A5E0 !important");
-        $("#user_menu_account").attr("style", "color:#08A5E0 !important");
+        $("#book_menu > a").addClass("nav-left-dropdown-a");
+        $("#book_menu > a").addClass("nav-left-bottom-border");
+        $("#book_menu > a").next("ul").addClass("nav-left-dropdown-ul").slideDown(0);
+        $("#book_menu > a").attr("d", "2");
+        $("#book_menu > a").attr("style", "color:#08A5E0 !important");
+        $("#book_menu_find").attr("style", "color:#08A5E0 !important");
 
         $(".dropdownMenu").dropdown();
         $(".nav-left-dropdown>a").click(function () {
+
+
             if ($(this).attr("d") != 1 && $(this).attr("d") != undefined) {
                 $(this).removeClass("nav-left-dropdown-a");
                 $this = $(this);
                 $(this).next("ul").slideUp(300, function () { $this.removeClass("nav-left-bottom-border"); $this.removeClass("nav-left-dropdown-ul") });
                 $(this).attr("d", "1");
                 $(this).attr("style", "color:#777777 !important");
-
             } else {
                 $(this).addClass("nav-left-dropdown-a");
                 $(this).addClass("nav-left-bottom-border");
@@ -293,6 +267,5 @@
         })
     });
 </script>
-
 </body>
 </html>

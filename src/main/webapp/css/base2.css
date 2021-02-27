@@ -73,7 +73,7 @@
     border-right: 2px solid #006699;
 }
 
-.nav-left-bottrom-border {
+.nav-left-bottom-border {
     border-bottom: 1px solid #006699;
 }
 
@@ -141,7 +141,7 @@ a:focus,a:hover{
 }
 .no-hover:hover{
     background:none;
-    color:none;
+    color:inherit;
 }
 .nav-username{
     margin-left:8px
@@ -165,7 +165,7 @@ a:focus,a:hover{
     background-color:#5BC0DE !important;
 }
 .pagination>.active{
-    background-color:none !important;
+    background-color:inherit !important;
 }
 table{
     color:#666666;

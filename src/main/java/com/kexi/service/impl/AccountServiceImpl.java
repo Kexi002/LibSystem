@@ -91,19 +91,6 @@ public class AccountServiceImpl implements AccountService {
                     }
                 }
             }
-
-
-           /* //如果是纯数字，则有可能是学号
-            {
-                tempList = accountDao.findByStudentIdLike(c);
-                if (!tempList.isEmpty()){
-                    if(accountList == null){
-                        accountList = tempList;
-                    }else {
-                        accountList.retainAll(tempList);
-                    }
-                }
-            }*/
         }
         return accountList;
     }

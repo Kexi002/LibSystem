@@ -111,20 +111,19 @@
     $(document).ready(function () {
         $(".dropdownMenu").dropdown();
         $(".nav-left-dropdown>a").click(function () {
-
-
             if ($(this).attr("d") != 1 && $(this).attr("d") != undefined) {
                 $(this).removeClass("nav-left-dropdown-a");
                 $this = $(this);
-                $(this).next("ul").slideUp(300, function () { $this.removeClass("nav-left-bottrom-border"); $this.removeClass("nav-left-dropdown-ul") });
-
+                $(this).next("ul").slideUp(300, function () { $this.removeClass("nav-left-bottom-border"); $this.removeClass("nav-left-dropdown-ul") });
                 $(this).attr("d", "1");
+                $(this).attr("style", "color:#777777 !important");
 
             } else {
                 $(this).addClass("nav-left-dropdown-a");
-                $(this).addClass("nav-left-bottrom-border");
+                $(this).addClass("nav-left-bottom-border");
                 $(this).next("ul").addClass("nav-left-dropdown-ul").slideDown(300);
                 $(this).attr("d", "2");
+                $(this).attr("style", "color:#08A5E0 !important");
             }
         })
     });
