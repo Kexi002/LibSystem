@@ -1,5 +1,6 @@
 package com.kexi.dao;
 
+import com.kexi.domain.Account;
 import com.kexi.domain.BookDetail;
 import com.kexi.domain.BookInfo;
 import org.apache.ibatis.annotations.*;
@@ -37,6 +38,18 @@ public interface BookInfoDao {
     @Select("select * from bookInfo where id = #{id}")
     @ResultMap("bookInfoMap")
     BookInfo findById(String id);
+
+    @Select("select * from bookInfo where bookName like concat('%',#{bookName},'%')")
+    List<BookInfo> findByBookNameLike(String bookName);
+
+    @Select("select * from bookInfo where category like concat('%',#{category},'%')")
+    List<BookInfo> findByCategoryLike(String category);
+
+    @Select("select * from bookInfo where author like concat('%',#{author},'%')")
+    List<BookInfo> findByAuthorLike(String author);
+
+    @Select("select * from bookInfo where publisher like concat('%',#{publisher},'%')")
+    List<BookInfo> findByPublisherLike(String publisher);
 
 
 }

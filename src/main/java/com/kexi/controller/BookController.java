@@ -48,16 +48,17 @@ public class BookController {
     }
 
     @RequestMapping("/detail.do")
-    public String update(Model model, @RequestParam(name = "id") String id){
-        BookDetail bookDetail = bookService.findDetailById(id);
-        model.addAttribute("bookDetail", bookDetail);
-        return "/admin/img-upload-test";
+    public String update(Model model, @RequestParam(name = "id") String id, @RequestParam(name = "condition", required = false) String condition){
+/*        BookDetail bookDetail = bookService.findDetailById(id);
+        model.addAttribute("bookDetail", bookDetail);*/
+        BookInfo bookInfo = bookService.findById(id);
+        model.addAttribute("bookInfo", bookInfo);
+        model.addAttribute("condition", condition);
+        return "/admin/book-detail";
     }
 
     @RequestMapping("/uploadImg.do")
     public @ResponseBody void uploadImg(HttpServletRequest request,  Model model, @RequestParam(name = "upload") MultipartFile upload, @RequestParam(name = "id") String id) throws Exception {
-        System.out.println("id:" + id);
-
         System.out.println("Controller:文件上传中......");
         String path = request.getSession().getServletContext().getRealPath("/img/bookImage/");
         System.out.println("path:"+path);

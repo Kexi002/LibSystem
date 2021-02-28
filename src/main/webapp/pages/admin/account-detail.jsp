@@ -40,7 +40,10 @@
 <div class="col-md-10 col-md-offset-2" style="margin-top: 70px;">
     <form class="form-horizontal" role="form">
         <div class="panel panel-3" style="margin-left: 15px; margin-right: 15px">
-            <div class="panel-heading"><h3>账户修改</h3></div>
+            <div class="panel-heading" style="padding-top: 0;">
+                <h3>账户修改</h3>
+                <hr style="margin-top: 0; margin-bottom: 0">
+            </div>
                 <div class="panel-body">
                     <div class="form-group">
                         <label class="col-md-1 control-label" for="studentId">学号</label>

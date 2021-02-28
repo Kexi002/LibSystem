@@ -14,6 +14,8 @@ public interface BookService {
 
     List<BookInfo> findByCondition(int page, int size, String condition);
 
+    BookInfo findById(String id);
+
     BookDetail findDetailById(String id);
 
     void updateImage(BookDetail bookDetail);

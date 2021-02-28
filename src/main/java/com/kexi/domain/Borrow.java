@@ -3,6 +3,7 @@ package com.kexi.domain;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 
 public class Borrow {
     String id;
@@ -105,5 +106,25 @@ public class Borrow {
                 ", renewStr='" + renewStr + '\'' +
                 ", status='" + status + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Borrow borrow = (Borrow) o;
+        return Objects.equals(id, borrow.id) &&
+                Objects.equals(userInfo, borrow.userInfo) &&
+                Objects.equals(bookInfo, borrow.bookInfo) &&
+                Objects.equals(borrowDate, borrow.borrowDate) &&
+                Objects.equals(returnDate, borrow.returnDate) &&
+                Objects.equals(renew, borrow.renew) &&
+                Objects.equals(renewStr, borrow.renewStr) &&
+                Objects.equals(status, borrow.status);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, userInfo, bookInfo, borrowDate, returnDate, renew, renewStr, status);
     }
 }

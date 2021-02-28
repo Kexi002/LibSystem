@@ -66,7 +66,8 @@
                     <td>${bookInfo.author}</td>
                     <td>${bookInfo.publisher}</td>
                     <td>
-                        <button class="btn-sm btn-warning" onclick="window.location.href = '${pageContext.request.contextPath}/book/detail.do?id=${bookInfo.id}'">修改</button>
+                        <button class="btn-sm btn-info" onclick="window.location.href = '${pageContext.request.contextPath}/book/detail.do?id=${bookInfo.id}&condition=${condition}'">详情</button>
+                        <button class="btn-sm btn-warning" onclick="window.location.href = '${pageContext.request.contextPath}/book/update.do?id=${bookInfo.id}'">修改</button>
                         <button class="btn-sm btn-danger btn_delete" onclick="confirmDelete(${bookInfo.id})">删除</button>
                     </td>
                 </tr>
@@ -154,6 +155,30 @@
     </ul>
 </nav>
 
+<%--隐藏的警告框--%>
+<div class="modal fade" id="model_delete">
+    <div class="modal-dialog" style="margin-top: 250px">
+        <div class="modal-content message_align">
+            <div class="modal-header" style="height: 50px">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" >提示</h4>
+            </div>
+            <div class="modal-body" style="height: 100px">
+                <p style="font-size: 16px">您确认要删除该条信息吗？</p>
+                <div style="float: right">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="padding-left: 20px; padding-right: 20px"
+                    >取消</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_delete_confirm" style="margin-left: 5px;padding-left: 20px; padding-right: 20px"
+                    >确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript">
 
     /*设置页数相关*/
@@ -183,7 +208,7 @@
         if (${!empty condition}){
             $("#condition").val("${condition}");
         } else {
-            $("#condition").attr("placeholder","按学号或用户名查询")
+            $("#condition").attr("placeholder","按书名、作者、出版社或类别查询")
         }
     });
 

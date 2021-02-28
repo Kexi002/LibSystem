@@ -60,7 +60,7 @@ public class AccountServiceImpl implements AccountService {
     /*多个关键字的交集查询*/
     @Override
     public List<Account> findByCondition(int page, int size, String condition) {
-        List<Account> accountList = null;
+        List<Account> accountList = new ArrayList<>();
         String[] cs = condition.split("\\s+");
         for (String c : cs) {
             //两种情况：关键字是纯数字（可能匹配学号+用户名），或者非纯数字（只能匹配用户名）
@@ -68,12 +68,12 @@ public class AccountServiceImpl implements AccountService {
                 List<Account> tempList = accountDao.findByUsernameLike(c);
                 //注意：Dao返回来的不是一个null值而是一个空数组
                 if(!tempList.isEmpty()){
-                    //第一次的时候集合是空的，不能取交集，直接赋值
-                    if(accountList == null){
-                        accountList = tempList;
-                    }else {
+                    if(!accountList.isEmpty()){
                         //注意：retainAll的比较，对于对象数组要重写equals和hashCode方法
                         accountList.retainAll(tempList);
+                    }else {
+                        //第一次的时候集合是空的，不能取交集，直接赋值
+                        accountList = tempList;
                     }
                 }
             }else{
@@ -84,10 +84,10 @@ public class AccountServiceImpl implements AccountService {
                 tempList2.removeAll(tempList1);
                 tempList1.addAll(tempList2);
                 if (!tempList1.isEmpty()){
-                    if (accountList == null){
-                        accountList = tempList1;
-                    }else {
+                    if (!accountList.isEmpty()){
                         accountList.retainAll(tempList1);
+                    }else {
+                        accountList = tempList1;
                     }
                 }
             }

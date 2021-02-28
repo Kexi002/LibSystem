@@ -1,5 +1,7 @@
 package com.kexi.domain;
 
+import java.util.Objects;
+
 public class BookInfo {
     private String id;
     private String bookName; //20
@@ -67,5 +69,23 @@ public class BookInfo {
                 ", publisher='" + publisher + '\'' +
                 ", bookDetail=" + bookDetail +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BookInfo bookInfo = (BookInfo) o;
+        return Objects.equals(id, bookInfo.id) &&
+                Objects.equals(bookName, bookInfo.bookName) &&
+                Objects.equals(category, bookInfo.category) &&
+                Objects.equals(author, bookInfo.author) &&
+                Objects.equals(publisher, bookInfo.publisher) &&
+                Objects.equals(bookDetail, bookInfo.bookDetail);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, bookName, category, author, publisher, bookDetail);
     }
 }

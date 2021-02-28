@@ -66,7 +66,7 @@
                     <td>${account.username}</td>
                     <td>${account.authorityStr}</td>
                     <td>
-                        <button class="btn-sm btn-warning" onclick="window.location.href = '${pageContext.request.contextPath}/account/detail.do?id=${account.id}'">修改</button>
+                        <button class="btn-sm btn-warning" onclick="window.location.href = '${pageContext.request.contextPath}/account/detail.do?id=${account.id}&condition=${condition}'">修改</button>
                         <button class="btn-sm btn-danger btn_delete" onclick="confirmDelete(${account.id})">删除</button>
                     </td>
                 </tr>
@@ -175,7 +175,6 @@
                     <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_delete_confirm" style="margin-left: 5px;padding-left: 20px; padding-right: 20px"
                     >确认</button>
                 </div>
-
             </div>
         </div>
     </div>
