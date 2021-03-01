@@ -6,6 +6,7 @@ import com.kexi.domain.BookInfo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import java.awt.print.Book;
 import java.util.List;
 
 @Repository
@@ -51,5 +52,10 @@ public interface BookInfoDao {
     @Select("select * from bookInfo where publisher like concat('%',#{publisher},'%')")
     List<BookInfo> findByPublisherLike(String publisher);
 
+    @Update("update bookInfo set bookName = #{bookName}, category = #{category}, author = #{author}, publisher = #{publisher} where id = #{id}")
+    void update(BookInfo bookInfo);
+
+    @Delete("delete from bookInfo where id = #{id}")
+    void delete(String id);
 
 }

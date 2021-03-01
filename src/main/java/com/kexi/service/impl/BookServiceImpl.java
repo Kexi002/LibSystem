@@ -114,4 +114,10 @@ public class BookServiceImpl implements BookService {
     public void updateImage(BookDetail bookDetail) {
         bookDetailDao.updateImage(bookDetail);
     }
+
+    @Override
+    public void update(BookInfo bookInfo) {
+        bookDetailDao.update(bookInfo.getBookDetail());
+        bookInfoDao.update(bookInfo);
+    }
 }

@@ -62,12 +62,12 @@
                 <tr>
                     <td>${s.count + pageInfo.pageSize * (pageInfo.pageNum - 1)}</td>
                     <td>${bookInfo.bookName}</td>
-                    <td>${bookInfo.category}</td>
+                    <td>${bookInfo.category} ${bookInfo.categoryStr}</td>
                     <td>${bookInfo.author}</td>
                     <td>${bookInfo.publisher}</td>
                     <td>
                         <button class="btn-sm btn-info" onclick="window.location.href = '${pageContext.request.contextPath}/book/detail.do?id=${bookInfo.id}&condition=${condition}'">详情</button>
-                        <button class="btn-sm btn-warning" onclick="window.location.href = '${pageContext.request.contextPath}/book/update.do?id=${bookInfo.id}'">修改</button>
+                        <button class="btn-sm btn-warning" onclick="window.location.href = '${pageContext.request.contextPath}/book/goUpdate.do?id=${bookInfo.id}&condition=${condition}'">修改</button>
                         <button class="btn-sm btn-danger btn_delete" onclick="confirmDelete(${bookInfo.id})">删除</button>
                     </td>
                 </tr>

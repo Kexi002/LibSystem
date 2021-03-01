@@ -125,9 +125,13 @@
 .nav-user-img{
     width:20px;height:20px;
 }
-span{
+/*span{
     color:#808080 !important;
+}*/
+span{
+    color: #333 !important;
 }
+
 .nav-user-img-xiala{
     width:100px; height:100px;
 }

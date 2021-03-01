@@ -19,4 +19,6 @@ public interface BookService {
     BookDetail findDetailById(String id);
 
     void updateImage(BookDetail bookDetail);
+
+    void update(BookInfo bookInfo);
 }

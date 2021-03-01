@@ -1,10 +1,8 @@
 package com.kexi.dao;
 
 import com.kexi.domain.BookDetail;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.Update;
+import com.kexi.domain.BookInfo;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -29,4 +27,11 @@ public interface BookDetailDao {
 
     @Update("update bookDetail set image = #{image} where id = #{id}")
     void updateImage(BookDetail bookDetail);
+
+    @Update("update bookDetail set publicationDate = #{publicationDate}, ISBN = #{ISBN}, intro = #{intro}, location = #{location}, number = #{number} where id = #{id}")
+    void update(BookDetail bookDetail);
+
+    @Delete("delete from bookDetail where id = #{id}")
+    void delete(String id);
+
 }

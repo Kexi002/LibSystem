@@ -82,6 +82,34 @@ public class TestService {
     }
 
     @Test
+    public void testUpdateBook(){
+        int start = 1;
+        int end = 20;
+        for (int i = start; i <= end; i++) {
+
+            BookDetail bookDetail = new BookDetail();
+            bookDetail.setId(Integer.toString(i+1));
+            bookDetail.setPublicationDate("2021-2-27");
+            bookDetail.setISBN("0000000000");
+            //198字
+            bookDetail.setIntro("这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本");
+            bookDetail.setLocation("中心图书馆 某层 某书架");
+            bookDetail.setNumber(0);
+
+
+            BookInfo bookInfo = new BookInfo();
+            bookInfo.setId(Integer.toString(i+1));
+            bookInfo.setBookDetail(bookDetail);
+            bookInfo.setAuthor("测试作者"+i);
+            bookInfo.setBookName("测试图书"+i);
+            bookInfo.setCategory("T");
+            bookInfo.setPublisher("测试出版社"+i);
+
+            bookService.update(bookInfo);
+        }
+    }
+
+    @Test
     public void testUpdateAccount(){
         Account account = new Account();
         account.setId("8");

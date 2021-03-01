@@ -82,5 +82,20 @@ public class TestOther {
         System.out.println(list2);
     }
 
+    public String testSwitch1(String category){
+        switch (category){
+            case "A":
+                return "马克思主义、列宁主义、毛泽东思想、邓小平理论";
+            case "B":
+                return "哲学、宗教";
+        }
+        return null;
+    }
+
+    @Test
+    public void testSwitch(){
+        System.out.println(testSwitch1("B"));
+    }
+
 
 }
