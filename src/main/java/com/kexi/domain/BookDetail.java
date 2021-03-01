@@ -7,6 +7,7 @@ public class BookDetail {
     private String intro; //500
     private String image; //50
     private String location;
+    private Integer number; //馆藏数，默认0
 
     public String getId() {
         return id;
@@ -56,6 +57,14 @@ public class BookDetail {
         this.location = location;
     }
 
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
     @Override
     public String toString() {
         return "BookDetail{" +
@@ -65,6 +74,7 @@ public class BookDetail {
                 ", intro='" + intro + '\'' +
                 ", image='" + image + '\'' +
                 ", location='" + location + '\'' +
+                ", number=" + number +
                 '}';
     }
 }

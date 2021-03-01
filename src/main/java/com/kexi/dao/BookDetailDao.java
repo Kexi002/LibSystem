@@ -17,9 +17,10 @@ public interface BookDetailDao {
     private String ISBN; //20
     private String intro; //500
     private String image; //50
-    private String location //50*/
+    private String location //50
+    private Integer number //默认0*/
 
-    @Insert("insert into bookDetail(publicationDate, ISBN, intro, image, location) values(#{publicationDate}, #{ISBN}, #{intro}, #{image}, #{location})")
+    @Insert("insert into bookDetail(publicationDate, ISBN, intro, image, location, number) values(#{publicationDate}, #{ISBN}, #{intro}, #{image}, #{location}, #{number})")
     @SelectKey(keyColumn = "id",keyProperty = "id",before = false,resultType = String.class, statement = {" select last_insert_id()"})
     void save(BookDetail bookDetail);
 

@@ -78,7 +78,7 @@ public class AccountController {
     }
 
     @RequestMapping("/detail.do")
-    public String update(Model model, @RequestParam(name = "id") String id, @RequestParam(name = "condition", required = false) String condition){
+    public String detail(Model model, @RequestParam(name = "id") String id, @RequestParam(name = "condition", required = false) String condition){
         Account account = accountService.findById(id);
         model.addAttribute("account", account);
         model.addAttribute("condition",condition);

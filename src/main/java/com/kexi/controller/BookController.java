@@ -1,6 +1,5 @@
 package com.kexi.controller;
 import com.github.pagehelper.PageInfo;
-import com.kexi.domain.Account;
 import com.kexi.domain.BookDetail;
 import com.kexi.domain.BookInfo;
 import com.kexi.service.BookService;
@@ -48,13 +47,19 @@ public class BookController {
     }
 
     @RequestMapping("/detail.do")
-    public String update(Model model, @RequestParam(name = "id") String id, @RequestParam(name = "condition", required = false) String condition){
-/*        BookDetail bookDetail = bookService.findDetailById(id);
-        model.addAttribute("bookDetail", bookDetail);*/
+    public String detail(Model model, @RequestParam(name = "id") String id, @RequestParam(name = "condition", required = false) String condition){
         BookInfo bookInfo = bookService.findById(id);
         model.addAttribute("bookInfo", bookInfo);
         model.addAttribute("condition", condition);
         return "/admin/book-detail";
+    }
+
+    @RequestMapping("/goUpdate.do")
+    public String goUpdate(Model model, @RequestParam(name = "id") String id, @RequestParam(name = "condition", required = false) String condition){
+        BookInfo bookInfo = bookService.findById(id);
+        model.addAttribute("bookInfo", bookInfo);
+        model.addAttribute("condition", condition);
+        return "/admin/book-update";
     }
 
     @RequestMapping("/uploadImg.do")
