@@ -62,9 +62,34 @@ public class BookController {
         return "/admin/book-update";
     }
 
+    @RequestMapping("/update.do")
+    public @ResponseBody void update(@RequestBody BookInfo bookInfo){
+        System.out.println(bookInfo);
+    }
+
     @RequestMapping("/uploadImg.do")
-    public @ResponseBody void uploadImg(HttpServletRequest request,  Model model, @RequestParam(name = "upload") MultipartFile upload, @RequestParam(name = "id") String id) throws Exception {
-        System.out.println("Controller:文件上传中......");
+    public @ResponseBody void uploadImg(HttpServletRequest request, @RequestParam(name = "img") MultipartFile img, @RequestParam(name = "id") String id) throws Exception {
+        //有可能没有传图像文件，那么什么都不做
+        String filename = img.getOriginalFilename();
+        if (!("".equals(filename) || filename == null)){
+            System.out.println("Controller:文件上传中......");
+            String path = request.getSession().getServletContext().getRealPath("/img/bookImage/");
+            System.out.println("path:"+path);
+
+            String uuid = UUID.randomUUID().toString().replace("-", "");
+            filename = uuid + "_" +filename;
+            System.out.println("文件名:"+filename);
+            img.transferTo(new File(path, filename));
+
+            //上传之后要把文件名存到数据库里面去(根据bookDetail里面的id)，先用id把数据拿出来
+            BookDetail bookDetail = bookService.findDetailById(id);
+            bookDetail.setImage(filename);
+            bookDetail.setId(id);
+            bookService.updateImage(bookDetail);
+        }
+
+
+        /*System.out.println("Controller:文件上传中......");
         String path = request.getSession().getServletContext().getRealPath("/img/bookImage/");
         System.out.println("path:"+path);
 
@@ -88,6 +113,6 @@ public class BookController {
 
         //model添加bookDetail，页面reload刷新
         model.addAttribute("bookDetail", bookDetail);
-        //return "../test";
+        //return "../test";*/
     }
 }

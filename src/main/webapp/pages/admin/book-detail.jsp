@@ -57,7 +57,7 @@
                     <p style="font-size: 17px; margin-bottom: 10px">${bookInfo.author}</p>
                     <p style="font-size: 17px; margin-bottom: 10px">${bookInfo.publisher}</p>
                     <p style="font-size: 17px; margin-bottom: 10px">${bookInfo.category} ${bookInfo.categoryStr}</p>
-                    <p style="font-size: 17px; margin-bottom: 10px">${bookInfo.bookDetail.ISBN}</p>
+                    <p style="font-size: 17px; margin-bottom: 10px">${bookInfo.bookDetail.isbn}</p>
                     <p style="font-size: 17px; margin-bottom: 10px">${bookInfo.bookDetail.publicationDate}</p>
                 </div>
                 <div style="clear:both"></div>

@@ -7,13 +7,9 @@ import com.kexi.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.awt.print.Book;
-import java.math.BigInteger;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext.xml", "classpath:spring-security.xml"})
@@ -65,7 +61,7 @@ public class TestService {
 
             BookDetail bookDetail = new BookDetail();
             bookDetail.setPublicationDate("2021-2-27");
-            bookDetail.setISBN("ISBN 0-000-00000-0");
+            bookDetail.setIsbn("ISBN 0-000-00000-0");
             //198字
             bookDetail.setIntro("这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本");
             bookDetail.setLocation("中心图书馆 某层 某书架");
@@ -90,7 +86,7 @@ public class TestService {
             BookDetail bookDetail = new BookDetail();
             bookDetail.setId(Integer.toString(i+1));
             bookDetail.setPublicationDate("2021-2-27");
-            bookDetail.setISBN("0000000000");
+            bookDetail.setIsbn("0000000000");
             //198字
             bookDetail.setIntro("这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本");
             bookDetail.setLocation("中心图书馆 某层 某书架");

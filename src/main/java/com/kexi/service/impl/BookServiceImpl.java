@@ -3,7 +3,6 @@ package com.kexi.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.kexi.dao.BookDetailDao;
 import com.kexi.dao.BookInfoDao;
-import com.kexi.domain.Account;
 import com.kexi.domain.BookDetail;
 import com.kexi.domain.BookInfo;
 import com.kexi.service.BookService;
@@ -35,8 +34,8 @@ public class BookServiceImpl implements BookService {
             }
             bookInfo.getBookDetail().setImage(defaultValue.defaultNoImg);
         }
-        if (bookInfo.getBookDetail().getISBN() == null || "".equals(bookInfo.getBookDetail().getISBN())){
-            bookInfo.getBookDetail().setISBN("暂无书号");
+        if (bookInfo.getBookDetail().getIsbn() == null || "".equals(bookInfo.getBookDetail().getIsbn())){
+            bookInfo.getBookDetail().setIsbn("暂无书号");
         }
         bookDetailDao.save(bookInfo.getBookDetail());
         bookInfoDao.save(bookInfo);

@@ -3,7 +3,7 @@ package com.kexi.domain;
 public class BookDetail {
     private String id;
     private String publicationDate; //20
-    private String ISBN; //20
+    private String isbn; //20
     private String intro; //500
     private String image; //50
     private String location;
@@ -25,12 +25,12 @@ public class BookDetail {
         this.publicationDate = publicationDate;
     }
 
-    public String getISBN() {
-        return ISBN;
+    public String getIsbn() {
+        return isbn;
     }
 
-    public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public String getIntro() {
@@ -70,7 +70,7 @@ public class BookDetail {
         return "BookDetail{" +
                 "id='" + id + '\'' +
                 ", publicationDate='" + publicationDate + '\'' +
-                ", ISBN='" + ISBN + '\'' +
+                ", isbn='" + isbn + '\'' +
                 ", intro='" + intro + '\'' +
                 ", image='" + image + '\'' +
                 ", location='" + location + '\'' +
