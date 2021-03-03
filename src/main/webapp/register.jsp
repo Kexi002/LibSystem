@@ -7,7 +7,7 @@
 <body>
 <h2>测试注册</h2>
 
-<form action="${pageContext.request.contextPath}/account/register.do" method="post">
+<form action="${pageContext.request.contextPath}/user/register.do" method="post">
     <table>
         <tr>
             <td>学号：</td>

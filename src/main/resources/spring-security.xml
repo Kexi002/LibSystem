@@ -11,7 +11,7 @@
     <security:http pattern="/login.jsp" security="none"/>
     <security:http pattern="/failer.jsp" security="none"/>
     <security:http pattern="/register.jsp" security="none"/>
-    <security:http pattern="/account/register.do" security="none"/>
+    <security:http pattern="/user/register.do" security="none"/>
     <security:http pattern="/account/checkUsername.do" security="none"/>
     <security:http pattern="/account/checkStudentId.do" security="none"/>
     <security:http pattern="/css/**" security="none"/>

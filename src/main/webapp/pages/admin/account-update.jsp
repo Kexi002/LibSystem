@@ -26,7 +26,7 @@
                         <li class="active">账户修改</li>
                     </c:if>
                     <c:if test="${!empty condition}">
-                        <li><a href="${pageContext.request.contextPath}/account/find.do?page=1&size=7">查询全部</a></li>
+                        <li><a href="${pageContext.request.contextPath}/user/find.do?page=1&size=7">查询全部</a></li>
                         <li><a href="javascript:history.go(-1)">按条件查询</a></li>
                         <li class="active">账户修改</li>
                     </c:if>
@@ -244,9 +244,6 @@
                             toastr.success("账户修改成功","", {"onHidden":function () {
                                     location.reload();
                                 }});
-/*                            setTimeout(function () {
-                                location.reload();
-                            }, 1500)*/
                         }
                     })
                 }

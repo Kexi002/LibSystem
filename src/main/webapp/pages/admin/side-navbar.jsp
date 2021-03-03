@@ -33,7 +33,7 @@
                 <li class="nav-left-dropdown" id="user_menu">
                     <a href="#">用户管理</a>
                     <ul class="nav-left-dropdown-menu">
-                        <li><a href="#">查询和修改</a></li>
+                        <li><a id="user_menu_find" href="${pageContext.request.contextPath}/user/find.do">查询和修改</a></li>
                         <li><a id="user_menu_account" href="${pageContext.request.contextPath}/account/find.do">账号管理</a></li>
                         <li><a href="#">选项3</a></li>
                     </ul>

@@ -26,7 +26,7 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping("/find.do")
+/*    @RequestMapping("/find.do")
     public String find(Model model, @RequestParam(name = "page", required = true, defaultValue = defaultValue.defaultPage) int page,
                                   @RequestParam(name = "size", required = true, defaultValue = defaultValue.defaultSize) int size,
                                   @RequestParam(name = "condition", required = false) String condition){
@@ -44,20 +44,13 @@ public class AccountController {
         }
         model.addAttribute("pageInfo", pageInfo);
         return "/admin/account-list";
-    }
+    }*/
 
-    @RequestMapping("/save.do")
+/*    @RequestMapping("/save.do")
     public String save(Account account) throws Exception {
         accountService.save(account);
         return "redirect:findAll.do";
-    }
-
-    @RequestMapping("/register.do")
-    public String register(UserInfo userInfo){
-        System.out.println(userInfo);
-        accountService.register(userInfo);
-        return "../login";
-    }
+    }*/
 
     @RequestMapping("/checkUsername.do")
     public @ResponseBody boolean checkUsername(@RequestBody Account newAccount){
@@ -77,12 +70,12 @@ public class AccountController {
         return false;
     }
 
-    @RequestMapping("/detail.do")
-    public String detail(Model model, @RequestParam(name = "id") String id, @RequestParam(name = "condition", required = false) String condition){
+    @RequestMapping("/goUpdate.do")
+    public String update(Model model, @RequestParam(name = "id") String id, @RequestParam(name = "condition", required = false) String condition){
         Account account = accountService.findById(id);
         model.addAttribute("account", account);
         model.addAttribute("condition",condition);
-        return "/admin/account-detail";
+        return "/admin/account-update";
     }
 
     @RequestMapping("/delete.do")

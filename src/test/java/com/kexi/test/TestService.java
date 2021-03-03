@@ -44,12 +44,12 @@ public class TestService {
             userDetail.setGender("男");
 
             UserInfo userInfo = new UserInfo();
-            userInfo.setStudentId(studentId);
+            /*userInfo.setStudentId(studentId);*/
             userInfo.setRealName("测试用户" + i);
             userInfo.setAccount(account);
             userInfo.setUserDetail(userDetail);
 
-            accountService.register(userInfo);
+            userService.register(userInfo);
         }
     }
 
@@ -119,7 +119,7 @@ public class TestService {
     public void testUpdateUser(){
         UserInfo userInfo = new UserInfo();
         userInfo.setId("2");
-        userInfo.setStudentId("222017321102033");
+        /*userInfo.setStudentId("222017321102033");*/
         userInfo.setRealName("张可");
 
         Account account = new Account();

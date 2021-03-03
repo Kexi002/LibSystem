@@ -62,14 +62,14 @@ public class TestDao {
         }
     }
 
-    @Test
+/*    @Test
     public void testUserInfoFindByStudentId(){
         List<UserInfo> users = userInfoDao.findByStudentIdLike("03");
         System.out.println("按学号查询userInfo");
         for (UserInfo user : users) {
             System.out.println(user);
         }
-    }
+    }*/
 
     @Test
     public void testBorrowInsert(){

@@ -12,11 +12,11 @@ public interface AccountService extends UserDetailsService {
 
     void save(Account account) throws Exception;
 
-    void register(UserInfo userInfo);
 
-    List<Account> findAll(int page, int size);
 
-    List<Account> findByCondition(int page, int size, String condition);
+/*    List<Account> findAll(int page, int size);
+
+    List<Account> findByCondition(int page, int size, String condition);*/
 
     Account findById(String id);
 

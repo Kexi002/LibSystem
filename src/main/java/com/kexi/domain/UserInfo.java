@@ -1,8 +1,9 @@
 package com.kexi.domain;
 
+import java.util.Objects;
+
 public class UserInfo {
     private String id;
-    private String studentId; //15
     private String realName; //15
 
     private Account account;
@@ -14,14 +15,6 @@ public class UserInfo {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
     }
 
     public String getRealName() {
@@ -52,10 +45,25 @@ public class UserInfo {
     public String toString() {
         return "UserInfo{" +
                 "id='" + id + '\'' +
-                ", studentId='" + studentId + '\'' +
                 ", realName='" + realName + '\'' +
-                ", account=" + account + '\'' +
+                ", account=" + account +
                 ", userDetail=" + userDetail +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserInfo userInfo = (UserInfo) o;
+        return Objects.equals(id, userInfo.id) &&
+                Objects.equals(realName, userInfo.realName) &&
+                Objects.equals(account, userInfo.account) &&
+                Objects.equals(userDetail, userInfo.userDetail);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, realName, account, userDetail);
     }
 }

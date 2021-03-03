@@ -10,12 +10,11 @@ import org.apache.ibatis.annotations.Update;
 import java.util.List;
 
 public interface UserService {
+    void register(UserInfo userInfo);
 
-    List<UserInfo> findAll();
+    List<UserInfo> findAll(int page, int size);
 
-    List<UserInfo> findByStudentIdLike(String studentId);
-
-    List<UserInfo> findByRealNameLike(String realName);
+    List<UserInfo> findByCondition(int page, int size, String condition);
 
     void update(UserInfo userInfo);
 

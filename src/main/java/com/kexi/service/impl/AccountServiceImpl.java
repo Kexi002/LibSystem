@@ -26,10 +26,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private AccountDao accountDao;
-    @Autowired
-    private UserInfoDao userInfoDao;
-    @Autowired
-    private UserDetailDao userDetailDao;
+
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -41,23 +38,13 @@ public class AccountServiceImpl implements AccountService {
         accountDao.save(account);
     }
 
-    //注意：页面要确认未注册且格式正确才能注册
-    @Override
-    public void register(UserInfo userInfo) {
-        userInfo.getAccount().setPassword(bCryptPasswordEncoder.encode(userInfo.getAccount().getPassword()));
-        userInfo.getAccount().setAuthority(0);
-        accountDao.save(userInfo.getAccount());
-        userDetailDao.save(userInfo.getUserDetail());
-        userInfoDao.save(userInfo);
-    }
-
-    @Override
+/*    @Override
     public List<Account> findAll(int page, int size) {
         PageHelper.startPage(page, size);
         return accountDao.findAll();
     }
 
-    /*多个关键字的交集查询*/
+    *//*多个关键字的交集查询*//*
     @Override
     public List<Account> findByCondition(int page, int size, String condition) {
         List<Account> accountList = new ArrayList<>();
@@ -93,7 +80,7 @@ public class AccountServiceImpl implements AccountService {
             }
         }
         return accountList;
-    }
+    }*/
 
     @Override
     public Account findById(String id) {
