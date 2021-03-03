@@ -1,3 +1,4 @@
+<%@ page import="com.kexi.util.defaultValue" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
@@ -22,19 +23,10 @@
 
     <div class="navbar-fixed-top">
         <jsp:include page="top-navbar.jsp"/> <%--顶部栏文件--%>
-
         <div class="col-md-10 col-md-offset-2">
             <div class="col-md-12">
                 <ol class="breadcrumb">
-                    <c:if test="${empty condition}">
-                        <li><a href="javascript:history.go(-1)">查询全部</a></li>
-                        <li class="active">图书修改</li>
-                    </c:if>
-                    <c:if test="${!empty condition}">
-                        <li><a href="${pageContext.request.contextPath}/book/find.do?page=1&size=7">查询全部</a></li>
-                        <li><a href="javascript:history.go(-1)">按条件查询</a></li>
-                        <li class="active">图书修改</li>
-                    </c:if>
+                    <li class="active">新书入库</li>
                 </ol>
             </div>
         </div>
@@ -44,18 +36,18 @@
 <div class="col-md-10 col-md-offset-2" style="margin-top: 50px; height: 600px">
     <div class="panel panel-3" style="; margin-left: 15px; margin-right: 15px;margin-bottom: 0">
         <div class="panel-heading" style="padding-top: 0!important;">
-            <h3 style="margin-top: 10px">图书修改</h3>
+            <h3 style="margin-top: 10px">新书入库</h3>
             <hr style="margin-top: 0; margin-bottom: 0">
         </div>
         <div class="panel-body" style="margin-top: -10px;height: 540px; padding-top: 5px; padding-bottom: 5px;overflow-y: auto">
             <form id="form_img" role="form">
                 <div class="col-md-4" style="float: left;">
-                    <img id="previewImg" src="${pageContext.request.contextPath}/img/bookImage/${bookInfo.bookDetail.image}" style="width: 375px; height: auto;">
+                    <img id="previewImg" src="${pageContext.request.contextPath}/img/bookImage/<%=defaultValue.defaultNoImg%>" style="width: 375px; height: auto;">
                     <button type="button" id="btn_updateImg" class="btn btn-info"
                             style="position:absolute; left: calc(50% - 48px); top:calc(50% + 42px); padding-left: 15px; padding-right: 15px"
                             onclick="$('#img').click()">修改封面图片</button>
                     <input type="file" name="img" id="img" accept=".jpg, .jpeg, .png" style="display: none">
-                    <input type="hidden" name="id" value="${bookInfo.id}">
+                    <input type="hidden" name="id" id="id">
                 </div>
             </form>
             <div class="col-md-7">
@@ -63,13 +55,14 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="bookName">书名</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="bookName" id="bookName" placeholder="请输入书名" maxlength="20" value="${bookInfo.bookName}"/>
+                            <input type="text" class="form-control" name="bookName" id="bookName" placeholder="请输入书名" maxlength="20"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="category">分类</label>
                         <div  class="col-md-6">
                             <select id="category" name="category" class="selectpicker">
+                                <option value="">请选择图书的类别</option>
                                 <option value="A">A 马克思主义、列宁主义、毛泽东思想、邓小平理论</option>
                                 <option value="B">B 哲学、宗教</option>
                                 <option value="C">C 社会科学总论</option>
@@ -98,43 +91,43 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="author">作者</label>
                         <div  class="col-md-6">
-                            <input type="text" class="form-control" name="author" id="author" placeholder="请输入作者的姓名" maxlength="20" value="${bookInfo.author}"/>
+                            <input type="text" class="form-control" name="author" id="author" placeholder="请输入作者的姓名" maxlength="20"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="publisher">出版社</label>
                         <div  class="col-md-6">
-                            <input type="text" class="form-control" name="publisher" id="publisher" placeholder="请输入出版社的名称" maxlength="20" value="${bookInfo.publisher}"/>
+                            <input type="text" class="form-control" name="publisher" id="publisher" placeholder="请输入出版社的名称" maxlength="20"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="publicationDate">出版日期</label>
                         <div  class="col-md-6">
-                            <input type="text" class="form-control" id="publicationDate" value="${bookInfo.bookDetail.publicationDate}">
+                            <input type="text" class="form-control" id="publicationDate" readonly>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="isbn">isbn</label>
                         <div  class="col-md-6">
-                            <input type="text" class="form-control" name="isbn" id="isbn" placeholder="请输入13位的ISBN书号" maxlength="20" value="${bookInfo.bookDetail.isbn}"/>
+                            <input type="text" class="form-control" name="isbn" id="isbn" placeholder="请输入13位的ISBN书号" maxlength="13"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="location">馆藏地址</label>
                         <div  class="col-md-6">
-                            <input type="text" class="form-control" name="location" id="location" placeholder="请输入此书的馆藏地址（选填）" maxlength="50" value="${bookInfo.bookDetail.location}"/>
+                            <input type="text" class="form-control" name="location" id="location" placeholder="请输入此书的馆藏地址（选填）" maxlength="50"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="number">可借余量</label>
                         <div  class="col-md-6">
-                            <input type="text" class="form-control" name="number" id="number" placeholder="请输入此书的可借余量（选填）" maxlength="50" value="${bookInfo.bookDetail.number}"/>
+                            <input type="text" class="form-control" name="number" id="number" placeholder="请输入此书的可借余量（选填）" maxlength="4"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="intro">简介</label>
                         <div  class="col-md-8">
-                            <textarea class="form-control" name="intro" id="intro" placeholder="请输入简介，上限为500字（选填）" maxlength="500">${bookInfo.bookDetail.intro}</textarea>
+                            <textarea class="form-control" name="intro" id="intro" placeholder="请输入简介，上限为500字（选填）" maxlength="500"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
@@ -152,45 +145,16 @@
 </div>
 
 <script>
-    $(function () {
-        $("#btn_reload").click(function () {
-            location.reload();
-        })
-    })
-
-    /*选择框设初始值*/
-    $(function () {
-        $("#category").selectpicker("val","${bookInfo.category}");
-        $("#category").selectpicker({size: 10});
-    })
-
-    /*自适应高度textarea*/
-    $(function () {
-        $('textarea').each(function () {
-            //设置初始高度
-            this.setAttribute("style", "height: 50px; overflow-y:hidden");
-            this.style.height = 'auto';
-            this.style.height = (this.scrollHeight) + 'px';
-        }).on('input', function () {
-            //输入文本时，自动调整高度
-            this.style.height = 'auto';
-            this.style.height = (this.scrollHeight) + 'px';
-        });
-    })
-
-    /*上传图片前预览*/
-    $(function () {
-        $("#img")[0].addEventListener("change", function () {
-            var file = this.files[0];
-            $("#previewImg")[0].src = file ? URL.createObjectURL(file) : "${pageContext.request.contextPath}/img/bookImage/defaultNoImg.jpg";
-        }, this);
-    })
-
     function check(){
         var checkFlag = true;
         var bookName = $("#bookName").val();
         if (bookName === ""){
             toastr.error("请填写书名");
+            checkFlag = false;
+        }
+        var category = $("#category").val();
+        if (category === ""){
+            toastr.error("请选择图书的种类");
             checkFlag = false;
         }
         var author = $("#author").val();
@@ -238,23 +202,12 @@
         if (!checkFlag){
             return;
         }
-        var img = new FormData($("#form_img")[0]);
-        $.ajax({
-            type:"post",
-            url:"${pageContext.request.contextPath}/book/uploadImg.do",
-            data:img,
-            contentType:false,
-            processData: false,
-        })
-        var category = $("#category").val();
         var json = {
-            id:${bookInfo.id},
             bookName:bookName,
             author:author,
             publisher:publisher,
             category:category,
             bookDetail:{
-                id: ${bookInfo.bookDetail.id},
                 isbn:isbn,
                 publicationDate:publicationDate,
                 location:location,
@@ -264,16 +217,61 @@
         };
         $.ajax({
             type: "post",
-            url: "${pageContext.request.contextPath}/book/update.do",
+            url: "${pageContext.request.contextPath}/book/save.do",
             contentType: 'application/json',
             data:JSON.stringify(json),
-            success: function() {
-                toastr.success("图书信息修改成功","", {"onHidden":function () {
-                        location.reload();
-                    }});
+            success: function(id) {
+                $("#id").val(id);
+                var img = new FormData($("#form_img")[0]);
+                $.ajax({
+                    type:"post",
+                    url:"${pageContext.request.contextPath}/book/uploadImg.do",
+                    data:img,
+                    contentType:false,
+                    processData: false,
+                    success:function () {
+                        toastr.success("新书入库成功","", {"onHidden":function () {
+                            window.location.href = "${pageContext.request.contextPath}/book/detail.do?id="+id;
+                        }});
+                    }
+                })
             }
         });
     }
+
+    $(function () {
+        $("#btn_reload").click(function () {
+            location.reload();
+        })
+    })
+
+    /*选择框设初始值*/
+    $(function () {
+        $("#category").selectpicker("val","");
+        $("#category").selectpicker({size: 10});
+    })
+
+    /*自适应高度textarea*/
+    $(function () {
+        $('textarea').each(function () {
+            //设置初始高度
+            this.setAttribute("style", "height: 50px; overflow-y:hidden");
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        }).on('input', function () {
+            //输入文本时，自动调整高度
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
+    })
+
+    /*上传图片前预览*/
+    $(function () {
+        $("#img")[0].addEventListener("change", function () {
+            var file = this.files[0];
+            $("#previewImg")[0].src = file ? URL.createObjectURL(file) : "${pageContext.request.contextPath}/img/bookImage/<%=defaultValue.defaultNoImg%>";
+        }, this);
+    })
 
     /*下拉框动画*/
     $(function () {
@@ -282,7 +280,7 @@
         $("#book_menu > a").next("ul").addClass("nav-left-dropdown-ul").slideDown(0);
         $("#book_menu > a").attr("d", "2");
         $("#book_menu > a").attr("style", "color:#08A5E0 !important");
-        $("#book_menu_find").attr("style", "color:#08A5E0 !important");
+        $("#book_menu_save").attr("style", "color:#08A5E0 !important");
 
         $(".dropdownMenu").dropdown();
         $(".nav-left-dropdown>a").click(function () {
@@ -313,7 +311,7 @@
         autoclose: true,//选中自动关闭
         todayBtn: true//显示今日按钮
     })
-    $("#publicationDate").datetimepicker("setDate", new Date("${bookInfo.bookDetail.publicationDate}"));  //设置显示默认当天的时间
+    $("#publicationDate").datetimepicker("setDate", new Date());  //设置显示默认当天的时间
 
     /*toastr配置*/
     $(function() {
@@ -336,4 +334,3 @@
 </script>
 </body>
 </html>
-

@@ -19,7 +19,7 @@
                     <a href="#">图书管理</a>
                     <ul class="nav-left-dropdown-menu">
                         <li><a id="book_menu_find" href="${pageContext.request.contextPath}/book/find.do">查询和修改</a></li>
-                        <li><a href="#">新书入库</a></li>
+                        <li><a id="book_menu_save" href="${pageContext.request.contextPath}/pages/admin/book-save.jsp">新书入库</a></li>
                     </ul>
                 </li>
                 <li class="nav-left-dropdown">

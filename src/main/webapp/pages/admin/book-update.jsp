@@ -1,3 +1,4 @@
+<%@ page import="com.kexi.util.defaultValue" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
@@ -110,13 +111,13 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="publicationDate">出版日期</label>
                         <div  class="col-md-6">
-                            <input type="text" class="form-control" id="publicationDate" value="${bookInfo.bookDetail.publicationDate}">
+                            <input type="text" class="form-control" id="publicationDate" value="${bookInfo.bookDetail.publicationDate}" readonly>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="isbn">isbn</label>
                         <div  class="col-md-6">
-                            <input type="text" class="form-control" name="isbn" id="isbn" placeholder="请输入13位的ISBN书号" maxlength="20" value="${bookInfo.bookDetail.isbn}"/>
+                            <input type="text" class="form-control" name="isbn" id="isbn" placeholder="请输入13位的ISBN书号" maxlength="13" value="${bookInfo.bookDetail.isbn}"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -128,7 +129,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="number">可借余量</label>
                         <div  class="col-md-6">
-                            <input type="text" class="form-control" name="number" id="number" placeholder="请输入此书的可借余量（选填）" maxlength="50" value="${bookInfo.bookDetail.number}"/>
+                            <input type="text" class="form-control" name="number" id="number" placeholder="请输入此书的可借余量（选填）" maxlength="4" value="${bookInfo.bookDetail.number}"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -182,7 +183,7 @@
     $(function () {
         $("#img")[0].addEventListener("change", function () {
             var file = this.files[0];
-            $("#previewImg")[0].src = file ? URL.createObjectURL(file) : "${pageContext.request.contextPath}/img/bookImage/defaultNoImg.jpg";
+            $("#previewImg")[0].src = file ? URL.createObjectURL(file) : "${pageContext.request.contextPath}/img/bookImage/<%=defaultValue.defaultNoImg%>";
         }, this);
     })
 
@@ -269,7 +270,7 @@
             data:JSON.stringify(json),
             success: function() {
                 toastr.success("图书信息修改成功","", {"onHidden":function () {
-                        location.reload();
+                        window.location.reload();
                 }});
             }
         });

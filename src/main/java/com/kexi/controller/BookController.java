@@ -26,6 +26,12 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
+    @RequestMapping("/save.do")
+    public @ResponseBody String save(@RequestBody BookInfo bookInfo){
+        bookService.save(bookInfo);
+        return bookInfo.getId();
+    }
+
     @RequestMapping("/find.do")
     public String find(Model model, @RequestParam(name = "page", required = true, defaultValue = defaultValue.defaultPage) int page,
                        @RequestParam(name = "size", required = true, defaultValue = defaultValue.defaultSize) int size,

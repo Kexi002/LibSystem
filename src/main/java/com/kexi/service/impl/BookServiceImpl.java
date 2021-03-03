@@ -25,17 +25,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void save(BookInfo bookInfo) {
-        //如果没有上传图片，那结果会是空还是null？
+        //没有上传图片，结果是null
         if (bookInfo.getBookDetail().getImage() == null || "".equals(bookInfo.getBookDetail().getImage())){
-            if (bookInfo.getBookDetail().getImage() == null){
-                System.out.println("Service:图片为null");
-            }else {
-                System.out.println("Service:图片为空字符串");
-            }
             bookInfo.getBookDetail().setImage(defaultValue.defaultNoImg);
-        }
-        if (bookInfo.getBookDetail().getIsbn() == null || "".equals(bookInfo.getBookDetail().getIsbn())){
-            bookInfo.getBookDetail().setIsbn("暂无书号");
         }
         bookDetailDao.save(bookInfo.getBookDetail());
         bookInfoDao.save(bookInfo);
