@@ -52,8 +52,8 @@
                 <div class="col-md-4" style="float: left;">
                     <img id="previewImg" src="${pageContext.request.contextPath}/img/bookImage/${bookInfo.bookDetail.image}" style="width: 375px; height: auto;">
                     <button type="button" id="btn_updateImg" class="btn btn-info"
-                        style="position:absolute; left: calc(50% - 48px); top:calc(50% + 42px); padding-left: 15px; padding-right: 15px"
-                    onclick="$('#img').click()">修改封面图片</button>
+                            style="position:absolute; left: calc(50% - 48px); top:calc(50% + 42px); padding-left: 15px; padding-right: 15px"
+                            onclick="$('#img').click()">修改封面图片</button>
                     <input type="file" name="img" id="img" accept=".jpg, .jpeg, .png" style="display: none">
                     <input type="hidden" name="id" value="${bookInfo.id}">
                 </div>
@@ -270,11 +270,11 @@
             success: function() {
                 toastr.success("图书信息修改成功","", {"onHidden":function () {
                         location.reload();
-                }});
+                    }});
             }
         });
     }
-    
+
     /*下拉框动画*/
     $(function () {
         $("#book_menu > a").addClass("nav-left-dropdown-a");
@@ -336,3 +336,4 @@
 </script>
 </body>
 </html>
+

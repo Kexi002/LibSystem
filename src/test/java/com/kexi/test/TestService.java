@@ -85,8 +85,8 @@ public class TestService {
 
             BookDetail bookDetail = new BookDetail();
             bookDetail.setId(Integer.toString(i+1));
-            bookDetail.setPublicationDate("2021-2-27");
-            bookDetail.setIsbn("0000000000");
+            bookDetail.setPublicationDate("2021-02-27");
+            bookDetail.setIsbn("0000000000000");
             //198字
             bookDetail.setIntro("这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本");
             bookDetail.setLocation("中心图书馆 某层 某书架");
