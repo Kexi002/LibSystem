@@ -35,10 +35,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public void register(UserInfo userInfo) {
         userInfo.getAccount().setPassword(bCryptPasswordEncoder.encode(userInfo.getAccount().getPassword()));
-        userInfo.getAccount().setAuthority(0);
+        if (userInfo.getAccount().getAuthority() != 1){
+            userInfo.getAccount().setAuthority(0);
+        }
         accountDao.save(userInfo.getAccount());
         userDetailDao.save(userInfo.getUserDetail());
         userInfoDao.save(userInfo);
+    }
+
+    @Override
+    public UserInfo findById(String id) {
+        return userInfoDao.findById(id);
     }
 
     @Override
@@ -102,16 +109,15 @@ public class UserServiceImpl implements UserService {
         return userList;
     }
 
-    //注意：更新用户的时候要先调用account的更新账户，然后看结果
     @Override
     public void update(UserInfo userInfo) {
-        userInfoDao.update(userInfo);
         userDetailDao.update(userInfo.getUserDetail());
+        userInfoDao.update(userInfo);
     }
 
     //注意：删除时要先删除用户再删除账号和详情
     @Override
-    public void deleteById(String id) {
+    public void delete(String id) {
 
     }
 }

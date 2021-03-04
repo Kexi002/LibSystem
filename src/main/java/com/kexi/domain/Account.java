@@ -9,6 +9,7 @@ public class Account { //管理员只有Account，没有对应的User对象
     private String password; //20
     private Integer authority; //int,0 or 1
     private String authorityStr;
+    private String authorityName;
 
     public String getId() {
         return id;
@@ -63,6 +64,21 @@ public class Account { //管理员只有Account，没有对应的User对象
 
     public void setAuthorityStr(String authorityStr) {
         this.authorityStr = authorityStr;
+    }
+
+    public String getAuthorityName() {
+        if (authority != null){
+            if (authority == 0){
+                authorityName = "用户";
+            }else if (authority == 1){
+                authorityName = "管理员";
+            }
+        }
+        return authorityName;
+    }
+
+    public void setAuthorityName(String authorityName) {
+        this.authorityName = authorityName;
     }
 
     @Override

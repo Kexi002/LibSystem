@@ -49,7 +49,7 @@
         <table class="table table-hover table-inner-border" style="table-layout: fixed;width: 100%;">
             <thead>
             <tr>
-                <th>序号</th>
+                <th style="width: 7%">序号</th>
                 <th>书名</th>
                 <th>分类</th>
                 <th>作者</th>

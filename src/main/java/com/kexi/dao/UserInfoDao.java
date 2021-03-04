@@ -39,12 +39,11 @@ public interface UserInfoDao {
     @ResultMap("userInfoMap")
     UserInfo findByAccountId(String accountId);
 
-    //注意：更新用户的时候要更新账号，同时查询学号是否已经存在
-    @Update("update userInfo set studentId = #{studentId}, realName = #{realName} where id = #{id}")
+    @Update("update userInfo set realName = #{realName} where id = #{id}")
     void update(UserInfo userInfo);
 
     //注意：删除时要先删除用户再删除账号和详情
     @Delete("delete from userInfo where id = #{id}")
-    void deleteById(String id);
+    void delete(String id);
 
 }

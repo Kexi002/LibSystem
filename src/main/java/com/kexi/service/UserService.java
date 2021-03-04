@@ -12,12 +12,14 @@ import java.util.List;
 public interface UserService {
     void register(UserInfo userInfo);
 
+    UserInfo findById(String id);
+
     List<UserInfo> findAll(int page, int size);
 
     List<UserInfo> findByCondition(int page, int size, String condition);
 
     void update(UserInfo userInfo);
 
-    void deleteById(String id);
+    void delete(String id);
 
 }

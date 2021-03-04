@@ -51,11 +51,11 @@
         <table class="table table-hover table-inner-border" style="table-layout: fixed;width: 100%;">
             <thead>
             <tr>
-                <th>序号</th>
+                <th style="width: 7%">序号</th>
                 <th>学号</th>
                 <th>用户名</th>
                 <th>姓名</th>
-                <th>操作</th>
+                <th style="width: 30%">操作</th>
             </tr>
             </thead>
             <tbody>
@@ -66,7 +66,9 @@
                     <td>${userInfo.account.username}</td>
                     <td>${userInfo.realName}</td>
                     <td>
-                        <button class="btn-sm btn-warning" onclick="window.location.href = '${pageContext.request.contextPath}/account/goUpdate.do?id=${userInfo.account.id}&condition=${condition}'">修改</button>
+                        <button class="btn-sm btn-info" onclick="window.location.href = '${pageContext.request.contextPath}/user/detail.do?id=${userInfo.id}&condition=${condition}'">详情</button>
+                        <button class="btn-sm btn-warning" onclick="window.location.href = '${pageContext.request.contextPath}/user/goUpdate.do?id=${userInfo.id}&condition=${condition}'">修改用户信息</button>
+                        <button class="btn-sm btn-warning" onclick="window.location.href = '${pageContext.request.contextPath}/account/goUpdate.do?id=${userInfo.account.id}&condition=${condition}'">修改账户</button>
                         <button class="btn-sm btn-danger btn_delete" onclick="confirmDelete(${userInfo.account.id})">删除</button>
                     </td>
                 </tr>

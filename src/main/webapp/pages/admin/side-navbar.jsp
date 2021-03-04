@@ -34,8 +34,7 @@
                     <a href="#">用户管理</a>
                     <ul class="nav-left-dropdown-menu">
                         <li><a id="user_menu_find" href="${pageContext.request.contextPath}/user/find.do">查询和修改</a></li>
-                        <li><a id="user_menu_account" href="${pageContext.request.contextPath}/account/find.do">账号管理</a></li>
-                        <li><a href="#">选项3</a></li>
+                        <li><a id="user_menu_save" href="${pageContext.request.contextPath}/pages/admin/user-save.jsp">新建用户</a></li>
                     </ul>
                 </li>
                 <li>

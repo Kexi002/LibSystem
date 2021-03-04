@@ -70,7 +70,6 @@ public class BookController {
 
     @RequestMapping("/update.do")
     public @ResponseBody void update(Model model, @RequestBody BookInfo bookInfo){
-        System.out.println(bookInfo);
         bookService.update(bookInfo);
         //把更新的图片信息也带上
         bookInfo = bookService.findById(bookInfo.getId());
