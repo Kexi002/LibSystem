@@ -93,7 +93,15 @@ public class BorrowController {
         List<String> bookList = (List<String>) request.getSession().getAttribute("nowBorrowList");
         String userId = (String) request.getSession().getAttribute("nowBorrowUserId");
         Borrow borrow = new Borrow();
-        borrow.setUserInfo();
+        UserInfo userInfo = new UserInfo();
+        userInfo.setId(userId);
+        borrow.setUserInfo(userInfo);
+        BookInfo bookInfo = new BookInfo();
+        for (String bookId : bookList) {
+            bookInfo.setId(bookId);
+            borrow.setBookInfo(bookInfo);
+            borrowService.save(borrow);
+        }
 
     }
 
