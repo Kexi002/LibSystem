@@ -14,7 +14,7 @@
                 <li><a class="dropdown-toggle" data-toggle="dropdown" href="#" style="height: 50px">
                     <span class="pull-left nav-username" style="color: #808080 !important;">当前管理员为：${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}</span></a>
 
-                    <ul class="dropdown-menu dropdown-menu-right clearfix" style="padding-top: 0px; min-width: 100%">
+                    <ul class="dropdown-menu dropdown-menu-right clearfix" style="padding-top: 0; min-width: 100%">
                         <li>
                             <div style="padding-top: 5px">
                                 <a href="${pageContext.request.contextPath}/logout.do" class="btn btn-flat no-yj" style="width: 100%; height: 100%">注销</a>

@@ -141,7 +141,7 @@
                     <div class="form-group">
                         <div  class="col-md-8 col-md-offset-2" style="margin-top: 0">
                             <button type="button" class="btn btn-info" onclick="check()"
-                                    style="padding-left: 20px; padding-right: 20px">保存修改</button>
+                                    style="padding-left: 20px; padding-right: 20px">确认保存</button>
                             <button type="button" class="btn btn-default" id="btn_reload"
                                     style="margin-left: 5px; padding-left: 20px;padding-right: 20px">重置</button>
                         </div>

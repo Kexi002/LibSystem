@@ -51,11 +51,11 @@
                 </div>
             </form>
             <div class="col-md-7">
-                <form id="form_main" class="form-horizontal" role="form">
+                <form id="form_main" class="form-horizontal" role="form" onkeyup="onEnter()">
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="bookName">书名</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="bookName" id="bookName" placeholder="请输入书名" maxlength="20"/>
+                            <input type="text" class="form-control" name="bookName" id="bookName" placeholder="请输入书名" maxlength="20" onclick="clickEnter()"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -91,13 +91,13 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="author">作者</label>
                         <div  class="col-md-6">
-                            <input type="text" class="form-control" name="author" id="author" placeholder="请输入作者的姓名" maxlength="20"/>
+                            <input type="text" class="form-control" name="author" id="author" placeholder="请输入作者的姓名" maxlength="20" onclick="clickEnter()"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="publisher">出版社</label>
                         <div  class="col-md-6">
-                            <input type="text" class="form-control" name="publisher" id="publisher" placeholder="请输入出版社的名称" maxlength="20"/>
+                            <input type="text" class="form-control" name="publisher" id="publisher" placeholder="请输入出版社的名称" maxlength="20" onclick="clickEnter()"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -115,13 +115,13 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="location">馆藏地址</label>
                         <div  class="col-md-6">
-                            <input type="text" class="form-control" name="location" id="location" placeholder="请输入此书的馆藏地址（选填）" maxlength="50"/>
+                            <input type="text" class="form-control" name="location" id="location" placeholder="请输入此书的馆藏地址（选填）" maxlength="50" onclick="clickEnter()"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="number">可借余量</label>
                         <div  class="col-md-6">
-                            <input type="text" class="form-control" name="number" id="number" placeholder="请输入此书的可借余量（选填）" maxlength="4"/>
+                            <input type="text" class="form-control" name="number" id="number" placeholder="请输入此书的可借余量（选填）" maxlength="4" onclick="clickEnter()"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -330,6 +330,30 @@
             "hideMethod" : "fadeOut" //消失时的动画方式
         };
     });
+
+    var index = 0
+
+    function clickEnter() {
+        $("input").each(function (i) {
+            if ($(this).is(':focus')) {
+                index = i
+            }
+        })
+    }
+
+    function onEnter() {
+        if (event.keyCode == 13){
+            index++
+            if (index >= $("input").length) {
+                index = 0
+            }
+            $("input").each(function (i) {
+                if (i == index) {
+                    $(this).focus()
+                }
+            })
+        }
+    }
 
 </script>
 </body>

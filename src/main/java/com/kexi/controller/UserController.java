@@ -33,6 +33,12 @@ public class UserController {
         return "../login";
     }
 
+    @RequestMapping("/save.do")
+    public @ResponseBody String save(@RequestBody UserInfo userInfo){
+        userService.register(userInfo);
+        return userInfo.getId();
+    }
+
     @RequestMapping("/find.do")
     public String find(Model model, @RequestParam(name = "page", required = true, defaultValue = defaultValue.defaultPage) int page,
                        @RequestParam(name = "size", required = true, defaultValue = defaultValue.defaultSize) int size,

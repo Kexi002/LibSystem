@@ -83,6 +83,15 @@ public class BookServiceImpl implements BookService {
                             }else {
                                 bookInfoList = tempList;
                             }
+                        }else {
+                            tempList = bookInfoDao.findByCategoryStrLike(c);
+                            if(!tempList.isEmpty()) {
+                                if (!bookInfoList.isEmpty()) {
+                                    bookInfoList.retainAll(tempList);
+                                } else {
+                                    bookInfoList = tempList;
+                                }
+                            }
                         }
                     }
                 }

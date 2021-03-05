@@ -22,11 +22,11 @@
                         <li><a id="book_menu_save" href="${pageContext.request.contextPath}/pages/admin/book-save.jsp">新书入库</a></li>
                     </ul>
                 </li>
-                <li class="nav-left-dropdown">
+                <li class="nav-left-dropdown" id="borrow_menu">
                     <a href="#">借阅管理</a>
                     <ul class="nav-left-dropdown-menu">
-                        <li><a href="#">查询和修改</a></li>
-                        <li><a href="#">新建借阅</a></li>
+                        <li><a id="borrow_menu_find" href="#">查询和修改</a></li>
+                        <li><a id="borrow_menu_main" href="${pageContext.request.contextPath}/borrow/main.do">新建借阅</a></li>
                         <li><a href="#">选项3</a></li>
                     </ul>
                 </li>

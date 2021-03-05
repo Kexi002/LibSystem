@@ -46,6 +46,9 @@ public interface BookInfoDao {
     @Select("select * from bookInfo where category like concat('%',#{category},'%')")
     List<BookInfo> findByCategoryLike(String category);
 
+    @Select("select * from bookInfo where category in (select category from category where categoryStr like concat('%',#{categoryStr},'%'))")
+    List<BookInfo> findByCategoryStrLike(String categoryStr);
+
     @Select("select * from bookInfo where author like concat('%',#{author},'%')")
     List<BookInfo> findByAuthorLike(String author);
 

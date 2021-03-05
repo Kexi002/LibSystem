@@ -90,7 +90,7 @@ public class TestService {
             //198字
             bookDetail.setIntro("这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本这是书籍介绍的测试文本");
             bookDetail.setLocation("中心图书馆 某层 某书架");
-            bookDetail.setNumber(0);
+            bookDetail.setNumber(10);
 
 
             BookInfo bookInfo = new BookInfo();
