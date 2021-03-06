@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="btn-group" style="float: left; margin-left: 15px">
-                    <button type="button" class="btn btn-success" onclick="window.location.href='${pageContext.request.contextPath}/borrow/goBorrowList.do'">当前用户借书单</button>
+                    <button type="button" class="btn btn-success" onclick="window.location.href='${pageContext.request.contextPath}/borrow/goBorrowCart.do'">当前用户借书单</button>
                 </div>
 
                 <div class="input-group col-md-7" style="float: left; margin-left: 15px">
@@ -97,7 +97,7 @@
                         <td>${bookInfo.bookDetail.number}</td>
                         <td>
                             <button class="btn-sm btn-info" onclick="window.location.href = '${pageContext.request.contextPath}/borrow/bookDetail.do?id=${bookInfo.id}&condition=${condition}'">详情</button>
-                            <button class="btn-sm btn-success" onclick="addBorrowList(${bookInfo.id})">加入借书单</button>
+                            <button class="btn-sm btn-success" onclick="addBorrowCart(${bookInfo.id})">加入借书单</button>
                         </td>
                     </tr>
                 </c:if>
@@ -188,10 +188,10 @@
 
 <script type="text/javascript">
 
-    function addBorrowList(id){
+    function addBorrowCart(id){
         $.ajax({
             type: "post",
-            url: "${pageContext.request.contextPath}/borrow/addBorrowList.do",
+            url: "${pageContext.request.contextPath}/borrow/addBorrowCart.do",
             data:{id:id},
             success: function(bool) {
                 if (bool){

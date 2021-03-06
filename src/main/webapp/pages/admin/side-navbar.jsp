@@ -25,7 +25,7 @@
                 <li class="nav-left-dropdown" id="borrow_menu">
                     <a href="#">借阅管理</a>
                     <ul class="nav-left-dropdown-menu">
-                        <li><a id="borrow_menu_find" href="#">查询和修改</a></li>
+                        <li><a id="borrow_menu_find" href="${pageContext.request.contextPath}/borrow/find.do">查询和修改</a></li>
                         <li><a id="borrow_menu_main" href="${pageContext.request.contextPath}/borrow/main.do">新建借阅</a></li>
                         <li><a href="#">选项3</a></li>
                     </ul>

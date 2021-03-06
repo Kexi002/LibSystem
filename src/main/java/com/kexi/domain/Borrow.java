@@ -17,7 +17,8 @@ public class Borrow {
     Timestamp returnDate;
     Integer renew; //int, 0 or 1
     String renewStr;
-    String status;
+    Integer status;
+    String statusStr;
 
     public String getId() {
         return id;
@@ -80,18 +81,49 @@ public class Borrow {
         this.renewStr = renewStr;
     }
 
-    public String getStatus() {
-        long days = (System.currentTimeMillis() - borrowDate.getTime()) / (1000 * 24 * 3600);
-        if (days > 30){
-            status = "已逾期";
-        } else {
-            status = "未逾期";
+    public Integer getStatus() {
+        long days = (System.currentTimeMillis() - returnDate.getTime()) / (1000 * 24 * 3600);
+        if (days <= 0 ){
+            //未超时
+            if (renew == 0){
+                status = 0;
+            }else {
+                status = 1;
+            }
+        }else {
+            if (renew == 0){
+                status = 2;
+            }else {
+                status = 3;
+            }
         }
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getStatusStr() {
+        long days = (System.currentTimeMillis() - returnDate.getTime()) / (1000 * 24 * 3600);
+        if (days <= 0 ){
+            if (renew == 0){
+                statusStr = "未逾期，可续借";
+            }else {
+                statusStr = "未逾期，已续借";
+            }
+        }else {
+            if (renew == 0){
+                statusStr = "已逾期，可续借";
+            }else {
+                statusStr = "已逾期，已续借";
+            }
+        }
+        return statusStr;
+    }
+
+    public void setStatusStr(String statusStr) {
+        this.statusStr = statusStr;
     }
 
     @Override
@@ -104,7 +136,8 @@ public class Borrow {
                 ", returnDate=" + returnDate +
                 ", renew=" + renew +
                 ", renewStr='" + renewStr + '\'' +
-                ", status='" + status + '\'' +
+                ", status=" + status +
+                ", statusStr='" + statusStr + '\'' +
                 '}';
     }
 
@@ -118,13 +151,11 @@ public class Borrow {
                 Objects.equals(bookInfo, borrow.bookInfo) &&
                 Objects.equals(borrowDate, borrow.borrowDate) &&
                 Objects.equals(returnDate, borrow.returnDate) &&
-                Objects.equals(renew, borrow.renew) &&
-                Objects.equals(renewStr, borrow.renewStr) &&
-                Objects.equals(status, borrow.status);
+                Objects.equals(renew, borrow.renew);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userInfo, bookInfo, borrowDate, returnDate, renew, renewStr, status);
+        return Objects.hash(id, userInfo, bookInfo, borrowDate, returnDate, renew);
     }
 }

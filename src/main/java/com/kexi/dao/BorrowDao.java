@@ -42,5 +42,13 @@ public interface BorrowDao {
     @ResultMap("borrowMap")
     List<Borrow> findByBookInfoId(String bookInfoId);
 
+    @Select("select * from borrow where renew = #{renew}")
+    @ResultMap("borrowMap")
+    List<Borrow> findByRenew(Integer renew);
+
+    @Select("select * from borrow where status = #{status}")
+    @ResultMap("borrowMap")
+    List<Borrow> findByStatus(Integer status);
+
 
 }

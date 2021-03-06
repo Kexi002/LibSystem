@@ -19,43 +19,37 @@
         <div class="col-md-10 col-md-offset-2">
             <div class="col-md-12">
                 <ol class="breadcrumb">
-                    <li><a href="javascript:history.go(-1)">继续添加借书</a></li>
-                    <li class="active">借书单</li>
+                    <c:if test="${empty condition}">
+                        <li class="active">查询全部</li>
+                    </c:if>
+                    <c:if test="${!empty condition}">
+                        <li><a href="${pageContext.request.contextPath}/borrow/find.do?page=1&size=${pageInfo.pageSize}">查询全部</a></li>
+                        <li class="active">按条件查询</li>
+                    </c:if>
                 </ol>
             </div>
 
-            <div class="col-md-12">
-                <div class="btn-group" style="float: left; margin-left: 15px">
-                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        当前操作用户为：${nowBorrowUserName}<span class="caret" style="margin-left: 10px"></span>
-                    </button>
-                    <ul class="dropdown-menu" style="width: 100%">
-                        <li><a href="${pageContext.request.contextPath}/borrow/deleteNowBorrowUser.do">更换当前操作用户</a></li>
-                    </ul>
-                </div>
-
-                <div class="btn-group" style="float: left; margin-left: 15px">
-                    <button type="button" class="btn btn-success" onclick="window.location.href='${pageContext.request.contextPath}/borrow/findBook.do'">继续添加借书</button>
-                </div>
-
-                <div class="btn-group" style="float: right; margin-right: 140px;">
-                    <button type="button" class="btn btn-success" onclick="borrow()" style=" padding-left: 20px; padding-right: 20px">确认借书</button>
+            <div class="col-md-6 col-md-offset-2">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="condition"/>
+                    <span class="input-group-btn">
+                    <button type="button" class="btn btn-blue" id="findByCondition" onclick="findByCondition()"
+                            style="padding-left: 50px;padding-right: 50px;">查询</button>
+                </span>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
 
 
-<div class="col-md-10 col-md-offset-2" style="margin-top: 110px;">
+<div class="col-md-10 col-md-offset-2" style="margin-top: 120px;">
     <div class="col-md-11"
-         style="margin-left: 20px;border-top: 2px solid #08A5E0; border-bottom: 2px solid #08A5E0;height: 500px;overflow-y: auto;">
+         style="margin-left: 20px;border-top: 2px solid #08A5E0; border-bottom: 2px solid #08A5E0;height: 405px;overflow-y: auto;">
         <table class="table table-hover table-inner-border" style="table-layout: fixed;width: 100%;">
             <thead>
             <tr>
-                <th style="width: 7%; text-align: center;">序号</th>
-                <th style="width: 20%; text-align: center;">图片预览</th>
+                <th style="width: 7%">序号</th>
                 <th>书名</th>
                 <th>分类</th>
                 <th>作者</th>
@@ -63,52 +57,188 @@
                 <th>操作</th>
             </tr>
             </thead>
-            <tbody style="">
-            <c:forEach items="${bookInfoList}" var="bookInfo" varStatus="s">
+            <tbody>
+            <c:forEach items="${pageInfo.list}" var="borrow" varStatus="s">
                 <tr>
-                    <td style="text-align: center;vertical-align: middle !important;">${s.count}</td>
-                    <td style="text-align: center;vertical-align: middle !important;"><img src="${pageContext.request.contextPath}/img/bookImage/${bookInfo.bookDetail.image}" style="width: 60%"></td>
-                    <td style="vertical-align: middle !important;">${bookInfo.bookName}</td>
-                    <td style="vertical-align: middle !important;">${bookInfo.category} ${bookInfo.categoryStr}</td>
-                    <td style="vertical-align: middle !important;">${bookInfo.author}</td>
-                    <td style="vertical-align: middle !important;">${bookInfo.publisher}</td>
-                    <td style="vertical-align: middle !important;">
-                        <button class="btn-sm btn-info" onclick="window.location.href = '${pageContext.request.contextPath}/borrow/listDetail.do?id=${bookInfo.id}'">详情</button>
-                        <button class="btn-sm btn-danger btn_delete" onclick="removeBorrowList(${bookInfo.id})">移除</button>
+                    <td>${s.count + pageInfo.pageSize * (pageInfo.pageNum - 1)}</td>
+                    <td>${borrow.bookInfo.bookName}</td>
+                    <td>${borrow.userInfo.realName}</td>
+                    <td>${borrow.borrowDate}</td>
+                    <td>${borrow.returnDate}</td>
+                    <td>
+<%--                        <button class="btn-sm btn-info" onclick="window.location.href = '${pageContext.request.contextPath}/borrow/detail.do?id=${bookInfo.id}&condition=${condition}'">详情</button>
+                        <button class="btn-sm btn-warning" onclick="window.location.href = '${pageContext.request.contextPath}/borrow/goUpdate.do?id=${bookInfo.id}&condition=${condition}'">修改</button>
+                        <button class="btn-sm btn-danger btn_delete" onclick="confirmDelete(${bookInfo.id})">删除</button>--%>
                     </td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
     </div>
+
+    <div style="float: left; margin-top: 10px; margin-left: -20px">
+        <div class="form-group form-inline"  style="margin-left: 50px;">
+            共<b>${pageInfo.pages}</b>页，共<b>${pageInfo.total}</b>条数据。每页
+            <select class="form-control" id="changePageSize" onchange="changePageSize()">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>10</option>
+                <option>20</option>
+            </select>
+            条
+        </div>
+    </div>
+</div>
+
+
+
+<nav class="navbar-fixed-bottom" style="text-align:center;margin-bottom: 15px" >
+    <ul class="pagination">
+        <li><a href="${pageContext.request.contextPath}/borrow/find.do?page=${pageInfo.pageNum-1}&size=${pageInfo.pageSize}&condition=${condition}"  aria-label="Previous">&laquo;</a></li>
+        <%--如果长度小于7，直接完整显示--%>
+        <c:if test="${pageInfo.pages <= 7}">
+            <c:forEach begin="1" end="${pageInfo.pages}" var="pageNum">
+                <li id="page_${pageNum}"><a href="${pageContext.request.contextPath}/borrow/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageNum}</a></li>
+            </c:forEach>
+        </c:if>
+        <%--如果长度大于7，则分三种情况：靠近首页、靠近尾页和在中间--%>
+        <c:if test="${pageInfo.pages > 7}">
+            <%--更靠近首页，且当前页离首页只有3格（4）--%>
+            <c:if test="${((pageInfo.pageNum - 1) < 4) && ((pageInfo.pageNum - 1) <= (pageInfo.pages - pageInfo.pageNum))}">
+                <%--如果离首页不到3格，则按照当前页为4显示--%>
+                <c:if test="${pageInfo.pageNum < 4}">
+                    <c:forEach begin="1" end="6" var="pageNum">
+                        <li id="page_${pageNum}"><a href="${pageContext.request.contextPath}/borrow/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageNum}</a></li>
+                    </c:forEach>
+                </c:if>
+                <%--当前页为4或以上--%>
+                <c:if test="${pageInfo.pageNum >= 4}">
+                    <c:forEach begin="1" end="${pageInfo.pageNum + 2}" var="pageNum">
+                        <li id="page_${pageNum}"><a href="${pageContext.request.contextPath}/borrow/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageNum}</a></li>
+                    </c:forEach>
+                </c:if>
+                <li><a href="#">...</a></li>
+                <li id="page_${pageInfo.pages}"><a href="${pageContext.request.contextPath}/borrow/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageInfo.pages}</a></li>
+            </c:if>
+            <%--更靠近尾页，且当前页离尾页只有不到3格--%>
+            <c:if test="${((pageInfo.pages - pageInfo.pageNum) < 4) && ((pageInfo.pageNum - 1) > (pageInfo.pages - pageInfo.pageNum))}">
+                <li id="page_1"><a href="${pageContext.request.contextPath}/borrow/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">1</a></li>
+                <li><a href="#">...</a></li>
+                <c:if test="${pageInfo.pageNum > (pageInfo.pages - 3)}">
+                    <c:forEach begin="${pageInfo.pages - 5}" end="${pageInfo.pages}" var="pageNum">
+                        <li id="page_${pageNum}"><a href="${pageContext.request.contextPath}/borrow/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageNum}</a></li>
+                    </c:forEach>
+                </c:if>
+                <c:if test="${pageInfo.pageNum <= (pageInfo.pages - 3)}">
+                    <c:forEach begin="${pageInfo.pageNum - 2}" end="${pageInfo.pages}" var="pageNum">
+                        <li id="page_${pageNum}"><a href="${pageContext.request.contextPath}/borrow/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageNum}</a></li>
+                    </c:forEach>
+                </c:if>
+            </c:if>
+            <%--当前页在中间位置--%>
+            <c:if test="${(pageInfo.pageNum - 1 >= 4) && ((pageInfo.pages - pageInfo.pageNum) >= 4)}">
+                <li id="page_1"><a href="${pageContext.request.contextPath}/borrow/find.do?page=1&size=${pageInfo.pageSize}&condition=${condition}">1</a></li>
+                <li><a href="#">...</a></li>
+                <c:forEach begin="${pageInfo.pageNum - 2}" end="${pageInfo.pageNum + 2}" var="pageNum">
+                    <li id="page_${pageNum}"><a href="${pageContext.request.contextPath}/borrow/find.do?page=${pageNum}&size=${pageInfo.pageSize}&condition=${condition}">${pageNum}</a></li>
+                </c:forEach>
+                <li><a href="#">...</a></li>
+                <li id="page_${pageInfo.pages}"><a href="${pageContext.request.contextPath}/borrow/find.do?page=${pageInfo.pages}&size=${pageInfo.pageSize}&condition=${condition}">${pageInfo.pages}</a></li>
+            </c:if>
+        </c:if>
+        <li><a href="${pageContext.request.contextPath}/borrow/find.do?page=${pageInfo.pageNum+1}&size=${pageInfo.pageSize}&condition=${condition}" aria-label="Next">&raquo;</a></li>
+    </ul>
+</nav>
+
+<%--隐藏的警告框--%>
+<div class="modal fade" id="model_delete">
+    <div class="modal-dialog" style="margin-top: 250px">
+        <div class="modal-content message_align">
+            <div class="modal-header" style="height: 50px">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" >提示</h4>
+            </div>
+            <div class="modal-body" style="height: 100px">
+                <p style="font-size: 16px">您确认要删除该条信息吗？</p>
+                <div style="float: right">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="padding-left: 20px; padding-right: 20px"
+                    >取消</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_delete_confirm" style="margin-left: 5px;padding-left: 20px; padding-right: 20px"
+                    >确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">
 
-    function removeBorrowList(id){
-        $.ajax({
-            type: "post",
-            url: "${pageContext.request.contextPath}/borrow/removeBorrowList.do",
-            data:{id:id},
-            success: function() {
-                toastr.success("移除借书单成功","", {"timeOut" : "1000", "onHidden":function () {
-                        window.location.reload();
-                }});
-            },
-        });
+    /*设置页数相关*/
+    $(function (){
+        //设置当前页的class为active
+        $("#page_${pageInfo.pageNum}").addClass("active");
+        //设置当前页的显示条数
+        if ("${pageInfo.pageSize}" > 7 && "${pageInfo.pageSize}" < 10){
+            $("#changePageSize").val(10);
+        } else if("${pageInfo.pageSize}" > 10 && "${pageInfo.pageSize}" < 20){
+            $("#changePageSize").val(20);
+        } else{
+            $("#changePageSize").val("${pageInfo.pageSize}");
+        }
+    });
+
+    function changePageSize() {
+        //获取下拉框的值
+        var pageSize = $("#changePageSize").val();
+        //向服务器发送请求，改变每页显示条数
+        location.href = "${pageContext.request.contextPath}/borrow/find.do?page=1&size="
+            + pageSize + "&condition=${condition}";
     }
 
-    function borrow(){
-        $.ajax({
-            type: "post",
-            url: "${pageContext.request.contextPath}/borrow/borrow.do",
-            success: function() {
-                toastr.success("借书成功","", {"timeOut" : "1000", "onHidden":function () {
-                        window.location.href = "${pageContext.request.contextPath}/borrow/find.do?page=1&size=7";
-                }});
-            },
-        });
+    /*搜索框*/
+    $(function (){
+        if (${!empty condition}){
+            $("#condition").val("${condition}");
+        } else {
+            $("#condition").attr("placeholder","按书名、作者、出版社或类别查询")
+        }
+    });
 
+    function findByCondition(){
+        if($("#condition").val() == ""){
+            location.href = "${pageContext.request.contextPath}/borrow/find.do?page=1&size=${pageInfo.pageSize}"
+        } else{
+            var condition = $("#condition").val();
+            location.href = "${pageContext.request.contextPath}/borrow/find.do?page=1&size="+
+                ${pageInfo.pageSize} +"&condition="
+                + condition;
+        }
+    }
+
+    /*删除警告*/
+    function confirmDelete(id){
+        $("#btn_delete_confirm").click(function (){
+            $.ajax({
+                type:"post",
+                url:"${pageContext.request.contextPath}/borrow/delete.do",
+                contentType:"application/json;charset=UTF-8",
+                data:'{"id":"'+ id +'"}',
+                data_type:"json",
+                success:function () {
+                    toastr.success("删除成功");
+                    location.href = "${pageContext.request.contextPath}/borrow/find.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}";
+                }
+            })
+        })
+        $("#model_delete").modal();
     }
 
     /*toastr配置*/
@@ -128,8 +258,8 @@
             "hideMethod" : "fadeOut" //消失时的动画方式
         };
 
-        if (${empty bookInfoList}){
-            toastr.warning("借书单里面还没有书");
+        if (${empty pageInfo.list}){
+            toastr.error("没有找到对应的查询结果");
         }
     });
 
@@ -140,7 +270,7 @@
         $("#borrow_menu > a").next("ul").addClass("nav-left-dropdown-ul").slideDown(0);
         $("#borrow_menu > a").attr("d", "2");
         $("#borrow_menu > a").attr("style", "color:#08A5E0 !important");
-        $("#borrow_menu_main").attr("style", "color:#08A5E0 !important");
+        $("#borrow_menu_find").attr("style", "color:#08A5E0 !important");
 
         $(".dropdownMenu").dropdown();
         $(".nav-left-dropdown>a").click(function () {

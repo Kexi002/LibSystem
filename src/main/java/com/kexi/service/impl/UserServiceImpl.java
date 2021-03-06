@@ -58,11 +58,11 @@ public class UserServiceImpl implements UserService {
     public List<UserInfo> findByCondition(int page, int size, String condition) {
         List<UserInfo> userList = new ArrayList<>();
         String[] cs = condition.split("\\s+");
+        List<Account> accountTempList1;
+        List<Account> accountTempList2;
+        List<UserInfo> tempList1;
+        List<UserInfo> tempList2;
         for (String c : cs) {
-            List<Account> accountTempList1;
-            List<Account> accountTempList2;
-            List<UserInfo> tempList1;
-            List<UserInfo> tempList2;
             //两种情况：关键字是纯数字（可能匹配学号和用户名），或者非纯数字（可能匹配用户名和人名）
             if (!c.matches("^\\d+$")){
                 //如果不是纯数字，则可能是人名或者用户名

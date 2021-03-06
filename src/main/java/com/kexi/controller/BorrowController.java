@@ -10,10 +10,8 @@ import com.kexi.service.UserService;
 import com.kexi.util.PageInfoUtil;
 import com.kexi.util.defaultValue;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -47,7 +45,7 @@ public class BorrowController {
         request.getSession().setAttribute("nowBorrowUserId", id);
         request.getSession().setAttribute("nowBorrowUserName", name);
         List<String>list = new ArrayList();
-        request.getSession().setAttribute("nowBorrowList", list);
+        request.getSession().setAttribute("nowBorrowCart", list);
         return "redirect:findBook.do?page=1&size=7";
     }
 
@@ -55,42 +53,42 @@ public class BorrowController {
     public String deleteNowBorrowUser(HttpServletRequest request) {
         request.getSession().removeAttribute("nowBorrowUserId");
         request.getSession().removeAttribute("nowBorrowUserName");
-        request.getSession().removeAttribute("nowBorrowList");
+        request.getSession().removeAttribute("nowBorrowCart");
         return "redirect:findUser.do?page=1&size=7";
     }
 
-    @RequestMapping("/addBorrowList.do")
-    public @ResponseBody Boolean addBorrowList(HttpServletRequest request,@RequestParam(name = "id") String id){
-        List<String> list = (List<String>) request.getSession().getAttribute("nowBorrowList");
+    @RequestMapping("/addBorrowCart.do")
+    public @ResponseBody Boolean addBorrowCart(HttpServletRequest request,@RequestParam(name = "id") String id){
+        List<String> list = (List<String>) request.getSession().getAttribute("nowBorrowCart");
         if (list.contains(id)){
             return false;
         }
         list.add(id);
-        request.getSession().setAttribute("nowBorrowList", list);
+        request.getSession().setAttribute("nowBorrowCart", list);
         return true;
     }
 
-    @RequestMapping("/removeBorrowList.do")
-    public @ResponseBody void removeBorrowList(HttpServletRequest request,@RequestParam(name = "id") String id){
-        List<String> list = (List<String>) request.getSession().getAttribute("nowBorrowList");
+    @RequestMapping("/removeBorrowCart.do")
+    public @ResponseBody void removeBorrowCart(HttpServletRequest request,@RequestParam(name = "id") String id){
+        List<String> list = (List<String>) request.getSession().getAttribute("nowBorrowCart");
         list.remove(id);
-        request.getSession().setAttribute("nowBorrowList", list);
+        request.getSession().setAttribute("nowBorrowCart", list);
     }
 
-    @RequestMapping("/goBorrowList.do")
-    public String addBorrowList(HttpServletRequest request, Model model){
-        List<String> list = (List<String>) request.getSession().getAttribute("nowBorrowList");
+    @RequestMapping("/goBorrowCart.do")
+    public String addBorrowCart(HttpServletRequest request, Model model){
+        List<String> list = (List<String>) request.getSession().getAttribute("nowBorrowCart");
         List<BookInfo> bookInfoList = new ArrayList<>();
         for (String id : list) {
             bookInfoList.add(bookService.findById(id));
         }
         model.addAttribute("bookInfoList",bookInfoList);
-        return "/admin/borrow-list";
+        return "/admin/borrow-cart";
     }
 
     @RequestMapping("/borrow.do")
     public @ResponseBody void borrow(HttpServletRequest request){
-        List<String> bookList = (List<String>) request.getSession().getAttribute("nowBorrowList");
+        List<String> bookList = (List<String>) request.getSession().getAttribute("nowBorrowCart");
         String userId = (String) request.getSession().getAttribute("nowBorrowUserId");
         Borrow borrow = new Borrow();
         UserInfo userInfo = new UserInfo();
@@ -102,7 +100,25 @@ public class BorrowController {
             borrow.setBookInfo(bookInfo);
             borrowService.save(borrow);
         }
+    }
 
+    @RequestMapping("/find.do")
+    public String find(Model model, @RequestParam(name = "page", required = true, defaultValue = defaultValue.defaultPage) int page,
+                       @RequestParam(name = "size", required = true, defaultValue = defaultValue.defaultSize) int size,
+                       @RequestParam(name = "condition", required = false) String condition){
+        List<Borrow> borrowList;
+        PageInfo pageInfo;
+        if (condition == null || "".equals(condition)){
+            //没有条件，查询全部
+            borrowList = borrowService.findAll(page, size);
+            pageInfo = new PageInfo(borrowList);
+        } else {
+            borrowList = borrowService.findByCondition(page, size, condition);
+            pageInfo = PageInfoUtil.list2PageInfo(page, size, borrowList);
+            model.addAttribute("condition", condition);
+        }
+        model.addAttribute("pageInfo", pageInfo);
+        return "/admin/borrow-list";
     }
 
     @RequestMapping("/findUser.do")
@@ -126,7 +142,7 @@ public class BorrowController {
     }
 
     @RequestMapping("/findBook.do")
-    public String find(Model model, @RequestParam(name = "page", required = true, defaultValue = defaultValue.defaultPage) int page,
+    public String findBook(Model model, @RequestParam(name = "page", required = true, defaultValue = defaultValue.defaultPage) int page,
                        @RequestParam(name = "size", required = true, defaultValue = defaultValue.defaultSize) int size,
                        @RequestParam(name = "condition", required = false) String condition){
         //condition在没有&的时候为null，但是在&{condition}且condition没有值的时候为空字符串
@@ -153,17 +169,10 @@ public class BorrowController {
         return "/admin/borrow-book-detail";
     }
 
-    @RequestMapping("/listDetail.do")
+    @RequestMapping("/cartDetail.do")
     public String detail(Model model, @RequestParam(name = "id") String id){
         BookInfo bookInfo = bookService.findById(id);
         model.addAttribute("bookInfo", bookInfo);
-        return "/admin/borrow-list-detail";
-    }
-
-    @RequestMapping("/find.do")
-    public String findAll(Model model){
-        List<Borrow> borrowList = borrowService.findAll();
-        model.addAttribute("borrowList", borrowList);
-        return "/admin/borrowList";
+        return "/admin/borrow-cart-detail";
     }
 }

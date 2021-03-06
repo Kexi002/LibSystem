@@ -10,7 +10,9 @@ public interface BorrowService {
 
     void save(Borrow borrow);
 
-    List<Borrow> findAll();
+    List<Borrow> findAll(int page, int size);
+
+    List<Borrow> findByCondition(int page, int size, String condition);
 
     List<Borrow> findByUserInfoId(String userInfoId);
 
