@@ -94,7 +94,7 @@
                         <td>${bookInfo.category} ${bookInfo.categoryStr}</td>
                         <td>${bookInfo.author}</td>
                         <td>${bookInfo.publisher}</td>
-                        <td>${bookInfo.bookDetail.number}</td>
+                        <td id="number_${bookInfo.id}">${bookInfo.bookDetail.number}</td>
                         <td>
                             <button class="btn-sm btn-info" onclick="window.location.href = '${pageContext.request.contextPath}/borrow/bookDetail.do?id=${bookInfo.id}&condition=${condition}'">详情</button>
                             <button class="btn-sm btn-success" onclick="addBorrowCart(${bookInfo.id})">加入借书单</button>
@@ -193,11 +193,15 @@
             type: "post",
             url: "${pageContext.request.contextPath}/borrow/addBorrowCart.do",
             data:{id:id},
-            success: function(bool) {
-                if (bool){
+            success: function(statusCode) {
+                if (statusCode === 0){
                     toastr.success("添加借书单成功","", {"timeOut" : "1000"});
-                }else {
+                    var number = $("#number_"+id).text();
+                    $("#number_"+id).text(number - 1);
+                }else if (statusCode === 1){
                     toastr.warning("这本书已经在借书单里面了","", {"timeOut" : "1000"})
+                }else if (statusCode === 2){
+                    toastr.warning("当前用户已经借了这本书了","", {"timeOut" : "1000"})
                 }
             }
         });

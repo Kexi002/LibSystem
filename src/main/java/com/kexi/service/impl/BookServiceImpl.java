@@ -3,8 +3,10 @@ package com.kexi.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.kexi.dao.BookDetailDao;
 import com.kexi.dao.BookInfoDao;
+import com.kexi.dao.BorrowDao;
 import com.kexi.domain.BookDetail;
 import com.kexi.domain.BookInfo;
+import com.kexi.domain.Borrow;
 import com.kexi.service.BookService;
 import com.kexi.util.defaultValue;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ public class BookServiceImpl implements BookService {
     private BookInfoDao bookInfoDao;
     @Autowired
     private BookDetailDao bookDetailDao;
+    @Autowired
+    private BorrowDao borrowDao;
 
     @Override
     public void save(BookInfo bookInfo) {
@@ -119,5 +123,18 @@ public class BookServiceImpl implements BookService {
     public void update(BookInfo bookInfo) {
         bookDetailDao.update(bookInfo.getBookDetail());
         bookInfoDao.update(bookInfo);
+    }
+
+    @Override
+    public void delete(String id) {
+        System.out.println("this is service");
+        //删除相关的借阅
+        List<Borrow> borrowList = borrowDao.findByBookInfoId(id);
+        for (Borrow borrow : borrowList) {
+            borrowDao.delete(borrow.getId());
+        }
+        //删除图书
+        bookDetailDao.delete(bookInfoDao.findById(id).getBookDetail().getId());
+        bookInfoDao.delete(id);
     }
 }

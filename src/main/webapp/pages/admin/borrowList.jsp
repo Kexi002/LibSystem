@@ -11,6 +11,7 @@
 
 <c:forEach items="${borrowList}" var="borrow">
 
+    id: ${borrow.id}
     借书时间：<fmt:formatDate value="${borrow.borrowDate}" pattern="yyyy-MM-dd"/>
     归还时间：<fmt:formatDate value="${borrow.returnDate}" pattern="yyyy-MM-dd"/>
     ${borrow.renewStr}

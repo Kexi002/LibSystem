@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <title>在线图书资料管理系统</title>
@@ -49,28 +50,83 @@
         <table class="table table-hover table-inner-border" style="table-layout: fixed;width: 100%;">
             <thead>
             <tr>
-                <th style="width: 7%">序号</th>
+                <th style="width: 5%">序号</th>
+                <th style="width: 14%">学号</th>
+                <th style="width: 10%">姓名</th>
                 <th>书名</th>
-                <th>分类</th>
-                <th>作者</th>
-                <th>出版社</th>
-                <th>操作</th>
+                <th width="9%">借出日期</th>
+                <th width="9%">归还日期</th>
+                <td>续借状态</td>
+                <td>逾期状态</td>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${pageInfo.list}" var="borrow" varStatus="s">
-                <tr>
-                    <td>${s.count + pageInfo.pageSize * (pageInfo.pageNum - 1)}</td>
-                    <td>${borrow.bookInfo.bookName}</td>
-                    <td>${borrow.userInfo.realName}</td>
-                    <td>${borrow.borrowDate}</td>
-                    <td>${borrow.returnDate}</td>
-                    <td>
-<%--                        <button class="btn-sm btn-info" onclick="window.location.href = '${pageContext.request.contextPath}/borrow/detail.do?id=${bookInfo.id}&condition=${condition}'">详情</button>
-                        <button class="btn-sm btn-warning" onclick="window.location.href = '${pageContext.request.contextPath}/borrow/goUpdate.do?id=${bookInfo.id}&condition=${condition}'">修改</button>
-                        <button class="btn-sm btn-danger btn_delete" onclick="confirmDelete(${bookInfo.id})">删除</button>--%>
-                    </td>
-                </tr>
+                <c:if test="${borrow.status == 0}">
+                    <tr class="success">
+                        <td>${s.count + pageInfo.pageSize * (pageInfo.pageNum - 1)}</td>
+                        <td>${borrow.userInfo.account.studentId}</td>
+                        <td>${borrow.userInfo.realName}</td>
+                        <td>${borrow.bookInfo.bookName}</td>
+                        <td><fmt:formatDate value="${borrow.borrowDate}" pattern="yyyy-MM-dd"/></td>
+                        <td><fmt:formatDate value="${borrow.returnDate}" pattern="yyyy-MM-dd"/></td>
+                        <td>${borrow.statusStr}</td>
+                        <td>
+                            <button class="btn-sm btn-info" onclick="renew(${borrow.id})">续借</button>
+                            <button class="btn-sm btn-success" onclick="returnBook(${borrow.id})">还书</button>
+                            <button class="btn-sm btn-danger invisible" disabled>催还</button>
+                        </td>
+                    </tr>
+                </c:if>
+                <c:if test="${borrow.status == 1}">
+                    <tr class="info">
+                        <td>${s.count + pageInfo.pageSize * (pageInfo.pageNum - 1)}</td>
+                        <td>${borrow.userInfo.account.studentId}</td>
+                        <td>${borrow.userInfo.realName}</td>
+                        <td>${borrow.bookInfo.bookName}</td>
+                        <td><fmt:formatDate value="${borrow.borrowDate}" pattern="yyyy-MM-dd"/></td>
+                        <td><fmt:formatDate value="${borrow.returnDate}" pattern="yyyy-MM-dd"/></td>
+                        <td>${borrow.statusStr}</td>
+                        <td>
+                            <button class="btn-sm btn-info invisible" disabled>续借</button>
+                            <button class="btn-sm btn-success" onclick="returnBook(${borrow.id})">还书</button>
+                            <button class="btn-sm btn-danger invisible" disabled>催还</button>
+                        </td>
+                    </tr>
+                </c:if>
+                <c:if test="${borrow.status == 2}">
+                    <tr class="warning">
+                        <td>${s.count + pageInfo.pageSize * (pageInfo.pageNum - 1)}</td>
+                        <td>${borrow.userInfo.account.studentId}</td>
+                        <td>${borrow.userInfo.realName}</td>
+                        <td>${borrow.bookInfo.bookName}</td>
+                        <td><fmt:formatDate value="${borrow.borrowDate}" pattern="yyyy-MM-dd"/></td>
+                        <td><fmt:formatDate value="${borrow.returnDate}" pattern="yyyy-MM-dd"/></td>
+                        <td>${borrow.statusStr}</td>
+                        <td>
+                            <button class="btn-sm btn-info" onclick="renew(${borrow.id})">续借</button>
+                            <button class="btn-sm btn-success" onclick="returnBook(${borrow.id})">还书</button>
+                            <button class="btn-sm btn-danger" >催还</button>
+                        </td>
+                    </tr>
+                </c:if>
+                <c:if test="${borrow.status == 3}">
+                    <tr class="danger">
+                        <td>${s.count + pageInfo.pageSize * (pageInfo.pageNum - 1)}</td>
+                        <td>${borrow.userInfo.account.studentId}</td>
+                        <td>${borrow.userInfo.realName}</td>
+                        <td>${borrow.bookInfo.bookName}</td>
+                        <td><fmt:formatDate value="${borrow.borrowDate}" pattern="yyyy-MM-dd"/></td>
+                        <td><fmt:formatDate value="${borrow.returnDate}" pattern="yyyy-MM-dd"/></td>
+                        <td>${borrow.statusStr}</td>
+                        <td>
+                            <button class="btn-sm btn-info invisible" disabled>续借</button>
+                            <button class="btn-sm btn-success" onclick="returnBook(${borrow.id})">还书</button>
+                            <button class="btn-sm btn-danger" >催还</button>
+                        </td>
+                    </tr>
+                </c:if>
+
             </c:forEach>
             </tbody>
         </table>
@@ -155,31 +211,33 @@
     </ul>
 </nav>
 
-<%--隐藏的警告框--%>
-<div class="modal fade" id="model_delete">
-    <div class="modal-dialog" style="margin-top: 250px">
-        <div class="modal-content message_align">
-            <div class="modal-header" style="height: 50px">
-                <button type="button" class="close" data-dismiss="modal"
-                        aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-                <h4 class="modal-title" >提示</h4>
-            </div>
-            <div class="modal-body" style="height: 100px">
-                <p style="font-size: 16px">您确认要删除该条信息吗？</p>
-                <div style="float: right">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" style="padding-left: 20px; padding-right: 20px"
-                    >取消</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_delete_confirm" style="margin-left: 5px;padding-left: 20px; padding-right: 20px"
-                    >确认</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script type="text/javascript">
+
+    function renew(id){
+        $.ajax({
+            type: "post",
+            url: "${pageContext.request.contextPath}/borrow/renew.do",
+            data:{id:id},
+            success: function() {
+                toastr.success("续借成功","", {"timeOut" : "1000", "onHidden":function () {
+                        window.location.reload();
+                }});
+            }
+        });
+    }
+
+    function returnBook(id){
+        $.ajax({
+            type: "post",
+            url: "${pageContext.request.contextPath}/borrow/returnBook.do",
+            data:{id:id},
+            success: function() {
+                toastr.success("还书成功","", {"timeOut" : "1000", "onHidden":function () {
+                        window.location.reload();
+                    }});
+            }
+        });
+    }
 
     /*设置页数相关*/
     $(function (){
@@ -208,7 +266,7 @@
         if (${!empty condition}){
             $("#condition").val("${condition}");
         } else {
-            $("#condition").attr("placeholder","按书名、作者、出版社或类别查询")
+            $("#condition").attr("placeholder","按学号、姓名、书名和续借、逾期状态查询")
         }
     });
 
@@ -221,24 +279,6 @@
                 ${pageInfo.pageSize} +"&condition="
                 + condition;
         }
-    }
-
-    /*删除警告*/
-    function confirmDelete(id){
-        $("#btn_delete_confirm").click(function (){
-            $.ajax({
-                type:"post",
-                url:"${pageContext.request.contextPath}/borrow/delete.do",
-                contentType:"application/json;charset=UTF-8",
-                data:'{"id":"'+ id +'"}',
-                data_type:"json",
-                success:function () {
-                    toastr.success("删除成功");
-                    location.href = "${pageContext.request.contextPath}/borrow/find.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}";
-                }
-            })
-        })
-        $("#model_delete").modal();
     }
 
     /*toastr配置*/

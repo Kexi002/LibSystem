@@ -45,12 +45,19 @@ public class BorrowServiceImpl implements BorrowService {
 
     @Override
     public List<Borrow> findAll(int page, int size) {
+        this.updateStatus();
         PageHelper.startPage(page, size);
         return borrowDao.findAll();
     }
 
     @Override
+    public Borrow findById(String id) {
+        return borrowDao.findById(id);
+    }
+
+    @Override
     public List<Borrow> findByCondition(int page, int size, String condition) {
+        this.updateStatus();
         List<Borrow> borrowList = new ArrayList<>();
         String[] cs = condition.split("\\s+");
         List<Borrow> tempList1;
@@ -155,5 +162,24 @@ public class BorrowServiceImpl implements BorrowService {
         return borrowDao.findByBookInfoId(bookInfoId);
     }
 
-    //update设置按照是否续借改归还时间
+    //因为status没办法在sql里面计算，所以在查询之前要先更新
+    @Override
+    public void updateStatus() {
+        List<Borrow> borrowList = borrowDao.findAll();
+        for (Borrow borrow : borrowList) {
+            borrowDao.updateStatus(borrow);
+        }
+    }
+
+    @Override
+    public void updateRenew(String id) {
+        borrowDao.updateRenew(id);
+    }
+
+    @Override
+    public void delete(String id) {
+        borrowDao.delete(id);
+    }
+
+
 }

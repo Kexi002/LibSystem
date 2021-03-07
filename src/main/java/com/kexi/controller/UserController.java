@@ -77,21 +77,6 @@ public class UserController {
 
     @RequestMapping("/update.do")
     public @ResponseBody void update(Model model, @RequestBody UserInfo userInfo){
-        System.out.println(userInfo);
         userService.update(userInfo);
-        userInfo = userService.findById(userInfo.getId());
-        model.addAttribute("userInfo", userInfo);
     }
-
-/*    @RequestMapping("/updateUser.do")
-    public String updateUser(UserInfo userInfo, Model model){
-        if(accountService.update(userInfo.getAccount())){
-            System.out.println("账号更新完毕...");
-            userService.update(userInfo);
-            System.out.println("用户信息更新完毕...");
-        }
-        model.addAttribute("userInfo", userInfo);
-        //跳转详情界面，应该是一个model，userinfo存进去转发到
-        return "detail";
-    }*/
 }

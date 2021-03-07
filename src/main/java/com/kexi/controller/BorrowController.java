@@ -35,9 +35,9 @@ public class BorrowController {
         String id = (String) request.getSession().getAttribute("nowBorrowUserId");
         //没有这个属性会是null
         if (id == null || "".equals(id)){
-            return "redirect:findUser.do?page=1&size=7";
+            return "redirect:findUser.do";
         }
-        return "redirect:findBook.do?page=1&size=7";
+        return "redirect:findBook.do";
     }
 
     @RequestMapping("/saveNowBorrowUser.do")
@@ -46,7 +46,7 @@ public class BorrowController {
         request.getSession().setAttribute("nowBorrowUserName", name);
         List<String>list = new ArrayList();
         request.getSession().setAttribute("nowBorrowCart", list);
-        return "redirect:findBook.do?page=1&size=7";
+        return "redirect:findBook.do";
     }
 
     @RequestMapping("/deleteNowBorrowUser.do")
@@ -54,25 +54,7 @@ public class BorrowController {
         request.getSession().removeAttribute("nowBorrowUserId");
         request.getSession().removeAttribute("nowBorrowUserName");
         request.getSession().removeAttribute("nowBorrowCart");
-        return "redirect:findUser.do?page=1&size=7";
-    }
-
-    @RequestMapping("/addBorrowCart.do")
-    public @ResponseBody Boolean addBorrowCart(HttpServletRequest request,@RequestParam(name = "id") String id){
-        List<String> list = (List<String>) request.getSession().getAttribute("nowBorrowCart");
-        if (list.contains(id)){
-            return false;
-        }
-        list.add(id);
-        request.getSession().setAttribute("nowBorrowCart", list);
-        return true;
-    }
-
-    @RequestMapping("/removeBorrowCart.do")
-    public @ResponseBody void removeBorrowCart(HttpServletRequest request,@RequestParam(name = "id") String id){
-        List<String> list = (List<String>) request.getSession().getAttribute("nowBorrowCart");
-        list.remove(id);
-        request.getSession().setAttribute("nowBorrowCart", list);
+        return "redirect:findUser.do";
     }
 
     @RequestMapping("/goBorrowCart.do")
@@ -84,6 +66,33 @@ public class BorrowController {
         }
         model.addAttribute("bookInfoList",bookInfoList);
         return "/admin/borrow-cart";
+    }
+
+    @RequestMapping("/addBorrowCart.do")
+    public @ResponseBody Integer addBorrowCart(HttpServletRequest request,@RequestParam(name = "id") String id){
+        //两种情况：在借书单里面或者已经借了
+        //在书单里面
+        List<String> list = (List<String>) request.getSession().getAttribute("nowBorrowCart");
+        if (list.contains(id)){
+            return 1;
+        }
+        //已经借了
+        List<Borrow> nowBorrowUserBorrowList = borrowService.findByUserInfoId((String) request.getSession().getAttribute("nowBorrowUserId"));
+        for (Borrow borrow : nowBorrowUserBorrowList) {
+            if (borrow.getBookInfo().getId().equals(id)){
+                return 2;
+            }
+        }
+        list.add(id);
+        request.getSession().setAttribute("nowBorrowCart", list);
+        return 0;
+    }
+
+    @RequestMapping("/removeBorrowCart.do")
+    public @ResponseBody void removeBorrowCart(HttpServletRequest request,@RequestParam(name = "id") String id){
+        List<String> list = (List<String>) request.getSession().getAttribute("nowBorrowCart");
+        list.remove(id);
+        request.getSession().setAttribute("nowBorrowCart", list);
     }
 
     @RequestMapping("/borrow.do")
@@ -99,7 +108,25 @@ public class BorrowController {
             bookInfo.setId(bookId);
             borrow.setBookInfo(bookInfo);
             borrowService.save(borrow);
+            //借了书要更新数量
+            BookInfo tempBook = bookService.findById(bookId);
+            tempBook.getBookDetail().setNumber(tempBook.getBookDetail().getNumber() - 1);
+            bookService.update(tempBook);
         }
+    }
+
+    @RequestMapping("/renew.do")
+    public @ResponseBody void renew(@RequestParam(name = "id") String id){
+        borrowService.updateRenew(id);
+    }
+
+    @RequestMapping("/returnBook.do")
+    public @ResponseBody void returnBook(@RequestParam(name = "id") String id){
+        //还书要更新数量
+        Borrow borrow = borrowService.findById(id);
+        borrow.getBookInfo().getBookDetail().setNumber(borrow.getBookInfo().getBookDetail().getNumber() + 1);
+        bookService.update(borrow.getBookInfo());
+        borrowService.delete(id);
     }
 
     @RequestMapping("/find.do")

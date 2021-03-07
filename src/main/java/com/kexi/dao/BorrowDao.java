@@ -34,6 +34,10 @@ public interface BorrowDao {
     })
     List<Borrow> findAll();
 
+    @Select("select * from borrow where id = #{id}")
+    @ResultMap("borrowMap")
+    Borrow findById(String Id);
+
     @Select("select * from borrow where userInfoId = #{userInfoId}")
     @ResultMap("borrowMap")
     List<Borrow> findByUserInfoId(String userInfoId);
@@ -50,5 +54,13 @@ public interface BorrowDao {
     @ResultMap("borrowMap")
     List<Borrow> findByStatus(Integer status);
 
+    //因为status没办法在sql里面计算，所以在查询之前要先更新
+    @Update("update borrow set status = #{status} where id = #{id}")
+    void updateStatus(Borrow borrow);
 
+    @Update("update borrow set renew = 1 where id = #{id}")
+    void updateRenew(String id);
+
+    @Delete("delete from borrow where id = #{id}")
+    void delete(String id);
 }

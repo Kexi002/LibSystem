@@ -71,9 +71,6 @@ public class BookController {
     @RequestMapping("/update.do")
     public @ResponseBody void update(Model model, @RequestBody BookInfo bookInfo){
         bookService.update(bookInfo);
-        //把更新的图片信息也带上
-        bookInfo = bookService.findById(bookInfo.getId());
-        model.addAttribute("bookInfo", bookInfo);
     }
 
     @RequestMapping("/uploadImg.do")
@@ -96,32 +93,12 @@ public class BookController {
             bookDetail.setId(id);
             bookService.updateImage(bookDetail);
         }
+    }
 
-
-        /*System.out.println("Controller:文件上传中......");
-        String path = request.getSession().getServletContext().getRealPath("/img/bookImage/");
-        System.out.println("path:"+path);
-
-        File file = new File(path);
-        if (!file.exists()){
-            file.mkdirs();
-        }
-
-        String filename = upload.getOriginalFilename();
-        String uuid = UUID.randomUUID().toString().replace("-", "");
-        filename = uuid + "_" +filename;
-        System.out.println("文件名:"+filename);
-
-        upload.transferTo(new File(path, filename));
-
-        //上传之后要把文件名存到数据库里面去(根据bookDetail里面的id)，先用id把数据拿出来
-        BookDetail bookDetail = bookService.findDetailById(id);
-        bookDetail.setImage(filename);
-        bookDetail.setId(id);
-        bookService.updateImage(bookDetail);
-
-        //model添加bookDetail，页面reload刷新
-        model.addAttribute("bookDetail", bookDetail);
-        //return "../test";*/
+    @RequestMapping("/delete.do")
+    public @ResponseBody void delete(@RequestParam(name = "id") String id){
+        System.out.println("this is controller");
+        System.out.println(id);
+        bookService.delete(id);
     }
 }

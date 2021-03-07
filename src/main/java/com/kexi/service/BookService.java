@@ -21,4 +21,6 @@ public interface BookService {
     void updateImage(BookDetail bookDetail);
 
     void update(BookInfo bookInfo);
+
+    void delete(String id);
 }
