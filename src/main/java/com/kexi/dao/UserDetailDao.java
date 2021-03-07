@@ -18,5 +18,5 @@ public interface UserDetailDao {
     void update(UserDetail userDetail);
 
     @Delete("delete from userDetail where id = #{id}")
-    void deleteById(String id);
+    void delete(String id);
 }

@@ -2,12 +2,10 @@ package com.kexi.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.kexi.dao.AccountDao;
+import com.kexi.dao.BorrowDao;
 import com.kexi.dao.UserDetailDao;
 import com.kexi.dao.UserInfoDao;
-import com.kexi.domain.Account;
-import com.kexi.domain.BookInfo;
-import com.kexi.domain.UserDetail;
-import com.kexi.domain.UserInfo;
+import com.kexi.domain.*;
 import com.kexi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,6 +25,8 @@ public class UserServiceImpl implements UserService {
     private UserInfoDao userInfoDao;
     @Autowired
     private UserDetailDao userDetailDao;
+    @Autowired
+    private BorrowDao borrowDao;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -119,5 +119,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(String id) {
 
+        //删除相关的借阅
+        List<Borrow> borrowList = borrowDao.findByUserInfoId(id);
+        for (Borrow borrow : borrowList) {
+            borrowDao.delete(borrow.getId());
+        }
+        //删除用户，先删info再删除account和detail否则删不掉
+        //但是要先把account和detail的id拿到！！！！
+        UserInfo userInfo = userInfoDao.findById(id);
+        String accountId = userInfo.getAccount().getId();
+        String userDetailId = userInfo.getUserDetail().getId();
+        System.out.println("1");
+        accountDao.delete(accountId);
+        userDetailDao.delete(userDetailId);
     }
 }

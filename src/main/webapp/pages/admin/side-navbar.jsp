@@ -12,8 +12,8 @@
 
         <div class="nav-list" >
             <ul>
-                <li>
-                    <a href="#">首页</a>
+                <li id="testli">
+                    <a id="main_menu" href="${pageContext.request.contextPath}/pages/admin/main.jsp">首页</a>
                 </li>
                 <li class="nav-left-dropdown" id="book_menu">
                     <a href="#">图书管理</a>
@@ -27,7 +27,6 @@
                     <ul class="nav-left-dropdown-menu">
                         <li><a id="borrow_menu_find" href="${pageContext.request.contextPath}/borrow/find.do">查询和修改</a></li>
                         <li><a id="borrow_menu_main" href="${pageContext.request.contextPath}/borrow/main.do">新建借阅</a></li>
-                        <li><a href="#">选项3</a></li>
                     </ul>
                 </li>
                 <li class="nav-left-dropdown" id="user_menu">
@@ -36,9 +35,6 @@
                         <li><a id="user_menu_find" href="${pageContext.request.contextPath}/user/find.do">查询和修改</a></li>
                         <li><a id="user_menu_save" href="${pageContext.request.contextPath}/pages/admin/user-save.jsp">新建用户</a></li>
                     </ul>
-                </li>
-                <li>
-                    <a href="#">分类3</a>
                 </li>
             </ul>
         </div>

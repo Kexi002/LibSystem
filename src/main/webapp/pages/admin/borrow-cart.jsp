@@ -104,7 +104,7 @@
             url: "${pageContext.request.contextPath}/borrow/borrow.do",
             success: function() {
                 toastr.success("借书成功","", {"timeOut" : "1000", "onHidden":function () {
-                        window.location.href = "${pageContext.request.contextPath}/borrow/find.do?page=1&size=7";
+                        window.location.href = "${pageContext.request.contextPath}/borrow/deleteNowBorrowUser.do";
                 }});
             },
         });

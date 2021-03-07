@@ -21,19 +21,12 @@
         <div class="col-md-10 col-md-offset-2">
             <div class="col-md-12">
                 <ol class="breadcrumb">
-                    <li><a href="#">一级目录</a></li>
-                    <li><a href="#">二级目录</a></li>
-                    <li class="active">当前页面</li>
+                    <li class="active">首页</li>
                 </ol>
             </div>
 
-            <div class="col-md-6 col-md-offset-2">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="按XXXXX查询"/>
-                    <span class="input-group-btn">
-                    <button class="btn btn-blue" type="button" style="padding-left: 50px;padding-right: 50px;">查询</button>
-                </span>
-                </div>
+            <div class="col-md-6 col-md-offset-3">
+                <h3>欢迎使用图书管理系统！您需要做什么？</h3>
             </div>
         </div>
     </div>
@@ -42,51 +35,35 @@
 
 <div class="col-md-10 col-md-offset-2" style="margin-top: 120px;">
     <div class="col-md-11"
-         style="margin-left: 20px;border-top: 2px solid #08A5E0; height: 440px;overflow-y: auto">
-        <table class="table table-hover table-inner-border" style="table-layout: fixed;width: 100%;">
-            <thead>
-            <tr>
-                <th>序号</th>
-                <th>名称</th>
-                <th>年龄</th>
-                <th>性别</th>
-                <th>住址</th>
-                <th>QQ</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>1</td>
-                <td>小易</td>
-                <td>21</td>
-                <td>男</td>
-                <td>china</td>
-                <td>123456</td>
-            </tr>
-            </tbody>
-        </table>
+         style="margin-left: 20px;border-top: 2px solid #08A5E0; height: auto">
+        <div class=" col-md-offset-2" style="padding-top: 10px; padding-left: 85px; float: left">
+            <button class="btn btn-info" style="float: left; width: 230px; height: 230px;border-Radius:10px"
+                    onclick="window.location.href='${pageContext.request.contextPath}/book/find.do'">
+                <span class="glyphicon glyphicon-book" style="font-size: 70px; color: white !important;"></span>
+                <h1 style="margin-top: 30px">管理图书</h1>
+            </button>
+            <button class="btn btn-info" style="float: left; width: 230px; height: 230px;border-Radius:10px; margin-left: 10px"
+                    onclick="window.location.href='${pageContext.request.contextPath}/borrow/find.do'">
+                <span class="glyphicon glyphicon-bookmark" style="font-size: 70px; color: white !important;"></span>
+                <h1 style="margin-top: 30px">管理借阅</h1>
+            </button>
+        </div>
+        <div class=" col-md-offset-2" style="padding-top: 10px; padding-left: 85px; float: left">
+            <button class="btn btn-info" style="float: left; width: 230px; height: 230px;border-Radius:10px"
+                    onclick="window.location.href='${pageContext.request.contextPath}/borrow/main.do'">
+                <span class="glyphicon glyphicon-shopping-cart" style="font-size: 70px; color: white !important;"></span>
+                <h1 style="margin-top: 30px">新建借阅</h1>
+            </button>
+            <button class="btn btn-info" style="float: left; width: 230px; height: 230px;border-Radius:10px; margin-left: 10px"
+                    onclick="window.location.href='${pageContext.request.contextPath}/user/find.do'">
+                <span class="glyphicon glyphicon-user" style="font-size: 70px; color: white !important;"></span>
+                <h1 style="margin-top: 30px">管理用户</h1>
+            </button>
+        </div>
+
+
     </div>
 </div>
-
-<nav class="navbar-fixed-bottom" style="margin-left: 650px">
-    <ul class="pagination">
-        <li>
-            <a href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li>
-            <a href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
-    </ul>
-</nav>
 
 <script type="text/javascript">
     $(function() {
@@ -109,6 +86,10 @@
 
     /*下拉框动画*/
     $(document).ready(function () {
+        $("#main_menu").attr("style", "color: #08A5E0 !important;"+
+            "    background-color: #fff;" +
+            "    border-left: 3px solid #08A5E0;");
+
         $(".dropdownMenu").dropdown();
         $(".nav-left-dropdown>a").click(function () {
             if ($(this).attr("d") != 1 && $(this).attr("d") != undefined) {

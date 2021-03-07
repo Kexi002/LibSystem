@@ -127,14 +127,15 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void delete(String id) {
-        System.out.println("this is service");
         //删除相关的借阅
         List<Borrow> borrowList = borrowDao.findByBookInfoId(id);
         for (Borrow borrow : borrowList) {
             borrowDao.delete(borrow.getId());
         }
-        //删除图书
-        bookDetailDao.delete(bookInfoDao.findById(id).getBookDetail().getId());
+        //删除图书，先删info再删除detail否则删不掉
+        //但是要先把detail的id拿到！！！！
+        String bookDetailId = bookInfoDao.findById(id).getBookDetail().getId();
         bookInfoDao.delete(id);
+        bookDetailDao.delete(bookDetailId);
     }
 }

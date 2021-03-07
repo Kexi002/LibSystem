@@ -42,8 +42,4 @@ public interface AccountDao {
     //删除不知道应该依据哪个字段删？
     @Delete("delete from account where id = #{id}")
     void delete(String id);
-
-/*    @Delete("delete from account where username = #{username}")
-    void deleteByUsername(String username);*/
-
 }

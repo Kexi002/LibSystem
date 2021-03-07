@@ -234,7 +234,6 @@
                     toastr.success("删除成功", "", {"timeOut":"1000","onHidden":function () {
                         window.location.reload();
                     }});
-
                 }
             })
         })

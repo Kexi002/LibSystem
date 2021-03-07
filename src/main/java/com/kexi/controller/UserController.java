@@ -79,4 +79,9 @@ public class UserController {
     public @ResponseBody void update(Model model, @RequestBody UserInfo userInfo){
         userService.update(userInfo);
     }
+
+    @RequestMapping("/delete.do")
+    public @ResponseBody void delete(@RequestParam(name = "id") String id){
+        userService.delete(id);
+    }
 }

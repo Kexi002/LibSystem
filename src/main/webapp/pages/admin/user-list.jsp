@@ -69,7 +69,7 @@
                         <button class="btn-sm btn-info" onclick="window.location.href = '${pageContext.request.contextPath}/user/detail.do?id=${userInfo.id}&condition=${condition}'">详情</button>
                         <button class="btn-sm btn-warning" onclick="window.location.href = '${pageContext.request.contextPath}/user/goUpdate.do?id=${userInfo.id}&condition=${condition}'">修改用户信息</button>
                         <button class="btn-sm btn-warning" onclick="window.location.href = '${pageContext.request.contextPath}/account/goUpdate.do?id=${userInfo.account.id}&condition=${condition}'">修改账户</button>
-                        <button class="btn-sm btn-danger btn_delete" onclick="confirmDelete(${userInfo.account.id})">删除</button>
+                        <button class="btn-sm btn-danger btn_delete" onclick="confirmDelete(${userInfo.id})">删除</button>
                     </td>
                 </tr>
             </c:forEach>
@@ -170,8 +170,8 @@
                 <h4 class="modal-title" >提示</h4>
             </div>
             <div class="modal-body" style="height: 100px">
-                <p style="font-size: 16px">您确认要删除该条信息吗？</p>
-                <div style="float: right">
+                <div style="font-size: 16px; float: left;">您确认要删除该用户吗？<div style="float: right;color: red">该用户相关的账号以及借阅信息也会被一并删除！</div></div>
+                <div style="margin-top: 10px;float: right">
                     <button type="button" class="btn btn-default" data-dismiss="modal" style="padding-left: 20px; padding-right: 20px"
                     >取消</button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_delete_confirm" style="margin-left: 5px;padding-left: 20px; padding-right: 20px"
@@ -232,12 +232,11 @@
             $.ajax({
                 type:"post",
                 url:"${pageContext.request.contextPath}/user/delete.do",
-                contentType:"application/json;charset=UTF-8",
-                data:'{"id":"'+ id +'"}',
-                data_type:"json",
+                data:{id:id},
                 success:function () {
-                    toastr.success("删除成功");
-                    location.href = "${pageContext.request.contextPath}/user/find.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}";
+                    toastr.success("删除成功", "", {"timeOut":"1000","onHidden":function () {
+                            window.location.reload();
+                        }});
                 }
             })
         })

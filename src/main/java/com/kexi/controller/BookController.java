@@ -97,8 +97,6 @@ public class BookController {
 
     @RequestMapping("/delete.do")
     public @ResponseBody void delete(@RequestParam(name = "id") String id){
-        System.out.println("this is controller");
-        System.out.println(id);
         bookService.delete(id);
     }
 }
