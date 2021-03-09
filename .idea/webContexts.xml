@@ -5,6 +5,7 @@
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/moban.html" value="file://$PROJECT_DIR$/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/pages/admin/book-save.jsp" value="file://$PROJECT_DIR$/src/main/webapp/pages/admin" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/pages/main.jsp" value="file://$PROJECT_DIR$/src/main/webapp/pages" />
       </map>
     </option>
   </component>
