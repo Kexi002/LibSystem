@@ -14,6 +14,8 @@ public interface UserService {
 
     UserInfo findById(String id);
 
+    UserInfo findByAccountId(String id);
+
     List<UserInfo> findAll(int page, int size);
 
     List<UserInfo> findByCondition(int page, int size, String condition);

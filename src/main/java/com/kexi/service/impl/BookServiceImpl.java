@@ -105,6 +105,12 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<BookInfo> findCategory(int page, int size, String category) {
+        PageHelper.startPage(page, size);
+        return bookInfoDao.findByCategoryLike(category);
+    }
+
+    @Override
     public BookInfo findById(String id) {
         return bookInfoDao.findById(id);
     }

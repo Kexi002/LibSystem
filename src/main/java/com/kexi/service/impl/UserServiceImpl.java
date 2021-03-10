@@ -49,6 +49,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserInfo findByAccountId(String id) {
+        return userInfoDao.findByAccountId(id);
+    }
+
+    @Override
     public List<UserInfo> findAll(int page, int size) {
         PageHelper.startPage(page, size);
         return userInfoDao.findAll();

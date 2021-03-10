@@ -102,7 +102,7 @@ public class BookInfo {
                 categoryStr =  "环境科学、劳动保护科学（安全科学）";
                 break;
             case "Z":
-                categoryStr =  "综合性图书）";
+                categoryStr =  "综合性图书";
                 break;
         }
         return categoryStr;

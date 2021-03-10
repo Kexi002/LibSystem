@@ -37,7 +37,7 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
         if("ROLE_ADMIN".equals(role)) {
             httpServletResponse.sendRedirect(basePath+"pages/admin/main.jsp");
         } else if("ROLE_USER".equals(role)) {
-            httpServletResponse.sendRedirect(basePath+"pages/main.jsp");
+            httpServletResponse.sendRedirect(basePath+"user/main.user.do");
         } else {
             System.out.println("其他");
             httpServletResponse.sendRedirect(basePath+"login.jsp");

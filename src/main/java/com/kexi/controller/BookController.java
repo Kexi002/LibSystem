@@ -99,4 +99,42 @@ public class BookController {
     public @ResponseBody void delete(@RequestParam(name = "id") String id){
         bookService.delete(id);
     }
+
+    /*用户方法*/
+    @RequestMapping("/find.user.do")
+    public String findUser(Model model, @RequestParam(name = "page", required = true)int page,
+                           @RequestParam(name = "condition", required = false)String condition,
+                            @RequestParam(name = "category", required = false)String category){
+        //condition在没有&的时候为null，但是在&{condition}且condition没有值的时候为空字符串
+        int size = Integer.parseInt(defaultValue.userBookPageDefaultSize);
+        List<BookInfo> bookInfoList;
+        PageInfo pageInfo;
+        if (category == null || "".equals(category)){
+            if (condition == null || "".equals(condition)){
+                //没有条件，查询全部
+                bookInfoList = bookService.findAll(page, size);
+                pageInfo = new PageInfo(bookInfoList);
+            } else {
+                bookInfoList = bookService.findByCondition(page, size, condition);
+                pageInfo = PageInfoUtil.list2PageInfo(page, size, bookInfoList);
+                model.addAttribute("condition", condition);
+            }
+        }else {
+            bookInfoList = bookService.findCategory(page, size, category);
+            pageInfo = new PageInfo(bookInfoList);
+            int categoryNumber = bookInfoList.size();
+            model.addAttribute("category", category);
+            model.addAttribute("categoryNumber", categoryNumber);
+        }
+        model.addAttribute("pageInfo", pageInfo);
+        return "book-list";
+    }
+
+    @RequestMapping("detail.user.do")
+    public String detailUser(Model model, @RequestParam(name = "id") String id, @RequestParam(name = "condition", required = false) String condition){
+        BookInfo bookInfo = bookService.findById(id);
+        model.addAttribute("bookInfo", bookInfo);
+        model.addAttribute("condition", condition);
+        return "book-detail";
+    }
 }

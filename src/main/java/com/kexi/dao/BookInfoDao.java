@@ -41,18 +41,23 @@ public interface BookInfoDao {
     BookInfo findById(String id);
 
     @Select("select * from bookInfo where bookName like concat('%',#{bookName},'%')")
+    @ResultMap("bookInfoMap")
     List<BookInfo> findByBookNameLike(String bookName);
 
     @Select("select * from bookInfo where category like concat('%',#{category},'%')")
+    @ResultMap("bookInfoMap")
     List<BookInfo> findByCategoryLike(String category);
 
     @Select("select * from bookInfo where category in (select category from category where categoryStr like concat('%',#{categoryStr},'%'))")
+    @ResultMap("bookInfoMap")
     List<BookInfo> findByCategoryStrLike(String categoryStr);
 
     @Select("select * from bookInfo where author like concat('%',#{author},'%')")
+    @ResultMap("bookInfoMap")
     List<BookInfo> findByAuthorLike(String author);
 
     @Select("select * from bookInfo where publisher like concat('%',#{publisher},'%')")
+    @ResultMap("bookInfoMap")
     List<BookInfo> findByPublisherLike(String publisher);
 
     @Update("update bookInfo set bookName = #{bookName}, category = #{category}, author = #{author}, publisher = #{publisher} where id = #{id}")

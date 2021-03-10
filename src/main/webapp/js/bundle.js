@@ -91,7 +91,10 @@
 
                 // bind click event to sideNav
                 sidenavCategoriesTrigger.addEventListener("click", sidenavClick);
-                sidenavCategoriesTrigger.click();
+                if ($("#open").val() == "false"){
+                    sidenavCategoriesTrigger.click();
+                }
+
 
                 // bind click event to each tab
                 for (var i = 0; i < tabs.length; i++) {

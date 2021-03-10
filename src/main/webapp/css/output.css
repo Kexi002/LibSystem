@@ -649,6 +649,26 @@ table {
     background-color: #fdac9a;
 }
 
+.libre-bg-black {
+    background-color:#030303
+}
+
+.libre-bg-green{
+    background-color:#51A351
+}
+
+.libre-bg-red{
+    background-color:#BD362F
+}
+
+.libre-bg-blue{
+    background-color:#2F96B4
+}
+
+.libre-bg-orange{
+    background-color:#F89406
+}
+
 .bg-indigo-medium {
     background-color: #38406c;
 }

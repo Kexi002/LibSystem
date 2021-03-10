@@ -135,7 +135,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="intro">简介</label>
                         <div  class="col-md-8">
-                            <textarea class="form-control" name="intro" id="intro" placeholder="请输入简介，上限为500字（选填）" maxlength="500">${bookInfo.bookDetail.intro}</textarea>
+                            <textarea class="form-control" name="intro" id="intro" placeholder="请输入简介，上限为500字（选填）" maxlength="500" style="white-space: pre">${bookInfo.bookDetail.intro}</textarea>
                         </div>
                     </div>
                     <div class="form-group">
