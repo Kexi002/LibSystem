@@ -31,12 +31,12 @@
         <!-- 标题 -->
         <div class="px-6 md:px-0 flex justify-between items-center -order-1">
             <div>
-                <h2 class="font-normal">图书信息</h2>
-                <p class="text-grey-dark mt-2">Book information</p>
+                <h2 class="font-normal">个人信息</h2>
+                <p class="text-grey-dark mt-2">Personal information</p>
             </div>
 
             <button class="mr-8 bg-indigo-dark hover:bg-indigo-darker text-white text-md py-2 px-8 rounded-full transition-normal hover:shadow hover:translate-y-1 active:translate-y-1 focus:outline-none"
-            onclick="window.location.href='javascript:history.go(-1)'">
+                    onclick="window.location.href='javascript:history.go(-1)'">
                 返回
             </button>
         </div>
@@ -45,64 +45,57 @@
         <div class=" hidden px-6 md:px-0 mt-4 md:flex md:shadow-md js-tab-pane"
              id="section-stats">
             <div class="p-4 px-6 w-full flex flex-row rounded md:rounded-r-none bg-white shadow-md md:shadow-none">
-                <%--图片--%>
-                <div class="w-1/3 mr-6">
-                    <img class="shadow-md" src="${pageContext.request.contextPath}/img/bookImage/${bookInfo.bookDetail.image}">
-                </div>
-                <div class="w-1/2 mt-4">
-                    <h2>${bookInfo.bookName}</h2>
-                    <table class="mt-4 w-full">
-                        <tbody class=" leading-loose text-md">
+                <div class="w-3/5 ml-8">
+                    <table class=" w-full">
+                        <tbody class="leading-loose text-md">
                         <tr class="border-b">
-                            <td class="py-2 w-1/4">作者</td>
-                            <td class="py-2 text-indigo-dark">${bookInfo.author}</td>
+                            <td class="py-2 w-1/4">学号</td>
+                            <td class="py-2 text-indigo-dark">${userInfo.account.studentId}</td>
                         </tr>
                         <tr class="border-b">
-                            <td class="py-2 w-1/4">出版社</td>
-                            <td class="py-2 text-indigo-dark">${bookInfo.publisher}</td>
+                            <td class="py-2 w-1/4">用户名</td>
+                            <td class="py-2 text-indigo-dark">${userInfo.account.username}</td>
                         </tr>
                         <tr class="border-b">
-                            <td class="py-2 w-1/4">类别</td>
-                            <td class="py-2 text-indigo-dark">${bookInfo.categoryStr}</td>
+                            <td class="py-2 w-1/4">姓名</td>
+                            <td class="py-2 text-indigo-dark">${userInfo.realName}</td>
                         </tr>
                         <tr class="border-b">
-                            <td class="py-2 w-1/4">出版日期</td>
-                            <td class="py-2 text-indigo-dark">${bookInfo.bookDetail.publicationDate}</td>
+                            <td class="py-2 w-1/4">性别</td>
+                            <td class="py-2 text-indigo-dark">${userInfo.userDetail.gender}</td>
                         </tr>
                         <tr class="border-b">
-                            <td class="py-2 w-1/4">ISBN</td>
-                            <td class="py-2 text-indigo-dark">${bookInfo.bookDetail.isbn}</td>
+                            <td class="py-2 w-1/4">电话号码</td>
+                            <td class="py-2 text-indigo-dark">${userInfo.userDetail.phoneNum}</td>
                         </tr>
-                        <tr class="border-b">
-                            <td class="py-2 w-1/4">馆藏信息</td>
-                            <td class="py-2 text-indigo-dark">${bookInfo.bookDetail.location}</td>
-                        </tr>
-                        <tr class="border-b">
-                            <td class="py-2 w-1/4">可借余量</td>
-                            <c:if test="${bookInfo.bookDetail.number != 0}">
-                                <td class="py-2"><label class=" rounded-full libre-bg-green text-white px-2 py-1/2 text-md">${bookInfo.bookDetail.number}本</label></td>
-                            </c:if>
-                            <c:if test="${bookInfo.bookDetail.number == 0}">
-                                <td class="py-2"><label class=" rounded-full libre-bg-red text-white px-2 py-1/2 text-md">无可借余量</label></td>
-                            </c:if>
+                        <tr class="">
+                            <td class="py-2 w-1/4">电子邮箱</td>
+                            <td class="py-2 text-indigo-dark">${userInfo.userDetail.email}</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
+<%--                <div class="w-2/5 justify-end flex" style="padding-top: 31.5%">
+                    <button class="h-8 mr-4 bg-indigo-dark hover:bg-indigo-darker text-white text-md py-2 px-6 rounded-full transition-normal hover:shadow hover:translate-y-1 active:translate-y-1 focus:outline-none"
+                            onclick="window.location.href='javascript:history.go(-1)'">
+                        修改个人信息
+                    </button>
+                    <button class="h-8 mr-2 bg-indigo-dark hover:bg-indigo-darker text-white text-md py-2 px-6 rounded-full transition-normal hover:shadow hover:translate-y-1 active:translate-y-1 focus:outline-none"
+                            onclick="window.location.href='javascript:history.go(-1)'">
+                        修改密码
+                    </button>
+                </div>--%>
             </div>
         </div>
-
-        <!-- 副标题 -->
-        <div class="px-6 md:px-0 flex justify-between items-center mt-4">
-            <div>
-                <h2 class="font-normal">简介</h2>
-                <p class="text-grey-dark mt-2">Introduction</p>
-            </div>
-        </div>
-        <div class="mb-8 hidden px-6 md:px-0 mt-4 md:flex md:shadow-md js-tab-pane">
-            <div class="p-4 px-6 w-full flex flex-col rounded md:rounded-r-none bg-white shadow-md md:shadow-none">
-                <div id="intro" style="white-space: pre-wrap">${bookInfo.bookDetail.intro}</div>
-            </div>
+        <div class="w-full flex justify-end mt-6">
+            <button class=" mr-4 bg-indigo-dark hover:bg-indigo-darker text-white text-md py-2 px-6 rounded-full transition-normal hover:shadow hover:translate-y-1 active:translate-y-1 focus:outline-none"
+                    onclick="window.location.href='${pageContext.request.contextPath}/pages/user-update.jsp'">
+                修改个人信息
+            </button>
+            <button class="mr-8 bg-indigo-dark hover:bg-indigo-darker text-white text-md py-2 px-6 rounded-full transition-normal hover:shadow hover:translate-y-1 active:translate-y-1 focus:outline-none"
+                    onclick="window.location.href='${pageContext.request.contextPath}/pages/user-update-password.jsp'">
+                修改密码
+            </button>
         </div>
     </div>
 
@@ -113,10 +106,6 @@
 </div>
 
 <script>
-    /*给当前页添加active*/
-    $(function () {
-        $("#page_${pageInfo.pageNum}").addClass("active");
-    })
 
     /*搜索框*/
     $(function (){

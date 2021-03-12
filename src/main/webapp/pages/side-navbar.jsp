@@ -4,12 +4,12 @@
     <title>Title</title>
 </head>
 <body>
-<nav class="absolute lg:relative lg:flex lg:text-sm bg-indigo-darker lg:bg-transparent pin-l pin-r py-4 px-6 lg:pt-10 lg:pl-12 lg:pr-6 -mt-1 lg:mt-0 overflow-y-auto lg:w-1/5 lg:border-r z-40 hidden">
+<nav class="absolute lg:relative lg:flex lg:text-md bg-indigo-darker lg:bg-transparent pin-l pin-r py-4 px-6 lg:pt-10 lg:pl-12 lg:pr-6 -mt-1 lg:mt-0 overflow-y-auto lg:w-1/5 lg:border-r z-40 hidden">
     <ul class="mt-4 list-reset mb-8 w-full">
-        <li class="ml-2 mb-3 pb-3 flex">
+        <li class="ml-2 mb-3 pb-3 flex" onclick="window.location.href='${pageContext.request.contextPath}/user/main.user.do'">
             <img src="${pageContext.request.contextPath}/img/icon/home-default.svg" alt="home-icon" class="w-4 h-4 mr-2">
-            <div href="www.baidu.com" class="text-md hover:cursor-pointer text-white lg:text-indigo-darkest no-underline font-medium mobile-home-trigger">
-                <a class="no-underline text-indigo-darkest" href="${pageContext.request.contextPath}/user/main.user.do">
+            <div class="text-md hover:cursor-pointer text-white lg:text-indigo-darkest no-underline font-medium mobile-home-trigger">
+                <a class="no-underline text-indigo-darkest" href="#">
                     首页
                 </a>
             </div>
@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </div>
-            <ul class="text-grey lg:text-grey-dark list-reset leading-loose mt-2" id="sidenav-categories">
+            <ul class="text-grey lg:text-sm lg:text-grey-dark list-reset leading-loose mt-2" id="sidenav-categories">
                 <li class="text-indigo-lighter lg:text-indigo-darker font-medium flex justify-between items-center hover:cursor-pointer transition-normal ml-1 border-l border-grey-dark pl-4 mobile-home-trigger">
                     <span><a class="hover:text-indigo-dark hover:cursor-pointer transition-normal no-underline text-grey-darker"
                              href="${pageContext.request.contextPath}/book/find.user.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}&category=A"
@@ -150,14 +150,6 @@
                         医药、卫生</a></span>
                     <span class="bg-indigo-dark text-white text-xs rounded-full px-2 leading-normal"
                           id="categoryNumber_R"></span>
-                </li>
-                <li class="text-indigo-lighter lg:text-indigo-darker font-medium flex justify-between items-center hover:cursor-pointer transition-normal ml-1 border-l border-grey-dark pl-4 mobile-home-trigger">
-                    <span><a class="hover:text-indigo-dark hover:cursor-pointer transition-normal no-underline text-grey-darker"
-                             href="${pageContext.request.contextPath}/book/find.user.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}&category=Q"
-                             id="category_Q">
-                        生物科学</a></span>
-                    <span class="bg-indigo-dark text-white text-xs rounded-full px-2 leading-normal"
-                          id="categoryNumber_Q"></span>
                 </li>
                 <li class="text-indigo-lighter lg:text-indigo-darker font-medium flex justify-between items-center hover:cursor-pointer transition-normal ml-1 border-l border-grey-dark pl-4 mobile-home-trigger">
                     <span><a class="hover:text-indigo-dark hover:cursor-pointer transition-normal no-underline text-grey-darker"

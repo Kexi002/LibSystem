@@ -131,11 +131,10 @@
         $("#condition").keydown(function (event) {
             if (event.keyCode == 13){
                 if($("#condition").val() === ""){
-                    location.href = "${pageContext.request.contextPath}/book/find.user.do?page=1&size=${pageInfo.pageSize}"
+                    location.href = "${pageContext.request.contextPath}/book/find.user.do?page=1&size=12"
                 } else{
                     var condition = $("#condition").val();
-                    location.href = "${pageContext.request.contextPath}/book/find.user.do?page=1&size="+
-                        ${pageInfo.pageSize} +"&condition="
+                    location.href = "${pageContext.request.contextPath}/book/find.user.do?page=1&size=12&condition="
                         + condition;
                 }
             }

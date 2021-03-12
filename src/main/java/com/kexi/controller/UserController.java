@@ -82,7 +82,7 @@ public class UserController {
     }
 
     @RequestMapping("/update.do")
-    public @ResponseBody void update(Model model, @RequestBody UserInfo userInfo){
+    public @ResponseBody void update(@RequestBody UserInfo userInfo){
         userService.update(userInfo);
     }
 
@@ -108,4 +108,12 @@ public class UserController {
         request.setAttribute("pageInfo", pageInfo);
         return "main";
     }
+
+    @RequestMapping("/update.user.do")
+    public @ResponseBody void updateUser(HttpServletRequest request, @RequestBody UserInfo userInfo){
+        userService.update(userInfo);
+        userInfo = userService.findById(userInfo.getId());
+        request.getSession().setAttribute("userInfo", userInfo);
+    }
+
 }

@@ -10,7 +10,7 @@
     <!-- 配置不拦截的资源 -->
     <security:http pattern="/login.jsp" security="none"/>
     <security:http pattern="/failer.jsp" security="none"/>
-    <security:http pattern="/register.jsp" security="none"/>
+    <security:http pattern="/register_old.jsp" security="none"/>
     <security:http pattern="/user/register.do" security="none"/>
     <security:http pattern="/account/checkUsername.do" security="none"/>
     <security:http pattern="/account/checkStudentId.do" security="none"/>
@@ -36,9 +36,8 @@
                 login-page="/login.jsp"
                 login-processing-url="/login.do"
                 default-target-url="/index.jsp"
-                authentication-failure-url="/failer.jsp"
-                authentication-failure-forward-url="/failer.jsp"
-                authentication-success-forward-url="/pages/main.jsp"
+                authentication-failure-url="/login.jsp?msg=fail"
+                authentication-failure-forward-url="/login.jsp?msg=fail"
                 authentication-success-handler-ref="successHandler"
         />
 

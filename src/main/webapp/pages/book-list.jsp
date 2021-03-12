@@ -36,6 +36,11 @@
             </div>
         </div>
 
+        <button class="mr-8 bg-indigo-dark hover:bg-indigo-darker text-white text-md py-2 px-8 rounded-full transition-normal hover:shadow hover:translate-y-1 active:translate-y-1 focus:outline-none"
+                onclick="window.location.href='javascript:history.go(-1)'">
+            返回
+        </button>
+
         <!-- 图书列表 -->
         <div class="hidden px-2 pt-2 md:px-0 flex-wrap pb-4 js-tab-pane active" id="section-library">
             <c:forEach items="${pageInfo.list}" var="bookInfo" varStatus="s">
@@ -150,11 +155,10 @@
         $("#condition").keydown(function (event) {
             if (event.keyCode == 13){
                 if($("#condition").val() === ""){
-                    location.href = "${pageContext.request.contextPath}/book/find.user.do?page=1&size=${pageInfo.pageSize}"
+                    location.href = "${pageContext.request.contextPath}/book/find.user.do?page=1&size=12"
                 } else{
                     var condition = $("#condition").val();
-                    location.href = "${pageContext.request.contextPath}/book/find.user.do?page=1&size="+
-                        ${pageInfo.pageSize} +"&condition="
+                    location.href = "${pageContext.request.contextPath}/book/find.user.do?page=1&size=12&condition="
                         + condition;
                 }
             }

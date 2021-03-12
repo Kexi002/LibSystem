@@ -26,30 +26,10 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-/*    @RequestMapping("/find.do")
-    public String find(Model model, @RequestParam(name = "page", required = true, defaultValue = defaultValue.defaultPage) int page,
-                                  @RequestParam(name = "size", required = true, defaultValue = defaultValue.defaultSize) int size,
-                                  @RequestParam(name = "condition", required = false) String condition){
-        //condition在没有&的时候为null，但是在&{condition}且condition没有值的时候为空字符串
-        List<Account> accountList;
-        PageInfo pageInfo;
-        if (condition == null || "".equals(condition)){
-            //没有条件，查询全部
-            accountList = accountService.findAll(page, size);
-            pageInfo = new PageInfo(accountList);
-        } else {
-            accountList = accountService.findByCondition(page, size, condition);
-            pageInfo = PageInfoUtil.list2PageInfo(page, size, accountList);
-            model.addAttribute("condition", condition);
-        }
-        model.addAttribute("pageInfo", pageInfo);
-        return "/admin/account-list";
-    }*/
-
-/*    @RequestMapping("/save.do")
-    public String save(Account account) throws Exception {
-        accountService.save(account);
-        return "redirect:findAll.do";
+/*    @RequestMapping("/fail.do")
+    public String fail(HttpServletRequest request){
+        request.setAttribute("msg", "fail");
+        return "../login";
     }*/
 
     @RequestMapping("/checkUsername.do")

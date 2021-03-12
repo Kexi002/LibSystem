@@ -123,6 +123,7 @@
             var regex = /^[0-9]{8,11}$/;
             if (!regex.test(phoneNum)){
                 toastr.error("电话号码格式错误！请填写8-11位的电话号码");
+                checkFlag = false;
             }
         }
         var email = $("#email").val();
@@ -133,6 +134,7 @@
             var regex = /^\w+[@]\w+[.]\w+$/;
             if (!regex.test(email)){
                 toastr.error("电子邮箱格式错误！请填写格式正确的电子邮箱地址");
+                checkFlag = false;
             }
         }
         if (!checkFlag){
@@ -158,9 +160,6 @@
                 toastr.success("用户信息修改成功","", {"onHidden":function () {
                         window.location.reload();
                 }});
-            },
-            error:function () {
-                toastr.error("hi");
             }
         });
     }
