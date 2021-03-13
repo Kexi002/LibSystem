@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <title>在线图书资料管理系统</title>
+    <title>图书资料管理系统</title>
     <script src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js"></script><!-- jquery文件 -->
     <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
     <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" />

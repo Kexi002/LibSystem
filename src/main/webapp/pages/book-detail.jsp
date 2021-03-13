@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>在线图书管理系统</title>
+    <title>图书资料管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/output.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/light.css">

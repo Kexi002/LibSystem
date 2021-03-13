@@ -35,9 +35,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void register(UserInfo userInfo) {
         userInfo.getAccount().setPassword(bCryptPasswordEncoder.encode(userInfo.getAccount().getPassword()));
-        if (userInfo.getAccount().getAuthority() != 1){
-            userInfo.getAccount().setAuthority(0);
-        }
+        userInfo.getAccount().setAuthority(0);
         accountDao.save(userInfo.getAccount());
         userDetailDao.save(userInfo.getUserDetail());
         userInfoDao.save(userInfo);

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>在线图书管理系统</title>
+    <title>图书资料管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/output.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/light.css">
@@ -50,16 +50,22 @@
                     <table class=" w-full">
                         <tbody class="leading-loose text-md">
                         <tr class="">
-                            <td class="py-2 w-1/6">学号</td>
-                            <td class="py-2 w-1/3 text-indigo-dark">${userInfo.account.studentId}</td>
+                            <td class="py-3 w-1/6">学号</td>
+                            <td class=" w-1/3 text-indigo-dark">${userInfo.account.studentId}</td>
+                            <td>
+                                <div class="flex-row flex">
+                                    <img class=" h-8" src='${pageContext.request.contextPath}/img/icon/star.png'>
+                                    <p class="mt-2 text-sm">学号和用户名不支持修改，请联系管理员</p>
+                                </div>
+                            </td>
                         </tr>
                         <tr class="">
-                            <td class="py-2">用户名</td>
-                            <td class="py-2 text-indigo-dark">${userInfo.account.username}</td>
+                            <td class="py-3">用户名</td>
+                            <td class=" text-indigo-dark">${userInfo.account.username}</td>
                         </tr>
                         <tr class="">
-                            <td class="py-2 ">姓名</td>
-                            <td class="py-2">
+                            <td class="py-3">姓名</td>
+                            <td class="">
                                 <input id="realName" maxlength="15" class="w-full -ml-4 text-md h-8 px-4 rounded-lg bg-grey-lighter text-indigo-dark outline-none" type="text"
                                    placeholder="请输入您的真实姓名"
                                    value="${userInfo.realName}">
@@ -73,18 +79,18 @@
                             </td>
                         </tr>
                         <tr class="">
-                            <td class="py-2 ">性别</td>
-                            <td class="py-2">
-                                <select id="gender" class="pr-10 -ml-4 text-md h-8 px-4 rounded-full bg-grey-lighter text-indigo-dark outline-none">
+                            <td class="py-3">性别</td>
+                            <td class="">
+                                <select id="gender" class="pr-10 -ml-4 text-md h-8 px-4 rounded-lg bg-grey-lighter text-indigo-dark outline-none">
                                     <option value="男">男</option>
                                     <option value="女">女</option>
                                 </select>
                             </td>
                         </tr>
                         <tr class="">
-                            <td class="py-2 ">电话号码</td>
-                            <td class="py-2">
-                                <input id="phoneNum" maxlength="11" class="w-full -ml-4 text-md h-8 px-4 rounded-full bg-grey-lighter text-indigo-dark outline-none" type="text"
+                            <td class="py-3">电话号码</td>
+                            <td class="">
+                                <input id="phoneNum" maxlength="11" class="w-full -ml-4 text-md h-8 px-4 rounded-lg bg-grey-lighter text-indigo-dark outline-none" type="text"
                                 placeholder="请输入8-11位的电话号码"
                                 value="${userInfo.userDetail.phoneNum}">
                             </td>
@@ -93,9 +99,9 @@
                             </td>
                         </tr>
                         <tr class="">
-                            <td class="py-2 ">电子邮箱</td>
-                            <td class="py-2">
-                                <input id="email" maxlength="32" class="w-full -ml-4 text-md h-8 px-4 rounded-full bg-grey-lighter text-indigo-dark outline-none" type="text"
+                            <td class="py-3">电子邮箱</td>
+                            <td class="">
+                                <input id="email" maxlength="32" class="w-full -ml-4 text-md h-8 px-4 rounded-lg bg-grey-lighter text-indigo-dark outline-none" type="text"
                                 placeholder="请输入格式正确的电子邮箱"
                                 value="${userInfo.userDetail.email}">
                             </td>
@@ -185,32 +191,33 @@
                 toastr.error("保存失败！请按要求填写信息","", {"onHidden":function () {
                         return;
                     }});
-            }
-            var realName = $("#realName").val();
-            var gender = $("#gender").val();
-            var phoneNum = $("#phoneNum").val();
-            var email = $("#email").val();
-            var json = {
-                id:${userInfo.id},
-                realName:realName,
-                userDetail:{
-                    id: ${userInfo.userDetail.id},
-                    gender:gender,
-                    phoneNum:phoneNum,
-                    email:email
+            }else {
+                var realName = $("#realName").val();
+                var gender = $("#gender").val();
+                var phoneNum = $("#phoneNum").val();
+                var email = $("#email").val();
+                var json = {
+                    id:${userInfo.id},
+                    realName:realName,
+                    userDetail:{
+                        id: ${userInfo.userDetail.id},
+                        gender:gender,
+                        phoneNum:phoneNum,
+                        email:email
+                    }
                 }
+                $.ajax({
+                    type: "post",
+                    url: "${pageContext.request.contextPath}/user/update.user.do",
+                    contentType: 'application/json',
+                    data:JSON.stringify(json),
+                    success: function() {
+                        toastr.success("个人信息修改成功","", {"onHidden":function () {
+                                window.location.reload();
+                            }});
+                    }
+                });
             }
-            $.ajax({
-                type: "post",
-                url: "${pageContext.request.contextPath}/user/update.user.do",
-                contentType: 'application/json',
-                data:JSON.stringify(json),
-                success: function() {
-                    toastr.success("个人信息修改成功","", {"onHidden":function () {
-                            window.location.reload();
-                        }});
-                }
-            });
         })
 
         $("#btn_reset").click(function () {

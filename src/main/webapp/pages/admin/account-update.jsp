@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-    <title>在线图书资料管理系统</title>
+    <title>图书资料管理系统</title>
     <script src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js"></script><!-- jquery文件 -->
     <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
     <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" />
@@ -290,7 +290,7 @@
         $("#password").keyup(function () {
             passwordFlags[0] = false;
             var password = $(this).val();
-            var regex = /^[\S]{6,16}$/;
+            var regex = /^[\S]{6,20}$/;
             if (! regex.test(password)){
                 showMsg("password", "密码格式错误", false);
                 return;
@@ -310,7 +310,7 @@
         $("#passwordConfirm").keyup(function () {
             passwordFlags[1] = false;
             var passwordConfirm = $(this).val();
-            var regex = /^[\S]{6,16}$/;
+            var regex = /^[\S]{6,20}$/;
             if (! regex.test(passwordConfirm)){
                 showMsg("passwordConfirm", "密码格式错误", false);
                 return;

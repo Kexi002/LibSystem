@@ -34,9 +34,11 @@ public class UserController {
     private BookService bookService;
 
     @RequestMapping("/register.do")
-    public String register(UserInfo userInfo){
+    public @ResponseBody void register(@RequestBody UserInfo userInfo){
+        System.out.println(userInfo);
         userService.register(userInfo);
-        return "../login";
+        System.out.println("hello");
+        System.out.println(userInfo);
     }
 
     @RequestMapping("/save.do")

@@ -9,8 +9,7 @@
 
     <!-- 配置不拦截的资源 -->
     <security:http pattern="/login.jsp" security="none"/>
-    <security:http pattern="/failer.jsp" security="none"/>
-    <security:http pattern="/register_old.jsp" security="none"/>
+    <security:http pattern="/register.jsp" security="none"/>
     <security:http pattern="/user/register.do" security="none"/>
     <security:http pattern="/account/checkUsername.do" security="none"/>
     <security:http pattern="/account/checkStudentId.do" security="none"/>

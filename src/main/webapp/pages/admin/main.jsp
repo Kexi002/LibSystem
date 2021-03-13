@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-    <title>在线图书资料管理系统</title>
+    <title>图书资料管理系统</title>
     <script src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js"></script><!-- jquery文件 -->
     <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
     <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" />
@@ -26,7 +26,7 @@
             </div>
 
             <div class="col-md-6 col-md-offset-3">
-                <h3>欢迎使用图书管理系统！您需要做什么？</h3>
+                <h3>欢迎使用图书资料管理系统！您需要做什么？</h3>
             </div>
         </div>
     </div>

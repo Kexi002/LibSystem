@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>在线图书管理系统</title>
+    <title>图书资料管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/output.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/light.css">
@@ -49,28 +49,28 @@
                     <table class=" w-full">
                         <tbody class="leading-loose text-md">
                         <tr class="border-b">
-                            <td class="py-2 w-1/4">学号</td>
-                            <td class="py-2 text-indigo-dark">${userInfo.account.studentId}</td>
+                            <td class="py-3 w-1/4">学号</td>
+                            <td class=" text-indigo-dark">${userInfo.account.studentId}</td>
                         </tr>
                         <tr class="border-b">
-                            <td class="py-2 w-1/4">用户名</td>
-                            <td class="py-2 text-indigo-dark">${userInfo.account.username}</td>
+                            <td class="py-3 w-1/4">用户名</td>
+                            <td class=" text-indigo-dark">${userInfo.account.username}</td>
                         </tr>
                         <tr class="border-b">
-                            <td class="py-2 w-1/4">姓名</td>
-                            <td class="py-2 text-indigo-dark">${userInfo.realName}</td>
+                            <td class="py-3 w-1/4">姓名</td>
+                            <td class=" text-indigo-dark">${userInfo.realName}</td>
                         </tr>
                         <tr class="border-b">
-                            <td class="py-2 w-1/4">性别</td>
-                            <td class="py-2 text-indigo-dark">${userInfo.userDetail.gender}</td>
+                            <td class="py-3 w-1/4">性别</td>
+                            <td class=" text-indigo-dark">${userInfo.userDetail.gender}</td>
                         </tr>
                         <tr class="border-b">
-                            <td class="py-2 w-1/4">电话号码</td>
-                            <td class="py-2 text-indigo-dark">${userInfo.userDetail.phoneNum}</td>
+                            <td class="py-3 w-1/4">电话号码</td>
+                            <td class=" text-indigo-dark">${userInfo.userDetail.phoneNum}</td>
                         </tr>
                         <tr class="">
-                            <td class="py-2 w-1/4">电子邮箱</td>
-                            <td class="py-2 text-indigo-dark">${userInfo.userDetail.email}</td>
+                            <td class="py-3 w-1/4">电子邮箱</td>
+                            <td class=" text-indigo-dark">${userInfo.userDetail.email}</td>
                         </tr>
                         </tbody>
                     </table>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>在线图书管理系统</title>
+    <title>图书资料管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/output.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/light.css">
@@ -27,14 +27,14 @@
 <div class="flex flex-row justify-center" style="background:url('${pageContext.request.contextPath}/img/library.png'); height: 70%">
 
     <div class="flex flex-col justify-start">
-        <h1 class="mt-10 text-white" style="font-size: 55px">在线图书管理系统</h1>
+        <h1 class="mt-20 text-white" style="font-size: 55px">图书资料管理系统</h1>
 
         <form action="${pageContext.request.contextPath}/login.do" method="post">
             <div  onkeyup="onEnter()">
                 <input name="username" id="username" maxlength="15" class="mt-12 w-full text-xl h-10 px-4 rounded-lg bg-grey-lighter text-indigo-dark outline-none" type="text"
                        placeholder="账号或用户名" onclick="clickEnter()">
 
-                <input name="password" id="password" maxlength="15" class="mt-6 w-full text-xl h-10 px-4 rounded-lg bg-grey-lighter text-indigo-dark outline-none" type="text"
+                <input name="password" id="password" maxlength="20" class="mt-6 w-full text-xl h-10 px-4 rounded-lg bg-grey-lighter text-indigo-dark outline-none" type="password"
                        placeholder="密码" onclick="clickEnter()">
             </div>
             <div class="flex flex-row justify-center mt-8">
@@ -46,7 +46,7 @@
         </form>
 
         <div class="flex flex-row justify-center mt-8">
-            <a href="${pageContext.request.contextPath}/register_old.jsp" class="no-underline text-white text-lg">还没有账号？马上注册</a>
+            <a href="${pageContext.request.contextPath}/register.jsp" class="no-underline text-white text-lg">还没有账号？马上注册</a>
         </div>
     </div>
 </div>
