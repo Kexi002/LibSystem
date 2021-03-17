@@ -10,6 +10,7 @@ import com.kexi.service.UserService;
 import com.kexi.util.PageInfoUtil;
 import com.kexi.util.defaultValue;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -201,5 +202,14 @@ public class BorrowController {
         BookInfo bookInfo = bookService.findById(id);
         model.addAttribute("bookInfo", bookInfo);
         return "/admin/borrow-cart-detail";
+    }
+
+    /*用户的方法*/
+    @RequestMapping("/find.user.do")
+    public String findUserBorrow(HttpServletRequest request){
+        UserInfo userInfo = (UserInfo) request.getSession().getAttribute("userInfo");
+        List<Borrow> borrowList = borrowService.findByUserInfoId(userInfo.getId());
+        request.setAttribute("borrowList", borrowList);
+        return "user-borrow-list";
     }
 }

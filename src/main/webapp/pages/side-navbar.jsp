@@ -201,12 +201,6 @@
                 </li>
             </ul>
         </li>
-        <li class="ml-2 mb-3 pb-3 flex">
-            <img src="${pageContext.request.contextPath}/img/icon/wishlist-default.svg" alt="wishlist-icon" class="w-4 h-4 mr-2">
-            <div class="text-md hover:cursor-pointer text-white lg:text-indigo-darkest no-underline font-medium mobile-home-trigger">
-                Wishlist
-            </div>
-        </li>
     </ul>
 </nav>
 

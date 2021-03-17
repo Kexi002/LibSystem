@@ -74,7 +74,7 @@
                     <td style="vertical-align: middle !important;">${bookInfo.publisher}</td>
                     <td style="vertical-align: middle !important;">
                         <button class="btn-sm btn-info" onclick="window.location.href = '${pageContext.request.contextPath}/borrow/cartDetail.do?id=${bookInfo.id}'">详情</button>
-                        <button class="btn-sm btn-danger btn_delete" onclick="removeBorrowList(${bookInfo.id})">移除</button>
+                        <button class="btn-sm btn-danger btn_delete" onclick="removeBorrowCart(${bookInfo.id})">移除</button>
                     </td>
                 </tr>
             </c:forEach>
@@ -85,10 +85,10 @@
 
 <script type="text/javascript">
 
-    function removeBorrowList(id){
+    function removeBorrowCart(id){
         $.ajax({
             type: "post",
-            url: "${pageContext.request.contextPath}/borrow/removeBorrowList.do",
+            url: "${pageContext.request.contextPath}/borrow/removeBorrowCart.do",
             data:{id:id},
             success: function() {
                 toastr.success("移除借书单成功","", {"timeOut" : "1000", "onHidden":function () {

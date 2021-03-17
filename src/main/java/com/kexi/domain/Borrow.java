@@ -18,7 +18,7 @@ public class Borrow {
     Integer renew; //int, 0 or 1
     String renewStr;
     Integer status;
-    String statusStr;
+    String statusStr;//0,未超时未续借，1，未超时已续借，2，已超时未续借，3，已超时已续借
 
     public String getId() {
         return id;

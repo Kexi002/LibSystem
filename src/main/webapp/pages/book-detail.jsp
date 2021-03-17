@@ -113,10 +113,6 @@
 </div>
 
 <script>
-    /*给当前页添加active*/
-    $(function () {
-        $("#page_${pageInfo.pageNum}").addClass("active");
-    })
 
     /*搜索框*/
     $(function (){
