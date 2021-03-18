@@ -19260,4 +19260,20 @@ table {
     .xl\:z-auto {
         z-index: auto;
     }
+
+    .bg-red-light{
+        background-color: #F2DEDE;
+    }
+
+    .bg-yellow-light{
+        background-color: #FCF8E3;
+    }
+
+    .bg-blue-light{
+        background-color: #D9EDF7;
+    }
+
+    .bg-green-light{
+        background-color: #DFF0D8;
+    }
 }

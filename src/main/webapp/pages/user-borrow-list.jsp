@@ -11,8 +11,10 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/light.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/carousel.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pagination.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/toastr.min.css"/>
     <script src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js"></script><!-- jquery文件 -->
     <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
+    <script src="${pageContext.request.contextPath}/js/toastr.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bundle.js" async defer></script>
 </head>
 <body class="bg-grey-lighter font-sans antialiased">
@@ -70,10 +72,10 @@
                                     <td class="py-2 w-1/6">续借状态</td>
                                     <td class="py-2 w-1/6">
                                         <c:if test="${borrow.renew == 0}">
-                                            <div class="text-white rounded-lg libre-bg-green justify-center flex">${borrow.renewStr}</div>
+                                            <div class="rounded-lg text-indigo-dark justify-center flex">${borrow.renewStr}</div>
                                         </c:if>
                                         <c:if test="${borrow.renew == 1}">
-                                            <div class="text-white rounded-lg libre-bg-blue justify-center flex">${borrow.renewStr}</div>
+                                            <div class="bg-blue-light rounded-lg text-indigo-dark justify-center flex">${borrow.renewStr}</div>
                                         </c:if>
                                     </td>
                                     <td class="py-2 w-1/6"></td>
@@ -87,20 +89,20 @@
                                     <td class="py-2 w-1/6">逾期状态</td>
                                     <c:if test="${borrow.status == 0 || borrow.status == 1}">
                                         <td class="py-2 w-1/6">
-                                            <div class="text-white rounded-lg libre-bg-green justify-center flex">未逾期</div>
+                                            <div class="bg-green-light rounded-lg text-indigo-dark justify-center flex">未逾期</div>
                                         </td>
                                         <td class="py-2 w-1/6"></td>
                                         <td class="py-2 w-1/6"></td>
                                     </c:if>
                                     <c:if test="${borrow.status == 2}">
                                         <td class="py-2 w-2/3 pl-5">
-                                            <div class="ml-4 px-4 text-white rounded-lg libre-bg-orange justify-center flex">已逾期，请续借或尽快还书</div>
+                                            <div class="bg-yellow-light rounded-lg text-indigo-dark ml-4 px-4 justify-center flex">已逾期，请续借或尽快还书</div>
                                         </td>
                                         <td class="py-2 w-1/6"></td>
                                     </c:if>
                                     <c:if test="${borrow.status == 3}">
                                         <td class="py-2 w-1/2 pl-5 pr-5">
-                                            <div class=" text-white rounded-lg libre-bg-red justify-center flex">已逾期，请尽快还书！</div>
+                                            <div class="bg-red-light rounded-lg text-indigo-dark justify-center flex">已逾期，请尽快还书！</div>
                                         </td>
                                         <td class="py-2 w-1/6"></td>
                                     </c:if>
@@ -112,10 +114,12 @@
                     </div>
                     <%--借书按钮--%>
                     <div class="w-1/6 flex flex-col justify-center px-2">
-                        <button class="ml-4 bg-indigo-dark hover:bg-indigo-darker text-white text-md py-2 rounded-full transition-normal hover:shadow hover:translate-y-1 active:translate-y-1 focus:outline-none"
-                                onclick="window.location.href='javascript:history.go(-1)'">
-                            续借
-                        </button>
+                        <c:if test="${borrow.renew == 0}">
+                            <button class="ml-4 bg-indigo-dark hover:bg-indigo-darker text-white text-md py-2 rounded-full transition-normal hover:shadow hover:translate-y-1 active:translate-y-1 focus:outline-none"
+                                    onclick="renew(${borrow.id})">
+                                续借
+                            </button>
+                        </c:if>
                     </div>
                 </div>
             </div>
@@ -129,6 +133,19 @@
 </div>
 
 <script>
+    function renew(id){
+        $.ajax({
+            type: "post",
+            url: "${pageContext.request.contextPath}/borrow/renew.do",
+            data:{id:id},
+            success: function() {
+                toastr.success("续借成功","", {"timeOut" : "1000", "onHidden":function () {
+                        window.location.reload();
+                }});
+            }
+        });
+    }
+
 
     /*搜索框*/
     $(function (){
@@ -150,6 +167,24 @@
             }
         })
 
+    });
+
+    /*toastr配置*/
+    $(function() {
+        toastr.options = {
+            "closeButton" : true,//是否显示关闭按钮
+            "debug" : false,//是否使用debug模式
+            "positionClass" : "toast-center-center",//弹出窗的位置
+            "onclick" : null,
+            "showDuration" : "300",//显示的动画时间
+            "hideDuration" : "1000",//消失的动画时间
+            "timeOut" : "1000",//展现时间
+            "extendedTimeOut" : "1000",//加长展示时间
+            "showEasing" : "swing",//显示时的动画缓冲方式
+            "hideEasing" : "linear",//消失时的动画缓冲方式
+            "showMethod" : "fadeIn",//显示时的动画方式
+            "hideMethod" : "fadeOut" //消失时的动画方式
+        };
     });
 
 </script>
