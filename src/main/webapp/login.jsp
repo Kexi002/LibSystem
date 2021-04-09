@@ -32,7 +32,7 @@
         <form action="${pageContext.request.contextPath}/login.do" method="post">
             <div  onkeyup="onEnter()">
                 <input name="username" id="username" maxlength="15" class="mt-12 w-full text-xl h-10 px-4 rounded-lg bg-grey-lighter text-indigo-dark outline-none" type="text"
-                       placeholder="账号或用户名" onclick="clickEnter()">
+                       placeholder="学号或用户名" onclick="clickEnter()">
 
                 <input name="password" id="password" maxlength="20" class="mt-6 w-full text-xl h-10 px-4 rounded-lg bg-grey-lighter text-indigo-dark outline-none" type="password"
                        placeholder="密码" onclick="clickEnter()">

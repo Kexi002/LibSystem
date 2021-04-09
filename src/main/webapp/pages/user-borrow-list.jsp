@@ -51,7 +51,8 @@
                 <div class="p-4 px-6 w-full flex flex-row rounded md:rounded-r-none bg-white shadow-md md:shadow-none">
                     <%--图片--%>
                     <div class="w-1/5 mr-6">
-                        <img class="shadow-md" src="${pageContext.request.contextPath}/img/bookImage/${borrow.bookInfo.bookDetail.image}">
+                        <img class="shadow-md transition-normal hover:brighter hover:translate-y-1 hover:shadow-lg hover:border-indigo" src="${pageContext.request.contextPath}/img/bookImage/${borrow.bookInfo.bookDetail.image}"
+                             onclick="window.location.href='${pageContext.request.contextPath}/book/detail.user.do?id=${borrow.bookInfo.id}'">
                     </div>
                     <div class="w-2/3 mt-4 flex-col flex">
                         <h2>${borrow.bookInfo.bookName}</h2>

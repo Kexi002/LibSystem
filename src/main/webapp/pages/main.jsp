@@ -83,9 +83,11 @@
         <div class="hidden px-2 pt-2 md:px-0 flex-wrap pb-4 js-tab-pane active" id="section-library">
             <c:forEach items="${pageInfo.list}" var="bookInfo" varStatus="s">
                 <div class="flex flex-row sm:flex-col items-center sm:items-start w-full xs:w-1/1 sm:w-1/2 md:w-1/4 p-4 js-book">
-                    <img src="${pageContext.request.contextPath}/img/bookImage/${bookInfo.bookDetail.image}" alt="book-01"
-                         class="w-1/3 sm:w-full shadow-md transition-normal hover:brighter hover:translate-y-1 hover:shadow-lg hover:border-indigo"
-                    onclick="window.location.href='${pageContext.request.contextPath}/book/detail.user.do?id=${bookInfo.id}'">
+                    <div style="height: 80%">
+                        <img src="${pageContext.request.contextPath}/img/bookImage/${bookInfo.bookDetail.image}" alt="book-01"
+                             class="w-1/3 sm:w-full shadow-md transition-normal hover:brighter hover:translate-y-1 hover:shadow-lg hover:border-indigo"
+                             onclick="window.location.href='${pageContext.request.contextPath}/book/detail.user.do?id=${bookInfo.id}'">
+                    </div>
                     <div class="ml-3 sm:ml-0 w-2/3 sm:w-full">
                         <p class="text-xl my-2 font-bold sm:font-normal">${bookInfo.bookName}</p>
                         <p class="text-sm my-2 font-medium sm:font-normal text-grey-darker">${bookInfo.author}</p>
