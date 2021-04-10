@@ -20,7 +20,7 @@
             <div class="col-md-12">
                 <ol class="breadcrumb">
                     <li><a href="javascript:history.go(-1)">继续添加借书</a></li>
-                    <li class="active">借书单</li>
+                    <li class="active">借书篮</li>
                 </ol>
             </div>
 
@@ -91,7 +91,7 @@
             url: "${pageContext.request.contextPath}/borrow/removeBorrowCart.do",
             data:{id:id},
             success: function() {
-                toastr.success("移除借书单成功","", {"timeOut" : "1000", "onHidden":function () {
+                toastr.success("移除借书篮成功","", {"timeOut" : "1000", "onHidden":function () {
                         window.location.reload();
                 }});
             },
@@ -129,7 +129,7 @@
         };
 
         if (${empty bookInfoList}){
-            toastr.warning("借书单里面还没有书");
+            toastr.warning("借书篮里面还没有书");
         }
     });
 

@@ -20,7 +20,7 @@
         <div class="col-md-10 col-md-offset-2">
             <div class="col-md-12">
                 <ol class="breadcrumb">
-                    <li><a href="javascript:history.go(-1)">返回借书单</a></li>
+                    <li><a href="javascript:history.go(-1)">返回借书篮</a></li>
                     <li class="active">图书详情</li>
                 </ol>
             </div>
