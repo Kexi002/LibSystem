@@ -33,7 +33,7 @@
             <ul class="text-grey lg:text-sm lg:text-grey-dark list-reset leading-loose mt-2" id="sidenav-categories">
                 <li class="text-indigo-lighter lg:text-indigo-darker font-medium flex justify-between items-center hover:cursor-pointer transition-normal ml-1 border-l border-grey-dark pl-4 mobile-home-trigger">
                     <span><a class="hover:text-indigo-dark hover:cursor-pointer transition-normal no-underline text-grey-darker"
-                             href="${pageContext.request.contextPath}/book/find.user.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}&category=A"
+                             href="${pageContext.request.contextPath}/book/find.user.do?page=1&size=12&condition=${condition}&category=A"
                     id="category_A">
                         马克思主义、列宁主义...</a></span>
                     <span class="bg-indigo-dark text-white text-xs rounded-full px-2 leading-normal"
@@ -41,7 +41,7 @@
                 </li>
                 <li class="text-indigo-lighter lg:text-indigo-darker font-medium flex justify-between items-center hover:cursor-pointer transition-normal ml-1 border-l border-grey-dark pl-4 mobile-home-trigger">
                     <span><a class="hover:text-indigo-dark hover:cursor-pointer transition-normal no-underline text-grey-darker"
-                             href="${pageContext.request.contextPath}/book/find.user.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}&category=B"
+                             href="${pageContext.request.contextPath}/book/find.user.do?page=1&size=12&condition=${condition}&category=B"
                              id="category_B">
                         哲学、宗教</a></span>
                     <span class="bg-indigo-dark text-white text-xs rounded-full px-2 leading-normal"
@@ -49,7 +49,7 @@
                 </li>
                 <li class="text-indigo-lighter lg:text-indigo-darker font-medium flex justify-between items-center hover:cursor-pointer transition-normal ml-1 border-l border-grey-dark pl-4 mobile-home-trigger">
                     <span><a class="hover:text-indigo-dark hover:cursor-pointer transition-normal no-underline text-grey-darker"
-                             href="${pageContext.request.contextPath}/book/find.user.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}&category=C"
+                             href="${pageContext.request.contextPath}/book/find.user.do?page=1&size=12&condition=${condition}&category=C"
                              id="category_C">
                         社会科学总论</a></span>
                     <span class="bg-indigo-dark text-white text-xs rounded-full px-2 leading-normal"
@@ -57,7 +57,7 @@
                 </li>
                 <li class="text-indigo-lighter lg:text-indigo-darker font-medium flex justify-between items-center hover:cursor-pointer transition-normal ml-1 border-l border-grey-dark pl-4 mobile-home-trigger">
                     <span><a class="hover:text-indigo-dark hover:cursor-pointer transition-normal no-underline text-grey-darker"
-                             href="${pageContext.request.contextPath}/book/find.user.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}&category=D"
+                             href="${pageContext.request.contextPath}/book/find.user.do?page=1&size=12&condition=${condition}&category=D"
                              id="category_D">
                         政治、法律</a></span>
                     <span class="bg-indigo-dark text-white text-xs rounded-full px-2 leading-normal"
@@ -65,7 +65,7 @@
                 </li>
                 <li class="text-indigo-lighter lg:text-indigo-darker font-medium flex justify-between items-center hover:cursor-pointer transition-normal ml-1 border-l border-grey-dark pl-4 mobile-home-trigger">
                     <span><a class="hover:text-indigo-dark hover:cursor-pointer transition-normal no-underline text-grey-darker"
-                             href="${pageContext.request.contextPath}/book/find.user.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}&category=E"
+                             href="${pageContext.request.contextPath}/book/find.user.do?page=1&size=12&condition=${condition}&category=E"
                              id="category_E">
                         军事</a></span>
                     <span class="bg-indigo-dark text-white text-xs rounded-full px-2 leading-normal"
@@ -73,7 +73,7 @@
                 </li>
                 <li class="text-indigo-lighter lg:text-indigo-darker font-medium flex justify-between items-center hover:cursor-pointer transition-normal ml-1 border-l border-grey-dark pl-4 mobile-home-trigger">
                     <span><a class="hover:text-indigo-dark hover:cursor-pointer transition-normal no-underline text-grey-darker"
-                             href="${pageContext.request.contextPath}/book/find.user.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}&category=F"
+                             href="${pageContext.request.contextPath}/book/find.user.do?page=1&size=12&condition=${condition}&category=F"
                              id="category_F">
                         经济</a></span>
                     <span class="bg-indigo-dark text-white text-xs rounded-full px-2 leading-normal"
@@ -81,7 +81,7 @@
                 </li>
                 <li class="text-indigo-lighter lg:text-indigo-darker font-medium flex justify-between items-center hover:cursor-pointer transition-normal ml-1 border-l border-grey-dark pl-4 mobile-home-trigger">
                     <span><a class="hover:text-indigo-dark hover:cursor-pointer transition-normal no-underline text-grey-darker"
-                             href="${pageContext.request.contextPath}/book/find.user.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}&category=G"
+                             href="${pageContext.request.contextPath}/book/find.user.do?page=1&size=12&condition=${condition}&category=G"
                              id="category_G">
                         文化、科学、教育、体育</a></span>
                     <span class="bg-indigo-dark text-white text-xs rounded-full px-2 leading-normal"
@@ -89,7 +89,7 @@
                 </li>
                 <li class="text-indigo-lighter lg:text-indigo-darker font-medium flex justify-between items-center hover:cursor-pointer transition-normal ml-1 border-l border-grey-dark pl-4 mobile-home-trigger">
                     <span><a class="hover:text-indigo-dark hover:cursor-pointer transition-normal no-underline text-grey-darker"
-                             href="${pageContext.request.contextPath}/book/find.user.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}&category=H"
+                             href="${pageContext.request.contextPath}/book/find.user.do?page=1&size=12&condition=${condition}&category=H"
                              id="category_H">
                         语言、文字</a></span>
                     <span class="bg-indigo-dark text-white text-xs rounded-full px-2 leading-normal"
@@ -97,7 +97,7 @@
                 </li>
                 <li class="text-indigo-lighter lg:text-indigo-darker font-medium flex justify-between items-center hover:cursor-pointer transition-normal ml-1 border-l border-grey-dark pl-4 mobile-home-trigger">
                     <span><a class="hover:text-indigo-dark hover:cursor-pointer transition-normal no-underline text-grey-darker"
-                             href="${pageContext.request.contextPath}/book/find.user.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}&category=J"
+                             href="${pageContext.request.contextPath}/book/find.user.do?page=1&size=12&condition=${condition}&category=J"
                              id="category_J">
                         艺术</a></span>
                     <span class="bg-indigo-dark text-white text-xs rounded-full px-2 leading-normal"
@@ -105,7 +105,7 @@
                 </li>
                 <li class="text-indigo-lighter lg:text-indigo-darker font-medium flex justify-between items-center hover:cursor-pointer transition-normal ml-1 border-l border-grey-dark pl-4 mobile-home-trigger">
                     <span><a class="hover:text-indigo-dark hover:cursor-pointer transition-normal no-underline text-grey-darker"
-                             href="${pageContext.request.contextPath}/book/find.user.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}&category=K"
+                             href="${pageContext.request.contextPath}/book/find.user.do?page=1&size=12&condition=${condition}&category=K"
                              id="category_K">
                         历史、地理</a></span>
                     <span class="bg-indigo-dark text-white text-xs rounded-full px-2 leading-normal"
@@ -113,7 +113,7 @@
                 </li>
                 <li class="text-indigo-lighter lg:text-indigo-darker font-medium flex justify-between items-center hover:cursor-pointer transition-normal ml-1 border-l border-grey-dark pl-4 mobile-home-trigger">
                     <span><a class="hover:text-indigo-dark hover:cursor-pointer transition-normal no-underline text-grey-darker"
-                             href="${pageContext.request.contextPath}/book/find.user.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}&category=N"
+                             href="${pageContext.request.contextPath}/book/find.user.do?page=1&size=12&condition=${condition}&category=N"
                              id="category_N">
                         自然科学总论</a></span>
                     <span class="bg-indigo-dark text-white text-xs rounded-full px-2 leading-normal"
@@ -121,7 +121,7 @@
                 </li>
                 <li class="text-indigo-lighter lg:text-indigo-darker font-medium flex justify-between items-center hover:cursor-pointer transition-normal ml-1 border-l border-grey-dark pl-4 mobile-home-trigger">
                     <span><a class="hover:text-indigo-dark hover:cursor-pointer transition-normal no-underline text-grey-darker"
-                             href="${pageContext.request.contextPath}/book/find.user.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}&category=O"
+                             href="${pageContext.request.contextPath}/book/find.user.do?page=1&size=12&condition=${condition}&category=O"
                              id="category_O">
                         数理科学和化学</a></span>
                     <span class="bg-indigo-dark text-white text-xs rounded-full px-2 leading-normal"
@@ -129,7 +129,7 @@
                 </li>
                 <li class="text-indigo-lighter lg:text-indigo-darker font-medium flex justify-between items-center hover:cursor-pointer transition-normal ml-1 border-l border-grey-dark pl-4 mobile-home-trigger">
                     <span><a class="hover:text-indigo-dark hover:cursor-pointer transition-normal no-underline text-grey-darker"
-                             href="${pageContext.request.contextPath}/book/find.user.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}&category=P"
+                             href="${pageContext.request.contextPath}/book/find.user.do?page=1&size=12&condition=${condition}&category=P"
                              id="category_P">
                         天文学、地球科学</a></span>
                     <span class="bg-indigo-dark text-white text-xs rounded-full px-2 leading-normal"
@@ -137,7 +137,7 @@
                 </li>
                 <li class="text-indigo-lighter lg:text-indigo-darker font-medium flex justify-between items-center hover:cursor-pointer transition-normal ml-1 border-l border-grey-dark pl-4 mobile-home-trigger">
                     <span><a class="hover:text-indigo-dark hover:cursor-pointer transition-normal no-underline text-grey-darker"
-                             href="${pageContext.request.contextPath}/book/find.user.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}&category=Q"
+                             href="${pageContext.request.contextPath}/book/find.user.do?page=1&size=12&condition=${condition}&category=Q"
                              id="category_Q">
                         生物科学</a></span>
                     <span class="bg-indigo-dark text-white text-xs rounded-full px-2 leading-normal"
@@ -145,7 +145,7 @@
                 </li>
                 <li class="text-indigo-lighter lg:text-indigo-darker font-medium flex justify-between items-center hover:cursor-pointer transition-normal ml-1 border-l border-grey-dark pl-4 mobile-home-trigger">
                     <span><a class="hover:text-indigo-dark hover:cursor-pointer transition-normal no-underline text-grey-darker"
-                             href="${pageContext.request.contextPath}/book/find.user.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}&category=R"
+                             href="${pageContext.request.contextPath}/book/find.user.do?page=1&size=12&condition=${condition}&category=R"
                              id="category_R">
                         医药、卫生</a></span>
                     <span class="bg-indigo-dark text-white text-xs rounded-full px-2 leading-normal"
@@ -153,7 +153,7 @@
                 </li>
                 <li class="text-indigo-lighter lg:text-indigo-darker font-medium flex justify-between items-center hover:cursor-pointer transition-normal ml-1 border-l border-grey-dark pl-4 mobile-home-trigger">
                     <span><a class="hover:text-indigo-dark hover:cursor-pointer transition-normal no-underline text-grey-darker"
-                             href="${pageContext.request.contextPath}/book/find.user.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}&category=S"
+                             href="${pageContext.request.contextPath}/book/find.user.do?page=1&size=12&condition=${condition}&category=S"
                              id="category_S">
                         农业科学</a></span>
                     <span class="bg-indigo-dark text-white text-xs rounded-full px-2 leading-normal"
@@ -161,7 +161,7 @@
                 </li>
                 <li class="text-indigo-lighter lg:text-indigo-darker font-medium flex justify-between items-center hover:cursor-pointer transition-normal ml-1 border-l border-grey-dark pl-4 mobile-home-trigger">
                     <span><a class="hover:text-indigo-dark hover:cursor-pointer transition-normal no-underline text-grey-darker"
-                             href="${pageContext.request.contextPath}/book/find.user.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}&category=T"
+                             href="${pageContext.request.contextPath}/book/find.user.do?page=1&size=12&condition=${condition}&category=T"
                              id="category_T">
                         工业技术</a></span>
                     <span class="bg-indigo-dark text-white text-xs rounded-full px-2 leading-normal"
@@ -169,7 +169,7 @@
                 </li>
                 <li class="text-indigo-lighter lg:text-indigo-darker font-medium flex justify-between items-center hover:cursor-pointer transition-normal ml-1 border-l border-grey-dark pl-4 mobile-home-trigger">
                     <span><a class="hover:text-indigo-dark hover:cursor-pointer transition-normal no-underline text-grey-darker"
-                             href="${pageContext.request.contextPath}/book/find.user.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}&category=U"
+                             href="${pageContext.request.contextPath}/book/find.user.do?page=1&size=12&condition=${condition}&category=U"
                              id="category_U">
                         交通运输</a></span>
                     <span class="bg-indigo-dark text-white text-xs rounded-full px-2 leading-normal"
@@ -177,7 +177,7 @@
                 </li>
                 <li class="text-indigo-lighter lg:text-indigo-darker font-medium flex justify-between items-center hover:cursor-pointer transition-normal ml-1 border-l border-grey-dark pl-4 mobile-home-trigger">
                     <span><a class="hover:text-indigo-dark hover:cursor-pointer transition-normal no-underline text-grey-darker"
-                             href="${pageContext.request.contextPath}/book/find.user.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}&category=V"
+                             href="${pageContext.request.contextPath}/book/find.user.do?page=1&size=12&condition=${condition}&category=V"
                              id="category_V">
                         航空、航天</a></span>
                     <span class="bg-indigo-dark text-white text-xs rounded-full px-2 leading-normal"
@@ -185,7 +185,7 @@
                 </li>
                 <li class="text-indigo-lighter lg:text-indigo-darker font-medium flex justify-between items-center hover:cursor-pointer transition-normal ml-1 border-l border-grey-dark pl-4 mobile-home-trigger">
                     <span><a class="hover:text-indigo-dark hover:cursor-pointer transition-normal no-underline text-grey-darker"
-                             href="${pageContext.request.contextPath}/book/find.user.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}&category=X"
+                             href="${pageContext.request.contextPath}/book/find.user.do?page=1&size=12&condition=${condition}&category=X"
                              id="category_X">
                         环境科学、劳动保护科学...</a></span>
                     <span class="bg-indigo-dark text-white text-xs rounded-full px-2 leading-normal"
@@ -193,7 +193,7 @@
                 </li>
                 <li class="text-indigo-lighter lg:text-indigo-darker font-medium flex justify-between items-center hover:cursor-pointer transition-normal ml-1 border-l border-grey-dark pl-4 mobile-home-trigger">
                     <span><a class="hover:text-indigo-dark hover:cursor-pointer transition-normal no-underline text-grey-darker"
-                             href="${pageContext.request.contextPath}/book/find.user.do?page=${pageInfo.pageNum}&size=${pageInfo.pageSize}&condition=${condition}&category=Z"
+                             href="${pageContext.request.contextPath}/book/find.user.do?page=1&size=12&condition=${condition}&category=Z"
                              id="category_Z">
                         综合性图书</a></span>
                     <span class="bg-indigo-dark text-white text-xs rounded-full px-2 leading-normal"
